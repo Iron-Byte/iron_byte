@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'features/main/main_screen.dart';
+import 'core/router/app_router.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
@@ -10,6 +10,13 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MainScreen());
+    return MaterialApp.router(
+      routerConfig: appRouter,
+      title: 'Iron Byte',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+    );
   }
 }
