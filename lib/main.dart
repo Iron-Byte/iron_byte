@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'core/router/app_router.dart';
+import 'core/theme/app_theme.dart';
 
 void main() {
   runApp(const App());
@@ -13,10 +14,7 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: appRouter,
       title: 'Iron Byte',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.theme,
     );
   }
 }
