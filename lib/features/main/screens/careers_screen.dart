@@ -5,13 +5,11 @@ class CareersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return  Center(
         child: Text(
           'Careers Screen',
           style: TextStyle(fontSize: 24),
         ),
-      ),
     );
   }
 }

@@ -5,13 +5,16 @@ class AppColors {
   AppColors._();
 
   /// Primary (main) color: #00191A
-  static const Color primary = Color(0xFF00191A);
+  static const Color primary = Color(0xFF000808);
 
   /// Secondary color: #469B9D
   static const Color secondary = Color(0xFF469B9D);
 
   /// Text color: #FFFFFF
   static const Color text = Color(0xFFFFFFFF);
+
+  static const Color white = Colors.white;
+
 }
 
 /// Centralized app theme configuration

@@ -5,13 +5,8 @@ class ServicesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          'Services Screen',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
+    return Center(
+      child: Text('Services Screen', style: TextStyle(fontSize: 24)),
     );
   }
 }

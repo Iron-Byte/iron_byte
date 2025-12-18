@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:ui' as ui;
 
 class MainScreen extends StatelessWidget {
   final Widget child;
 
-  const MainScreen({
-    super.key,
-    required this.child,
-  });
+  const MainScreen({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,24 @@ class MainScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: child,
+      body: Stack(
+        children: [
+        
+          Container(
+            width: 250,
+            height: 250,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.orange, width: 40),
+            ),
+          ),
+          BackdropFilter(
+          filter: ui.ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+          child: Container(color: Colors.transparent),
+        ),
+            child,
+        ],
+      ),
     );
   }
 }
