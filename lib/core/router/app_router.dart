@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import '../../features/main/main_screen.dart';
-import '../../features/main/screens/home_screen.dart';
-import '../../features/main/screens/careers_screen.dart';
-import '../../features/main/screens/services_screen.dart';
+import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/main/presentation/screens/careers_screen.dart';
+import '../../features/main/presentation/screens/services_screen.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/home',
@@ -17,16 +17,7 @@ final GoRouter appRouter = GoRouter(
           name: 'home',
           builder: (context, state) => const HomeScreen(),
         ),
-        GoRoute(
-          path: '/careers',
-          name: 'careers',
-          builder: (context, state) => const CareersScreen(),
-        ),
-        GoRoute(
-          path: '/services',
-          name: 'services',
-          builder: (context, state) => const ServicesScreen(),
-        ),
+       
       ],
     ),
   ],

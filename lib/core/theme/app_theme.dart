@@ -13,6 +13,10 @@ class AppColors {
   /// Text color: #FFFFFF
   static const Color text = Color(0xFFFFFFFF);
 
+    static const Color teal = Color(0xFF092635);
+
+  
+
   static const Color white = Colors.white;
 
 }
@@ -64,6 +68,7 @@ class AppTheme {
           fontSize: 32,
           fontWeight: FontWeight.bold,
           color: AppColors.text,
+          
           letterSpacing: -0.5,
         ),
         headlineMedium: TextStyle(
