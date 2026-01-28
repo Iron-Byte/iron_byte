@@ -5,14 +5,12 @@ import 'package:iron_byte/core/theme/app_theme.dart';
 
 class MateContainer extends StatelessWidget {
   final String? title;
-  final String? subtitle;
   final String? description1;
   final String? description2;
   final String? description3;
   const MateContainer({
     super.key,
     this.title,
-    this.subtitle,
     this.description1,
     this.description2,
     this.description3,
@@ -27,7 +25,11 @@ class MateContainer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         icon,
-        Text(description, style: context.h2?.copyWith(color: Colors.black)),
+        Gap(12),
+        Text(
+          description,
+          style: context.titleL?.copyWith(fontWeight: FontWeight.w400),
+        ),
       ],
     );
   }
@@ -35,10 +37,10 @@ class MateContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 600,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: AppColors.secondary.withValues(alpha: 0.70),
-     
+        color: AppColors.secondary.withValues(alpha: 0.30),
       ),
       padding: EdgeInsets.all(32),
 
@@ -47,33 +49,43 @@ class MateContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           title != null
-              ? Text(title!, style: context.h1?.copyWith(color: Colors.black))
-              : SizedBox(),
-          Gap(22),
-          subtitle != null
               ? Text(
-                  subtitle!,
-                  style: context.h2?.copyWith(color: Colors.black),
+                  title!,
+                  style: context.h3?.copyWith(fontWeight: FontWeight.w500),
+                  maxLines: 6,
                 )
               : SizedBox(),
-          Gap(22),
+          Gap(28),
           if (description1 != null)
             descriptionBuilder(
               context: context,
-              icon: Icon(Icons.check_rounded, color: Colors.black),
+              icon: Icon(
+                Icons.check_circle_outline_rounded,
+                size: 32,
+                color: AppColors.tealLight,
+              ),
               description: description1!,
             ),
+          Gap(12),
           if (description2 != null)
             descriptionBuilder(
               context: context,
-              icon: Icon(Icons.check_rounded, color: Colors.black),
+              icon: Icon(
+                Icons.check_circle_outline_rounded,
+                size: 32,
+                color: Colors.lightBlueAccent,
+              ),
               description: description2!,
             ),
-
+          Gap(12),
           if (description3 != null)
             descriptionBuilder(
               context: context,
-              icon: Icon(Icons.check_rounded, color: Colors.black),
+              icon: Icon(
+                Icons.check_circle_outline_rounded,
+                size: 32,
+                color: Colors.deepOrangeAccent,
+              ),
               description: description3!,
             ),
         ],

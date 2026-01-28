@@ -19,6 +19,10 @@ extension ContextExtensions on BuildContext {
   double get width => size.width;
 
   /// Shortcuts for common styles
+  TextStyle? get displayLarge => textTheme.displayLarge;
+  TextStyle? get displayMedium => textTheme.displayMedium;
+  TextStyle? get displaySmall => textTheme.displaySmall;
+
   TextStyle? get h1 => textTheme.headlineLarge;
   TextStyle? get h2 => textTheme.headlineMedium;
   TextStyle? get h3 => textTheme.headlineSmall;
