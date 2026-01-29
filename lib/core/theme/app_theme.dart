@@ -17,6 +17,7 @@ class AppColors {
 
   static const Color tealLight = Color(0xFF79C9C5);
 
+    static const Color dirtyWhite = Color(0xFFF9F8F6);
 
   static const Color white = Colors.white;
 }

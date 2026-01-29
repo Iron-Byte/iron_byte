@@ -139,9 +139,9 @@ class _DiagonalEnergyPainter extends CustomPainter {
           center,
           end,
           [
-            Colors.white.withValues(alpha: 0.95),
+            Colors.orangeAccent.withValues(alpha: 0.95),
             Colors.cyanAccent.withValues(alpha: 0.65),
-            Colors.cyan.withValues(alpha: 0.05),
+            Colors.purple.withValues(alpha: 0.45),
           ],
           const [0.0, 0.35, 1.0],
         );

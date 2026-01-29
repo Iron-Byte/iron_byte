@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iron_byte/core/extensions.dart';
 import 'package:iron_byte/core/theme/app_theme.dart';
+import 'package:iron_byte/widgets/filling_form.dart';
 
 import 'package:iron_byte/widgets/mate_container.dart';
 
@@ -11,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isNarrow = context.width < 1000;
+    // final isNarrow = context.width < 1000;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 100),
@@ -59,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Gap(24),
+                Gap(55),
                 MateContainer(
                   title: 'weBring'.tr(),
                   description1: '24/7 client and app support',
@@ -71,9 +72,13 @@ class HomeScreen extends StatelessWidget {
             Gap(100),
             Expanded(
               child: Container(
-                color: Colors.deepOrange.withValues(alpha: 0.40),
+                decoration: BoxDecoration(
+                  color: AppColors.tealLight.withValues(alpha: 0.20),
+                  borderRadius: BorderRadius.circular(4),
+                ),           
                 height: context.height,
                 width: context.width,
+                child: FillingForm(),
               ),
             ),
           ],
