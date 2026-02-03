@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:iron_byte/core/extensions.dart';
-import 'package:iron_byte/core/reg_exp.dart';
+import 'package:iron_byte/core/utils/extensions.dart';
+import 'package:iron_byte/core/utils/reg_exp.dart';
 import 'package:iron_byte/core/theme/app_theme.dart';
 
 class FillingForm extends StatefulWidget {

@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 
 extension ContextExtensions on BuildContext {
-  /// Full theme
   ThemeData get theme => Theme.of(this);
 
-  /// Text theme shortcut
   TextTheme get textTheme => theme.textTheme;
 
-  /// Color scheme shortcut
   ColorScheme get colors => theme.colorScheme;
 
-  /// MediaQuery shortcut
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
-  /// Screen size shortcuts
   Size get size => mediaQuery.size;
   double get height => size.height;
   double get width => size.width;
 
-  /// Shortcuts for common styles
   TextStyle? get displayLarge => textTheme.displayLarge;
   TextStyle? get displayMedium => textTheme.displayMedium;
   TextStyle? get displaySmall => textTheme.displaySmall;

@@ -1,11 +1,11 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:iron_byte/core/extensions.dart';
+import 'package:iron_byte/core/utils/extensions.dart';
 import 'package:iron_byte/core/theme/app_theme.dart';
 import 'package:iron_byte/features/home/presentation/screens/home_screen.dart';
 import 'package:iron_byte/features/main/presentation/screens/careers_screen.dart';
-import 'package:iron_byte/features/main/presentation/screens/services_screen.dart';
+import 'package:iron_byte/features/services/presentation/screens/services_screen.dart';
 import '../../core/widgets/energy_bnag.dart';
 
 class MainScreen extends StatefulWidget {
@@ -39,7 +39,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // extendBodyBehindAppBar: true,
       backgroundColor: AppColors.teal,
       appBar: AppBar(
         toolbarHeight: 80,
@@ -49,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
         centerTitle: false,
         title: Row(
           children: [
-             Text('Iron Byte', style: context.displaySmall),
+            Text('Iron Byte', style: context.displaySmall),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -57,25 +56,36 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   TextButton(
                     onPressed: () => goToPage(0),
-                    child:  Text('Home', style: context.h2!.copyWith(fontWeight: FontWeight.w400)),
+                    child: Text(
+                      'Home',
+                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                    ),
                   ),
                   TextButton(
                     onPressed: () => goToPage(1),
-                    child:  Text('Services', style: context.h2!.copyWith(fontWeight: FontWeight.w400)),
+                    child: Text(
+                      'Services',
+                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                    ),
                   ),
                   TextButton(
                     onPressed: () => goToPage(2),
-                    child:  Text('Careers', style: context.h2!.copyWith(fontWeight: FontWeight.w400)),
+                    child: Text(
+                      'Careers',
+                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                    ),
                   ),
-                   TextButton(
+                  TextButton(
                     onPressed: () => goToPage(2),
-                    child:  Text('About',  style: context.h2!.copyWith(fontWeight: FontWeight.w400)),
+                    child: Text(
+                      'About',
+                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                    ),
                   ),
-                  SizedBox(width: 120,),
+                  Gap(120),
                 ],
               ),
             ),
-         
           ],
         ),
       ),
@@ -86,14 +96,15 @@ class _MainScreenState extends State<MainScreen> {
             filter: ui.ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
             child: Container(color: Colors.transparent),
           ),
+
           PageView(
             controller: pageController,
             scrollDirection: Axis.vertical,
-            physics: const BouncingScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             onPageChanged: (index) {
               setState(() => pageIndex = index);
             },
-            children: const [HomeScreen(), CareersScreen(), ServicesScreen()],
+            children: const [HomeScreen(), ServicesScreen(), CareersScreen()],
           ),
         ],
       ),

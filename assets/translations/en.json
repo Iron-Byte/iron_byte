@@ -1,4 +1,13 @@
 {
     "webMobileAnimationStudio": "Web, mobile & Animation Studio",
-    "weBring":  "We bring your ideas to life through stunning web design, powerful mobile apps, and captivating animations that leave a lasting impression."
+    "weBring": "We bring your ideas to life through Creative & Stainless Solutions for Every Digital Need",
+    "ourServices": "Our Services",
+    "serviceTitles": {
+        "webdesign": "Web Design & Development",
+        "mobileDevelopment" : "Mobile App Development",
+         "animations" : "Animation & Motion Graphics",
+         "design" : "UI/UX Design",
+         "eCommerce" : "E-commerce Solutions",
+         "brand" : "Brand Identity"
+    }
 }

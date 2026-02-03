@@ -9,6 +9,8 @@ class AppAssets {
 
   // Icon
   static const String checkboxRounded = '$_icons/checkbox_rounded.svg';
+    static const String planet = '$_icons/planet.svg';
+
 }
 
 extension SvgAssetExtension on String {
@@ -16,7 +18,7 @@ extension SvgAssetExtension on String {
     Key? key,
     double? width,
     double? height,
-    Color? color = Colors.deepOrange,
+    Color? color,
     BoxFit fit = BoxFit.contain,
     Alignment alignment = Alignment.center,
   }) {
@@ -25,7 +27,7 @@ extension SvgAssetExtension on String {
       key: key,
       width: width,
       height: height,
-      colorFilter: ColorFilter.mode(color!, BlendMode.srcIn),
+      colorFilter: ColorFilter.mode(color ?? Colors.teal, BlendMode.srcIn),
       fit: fit,
       alignment: alignment,
     );
