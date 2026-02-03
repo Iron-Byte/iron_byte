@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iron_byte/core/utils/extensions.dart';
 import 'package:iron_byte/core/theme/app_theme.dart';
+import 'package:iron_byte/features/about/presentation/screens/about_screen.dart';
 import 'package:iron_byte/features/home/presentation/screens/home_screen.dart';
-import 'package:iron_byte/features/main/presentation/screens/careers_screen.dart';
+import 'package:iron_byte/features/careers/presentation/screens/careers_screen.dart';
+import 'package:iron_byte/features/portfolio/presentation/screens/portfolio.dart';
 import 'package:iron_byte/features/services/presentation/screens/services_screen.dart';
 import '../../core/widgets/energy_bnag.dart';
 
@@ -64,19 +66,26 @@ class _MainScreenState extends State<MainScreen> {
                   TextButton(
                     onPressed: () => goToPage(1),
                     child: Text(
-                      'Services',
+                      'Portfolio',
                       style: context.h2!.copyWith(fontWeight: FontWeight.w400),
                     ),
                   ),
                   TextButton(
                     onPressed: () => goToPage(2),
                     child: Text(
+                      'Services',
+                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => goToPage(3),
+                    child: Text(
                       'Careers',
                       style: context.h2!.copyWith(fontWeight: FontWeight.w400),
                     ),
                   ),
                   TextButton(
-                    onPressed: () => goToPage(2),
+                    onPressed: () => goToPage(4),
                     child: Text(
                       'About',
                       style: context.h2!.copyWith(fontWeight: FontWeight.w400),
@@ -104,7 +113,13 @@ class _MainScreenState extends State<MainScreen> {
             onPageChanged: (index) {
               setState(() => pageIndex = index);
             },
-            children: const [HomeScreen(), ServicesScreen(), CareersScreen()],
+            children: const [
+              HomeScreen(),
+              PortfolioScreen(),
+              ServicesScreen(),
+              CareersScreen(),
+              AboutScreen(),
+            ],
           ),
         ],
       ),

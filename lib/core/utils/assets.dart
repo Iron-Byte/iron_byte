@@ -9,7 +9,12 @@ class AppAssets {
 
   // Icon
   static const String checkboxRounded = '$_icons/checkbox_rounded.svg';
-    static const String planet = '$_icons/planet.svg';
+  static const String planet = '$_icons/planet.svg';
+  static const String smartphone = '$_icons/smartphone.svg';
+  static const String animation = '$_icons/animation.svg';
+  static const String paint = '$_icons/paint.svg';
+  static const String bag = '$_icons/bag.svg';
+    static const String brand = '$_icons/brand.svg';
 
 }
 
