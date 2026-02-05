@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:iron_byte/core/utils/extensions.dart';
 import 'package:iron_byte/core/theme/app_theme.dart';
+import 'package:iron_byte/core/utils/sizes.dart';
 import 'package:iron_byte/features/about/presentation/screens/about_screen.dart';
 import 'package:iron_byte/features/home/presentation/screens/home_screen.dart';
 import 'package:iron_byte/features/careers/presentation/screens/careers_screen.dart';
@@ -59,36 +60,51 @@ class _MainScreenState extends State<MainScreen> {
                   TextButton(
                     onPressed: () => goToPage(0),
                     child: Text(
-                      'Home',
-                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                      'HOME',
+                      style: context.h1!.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: pageIndex == 0 ? Colors.deepOrangeAccent : null,
+                      ),
                     ),
                   ),
                   TextButton(
                     onPressed: () => goToPage(1),
                     child: Text(
-                      'Portfolio',
-                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                      'PORTFOLIO',
+                      style: context.h1!.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: pageIndex == 1 ? Colors.deepOrangeAccent : null,
+                      ),
                     ),
                   ),
                   TextButton(
                     onPressed: () => goToPage(2),
                     child: Text(
-                      'Services',
-                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                      'SERVICES',
+                      style: context.h1!.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: pageIndex == 2 ? Colors.deepOrangeAccent : null,
+                      ),
                     ),
                   ),
                   TextButton(
                     onPressed: () => goToPage(3),
                     child: Text(
-                      'Careers',
-                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                      'CAREERS',
+                      style: context.h1!.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: pageIndex == 3 ? Colors.deepOrangeAccent : null,
+                      ),
                     ),
                   ),
                   TextButton(
                     onPressed: () => goToPage(4),
                     child: Text(
-                      'About',
-                      style: context.h2!.copyWith(fontWeight: FontWeight.w400),
+                      'ABOUT',
+                      style: context.h1!.copyWith(
+                        fontWeight: FontWeight.w800,
+                        color: pageIndex == 4 ? Colors.deepOrangeAccent : null,
+                      ),
                     ),
                   ),
                   Gap(120),
@@ -105,7 +121,6 @@ class _MainScreenState extends State<MainScreen> {
             filter: ui.ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
             child: Container(color: Colors.transparent),
           ),
-
           PageView(
             controller: pageController,
             scrollDirection: Axis.vertical,
