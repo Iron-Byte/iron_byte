@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:iron_byte/core/theme/app_theme.dart';
+import 'package:iron_byte/core/utils/extensions.dart';
+import 'package:iron_byte/core/utils/sizes.dart';
 
 class InfoContainer extends StatelessWidget {
   final Widget? cardItem;
@@ -20,13 +23,38 @@ class InfoContainer extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        padding: EdgeInsets.all(AppSpacing.padding24),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           color: AppColors.secondary.withValues(alpha: 0.30),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ?cardItem,
+            if (cardItem != null)
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  color: AppColors.dirtyWhite,
+                  borderRadius: BorderRadius.circular(AppSpacing.padding12),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(AppSpacing.padding8),
+                  child: cardItem,
+                ),
+              ),
+            ...[
+              Gap(AppSpacing.padding16),
+              if (cardTitle != null)
+                Text(maxLines: 3, cardTitle!, style: context.titleL),
+            ],
+            ...[
+              if (cardDescription != null) Gap(AppSpacing.padding16),
+              Text(
+                maxLines: 3,
+                cardDescription!,
+                style: context.titleM!.copyWith(fontWeight: FontWeight.w400),
+              ),
+            ],
           ],
         ),
       ),

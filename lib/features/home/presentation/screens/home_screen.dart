@@ -12,18 +12,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final isNarrow = context.width < 1000;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 100),
       child: SingleChildScrollView(
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                const Gap(35),
                 RichText(
                   text: TextSpan(
                     children: [
@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Gap(55),
+                const Gap(55),
                 MateContainer(
                   title: 'weBring'.tr(),
                   description1: '24/7 client and app support',
@@ -69,13 +69,13 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(100),
+            const Gap(122),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
                   color: AppColors.tealLight.withValues(alpha: 0.20),
                   borderRadius: BorderRadius.circular(4),
-                ),           
+                ),
                 height: context.height,
                 width: context.width,
                 child: FillingForm(),
