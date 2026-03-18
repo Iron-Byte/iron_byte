@@ -114,29 +114,33 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          const Positioned(top: 60, left: 0, child: DiagonalEnergyLines()),
-          BackdropFilter(
-            filter: ui.ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
-            child: Container(color: Colors.transparent),
-          ),
-          PageView(
-            controller: pageController,
-            scrollDirection: Axis.vertical,
-            physics: const NeverScrollableScrollPhysics(),
-            onPageChanged: (index) {
-              setState(() => pageIndex = index);
-            },
-            children: const [
-              HomeScreen(),
-              PortfolioScreen(),
-              ServicesScreen(),
-              CareersScreen(),
-              AboutScreen(),
-            ],
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(AppSpacing.padding32),
+        child: Stack(
+          children: [
+         
+            const Positioned(top: 60, left: 200, child: DiagonalEnergyLines()),
+            BackdropFilter(
+              filter: ui.ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+              child: Container(color: Colors.transparent),
+            ),
+            PageView(
+              controller: pageController,
+              scrollDirection: Axis.vertical,
+              physics: const NeverScrollableScrollPhysics(),
+              onPageChanged: (index) {
+                setState(() => pageIndex = index);
+              },
+              children: const [
+                HomeScreen(),
+                PortfolioScreen(),
+                ServicesScreen(),
+                CareersScreen(),
+                AboutScreen(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
