@@ -175,7 +175,7 @@ class _MainScreenState extends State<MainScreen> {
                     : largeActions,
           ),
           body: Padding(
-            padding: const EdgeInsets.all(AppSpacing.padding32),
+            padding: const EdgeInsets.all(0),
             child: Stack(
               children: [
                 const Positioned(

@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:iron_byte/core/theme/app_theme.dart';
 import 'package:iron_byte/core/utils/extensions.dart';
+import 'package:iron_byte/core/theme/app_theme.dart';
 import 'package:iron_byte/widgets/filling_form.dart';
+
 import 'package:iron_byte/widgets/mate_container.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,14 +15,13 @@ class HomeScreen extends StatelessWidget {
       builder: (context, constraints) {
         final width = constraints.maxWidth;
 
-        // Breakpoints (requested)
-        final isMobile = width < 600;
-        final isTablet = width >= 600 && width < 1024;
+        // Breakpoints: mobile / tablet / desktop
+        final isMobile = width < 1280;
+        final isTablet = width >= 600 && width < 1280;
 
         final horizontalPadding = isMobile ? 16.0 : isTablet ? 48.0 : 80.0;
-        final outerVerticalPadding = isMobile ? 24.0 : 32.0;
+        final verticalPadding = isMobile ? 24.0 : 32.0;
 
-        // Scale down hero typography on narrow screens.
         final visionFont = isMobile ? 52.0 : isTablet ? 70.0 : 80.0;
         final ourFont = isMobile ? 42.0 : isTablet ? 55.0 : 65.0;
         final innovativeFont = isMobile ? 52.0 : isTablet ? 70.0 : 80.0;
@@ -62,14 +61,13 @@ class HomeScreen extends StatelessWidget {
                     text: ' solutions',
                     style: context.displayMedium!.copyWith(
                       fontSize: solutionsFont,
-                      color: Colors.deepOrange,
                       fontStyle: FontStyle.normal,
                     ),
                   ),
                 ],
               ),
             ),
-            const Gap(24),
+            const SizedBox(height: 24),
             MateContainer(
               title: 'weBring'.tr(),
               description1: '24/7 client and app support',
@@ -79,12 +77,12 @@ class HomeScreen extends StatelessWidget {
           ],
         );
 
-        // Form card: avoid fixed height/width. Let constraints drive layout.
         final formCard = Container(
           decoration: BoxDecoration(
             color: AppColors.tealLight.withValues(alpha: 0.20),
             borderRadius: BorderRadius.circular(4),
           ),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           child: const FillingForm(),
         );
 
@@ -93,16 +91,16 @@ class HomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   hero,
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 64),
                   formCard,
                 ],
               )
             : Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Hero gets more space than the form on wide screens.
+                  // Give hero more space on wide screens.
                   Flexible(flex: 3, child: hero),
-                  const SizedBox(width: 64),
+                  SizedBox(width: isTablet ? 32 : 64),
                   Flexible(flex: 2, child: formCard),
                 ],
               );
@@ -111,7 +109,7 @@ class HomeScreen extends StatelessWidget {
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               horizontal: horizontalPadding,
-              vertical: outerVerticalPadding,
+              vertical: verticalPadding,
             ),
             child: content,
           ),
@@ -120,4 +118,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
