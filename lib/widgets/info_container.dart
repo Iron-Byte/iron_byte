@@ -49,10 +49,14 @@ class InfoContainer extends StatelessWidget {
             ],
             ...[
               if (cardDescription != null) Gap(AppSpacing.padding16),
-              Text(
-                maxLines: 3,
-                cardDescription!,
-                style: context.titleM!.copyWith(fontWeight: FontWeight.w400),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Text(  
+                    maxLines: 5,
+                    cardDescription!,
+                    style: context.titleM!.copyWith(fontWeight: FontWeight.w400),
+                  ),
+                ),
               ),
             ],
           ],

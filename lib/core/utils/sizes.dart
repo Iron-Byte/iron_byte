@@ -9,4 +9,7 @@ abstract class AppSpacing {
   static const double padding24 = 24;
   static const double padding28 = 28;
   static const double padding32 = 32;
+  static const double padding36 = 36;
+  static const double padding42 = 42;
+
 }

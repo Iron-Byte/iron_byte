@@ -17,7 +17,7 @@ class ServicesScreen extends StatelessWidget {
 
         // Breakpoints: mobile / tablet / desktop
         final isMobile = shortestSide < 600;
-        final isTablet = !isMobile && shortestSide < 1024;
+        final isTablet = !isMobile && shortestSide < 820;
 
         final horizontalPadding = isMobile ? 16.0 : isTablet ? 40.0 : 80.0;
         final titleFontSize = isMobile ? 26.0 : isTablet ? 32.0 : 35.0;
