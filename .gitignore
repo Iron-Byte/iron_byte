@@ -1,0 +1,63 @@
+# Flutter / Dart / General
+
+.dart_tool/
+.packages
+.pub/
+build/
+
+# Flutter specific
+
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+
+# IDE files
+
+.idea/
+.vscode/
+*.iml
+
+# macOS
+
+.DS_Store
+
+# Windows
+
+Thumbs.db
+
+# Logs
+
+*.log
+
+# Temporary files
+
+*.tmp
+*.swp
+
+# Generated files
+
+generated_plugin_registrant.dart
+
+# Coverage
+
+coverage/
+
+# Android
+
+android/.gradle/
+android/app/build/
+
+# iOS
+
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/.last_build_id
+
+# Web specific (optional, usually safe to ignore)
+
+web/.dart_tool/
+
+# Firebase (if used)
+
+.firebase/
+.firebaserc
