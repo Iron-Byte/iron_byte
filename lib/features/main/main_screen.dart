@@ -1,7 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:iron_byte/core/theme/app_theme.dart';
-import 'package:iron_byte/core/utils/sizes.dart';
 import 'package:iron_byte/features/about/presentation/screens/about_screen.dart';
 import 'package:iron_byte/features/home/presentation/screens/home_screen.dart';
 import 'package:iron_byte/features/careers/presentation/screens/careers_screen.dart';
