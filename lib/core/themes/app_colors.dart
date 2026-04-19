@@ -21,5 +21,5 @@ class AppColors {
   static const textMuted = Color(0x80FFFFFF); // 50% white
   static const textHint = Color(0x66FFFFFF); // 40% white
   static const textPlaceholder = Color(0x59FFFFFF); // 35% white
-  static const textPrimary_brand = Color(0xFFE8642A);
+  static const textPrimary_brand = Color(0xFFE8642A); // 35% white
 }

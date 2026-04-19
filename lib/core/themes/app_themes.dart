@@ -12,9 +12,9 @@ class AppTheme {
   AppTheme._();
  
   static ThemeData get dark => ThemeData(
+        // fontFamily: 'Cinzel',
         useMaterial3: true,
         brightness: Brightness.dark,
- 
         // ── Color scheme ──────────────────────
         colorScheme: const ColorScheme.dark(
           brightness: Brightness.dark,
@@ -111,7 +111,7 @@ class AppTheme {
         // ── Text button ───────────────────────
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            foregroundColor: AppColors.primary,
+            foregroundColor: AppColors.textPrimary,
             textStyle: AppTextStyles.button,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             shape: RoundedRectangleBorder(

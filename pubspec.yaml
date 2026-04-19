@@ -70,8 +70,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/translations/en.json
+  assets:
+    - assets/translations/
   #   - assets/images/icons/
   #   - assets/images/pictures/
 
@@ -89,11 +89,36 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Roboto
-  #     fonts:
-  #       - asset: assets/fonts/Roboto-Thin.ttf
-  #         weight: 100
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/roboto/Roboto-VariableFont_wdth,wght.ttf 
+        - asset: assets/fonts/roboto/Roboto-Italic-VariableFont_wdth,wght.ttf
+
+    - family: DMSans
+      fonts:
+         - asset: assets/fonts/dm_sans/DMSans-VariableFont_opsz,wght.ttf      
+         - asset: assets/fonts/dm_sans/DMSans-Italic-VariableFont_opsz,wght.ttf
+
+    - family: Montserrat
+      fonts:
+         - asset: assets/fonts/monserrat/Montserrat-VariableFont_wght.ttf
+         - asset: assets/fonts/monserrat/Montserrat-Italic-VariableFont_wght.ttf   
+
+    - family: Syne
+      fonts:
+         - asset: assets/fonts/syne/Syne-VariableFont_wght.ttf
+    
+    - family: Cinzel
+      fonts:
+         - asset: assets/fonts/cinzel/Cinzel-VariableFont_wght.ttf
+
+    - family: PlayFair
+      fonts:
+         - asset: assets/fonts/playfair/Playfair-VariableFont_opsz,wdth,wght.ttf
+         - asset: assets/fonts/playfair/Playfair-Italic-VariableFont_opsz,wdth,wght.ttf
+
+
   #       - asset: assets/fonts/Roboto-ExtraLight.ttf
   #         weight: 200
   #       - asset: assets/fonts/Roboto-Light.ttf
