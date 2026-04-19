@@ -1,4 +1,3 @@
-/// Translation key for a service tag shown in the home hero chip area.
 class HomeServiceTag {
   const HomeServiceTag(this.translationKey);
 

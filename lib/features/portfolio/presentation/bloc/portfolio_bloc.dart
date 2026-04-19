@@ -15,7 +15,6 @@ class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   ) async {
     emit(const PortfolioState.loading());
     try {
-      // TODO: call usecase
       emit(const PortfolioState.loaded(filter: PortfolioFilter.all));
     } catch (e) {
       emit(PortfolioState.error(e.toString()));

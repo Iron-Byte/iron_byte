@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Static UI configuration for the Services page (copy uses translation keys).
 class ServicesCapabilityData {
   const ServicesCapabilityData({
     required this.icon,

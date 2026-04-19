@@ -13,7 +13,6 @@ class ServicesBloc extends Bloc<ServicesEvent, ServicesState> {
   ) async {
     emit(const ServicesState.loading());
     try {
-      // Static page content; hook for future repository/use case.
       emit(const ServicesState.loaded());
     } catch (e) {
       emit(ServicesState.error(e.toString()));

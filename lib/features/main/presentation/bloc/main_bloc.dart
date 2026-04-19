@@ -8,7 +8,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       emit(const MainState.loading());
 
       try {
-        // TODO: call usecase
         emit(const MainState.success());
       } catch (e) {
         emit(MainState.error(e.toString()));

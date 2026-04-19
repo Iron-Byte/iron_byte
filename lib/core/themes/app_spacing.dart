@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppSpacing {
-  // Base spacing values
   static const double xs4 = 4;
   static const double sm8 = 8;
   static const double md12 = 12;
@@ -11,7 +10,6 @@ class AppSpacing {
   static const double xxxl32 = 32;
   static const double huge36 = 36;
 
-  // EdgeInsets - All
   static const allXs4 = EdgeInsets.all(xs4);
   static const allSm8 = EdgeInsets.all(sm8);
   static const allMd12 = EdgeInsets.all(md12);
@@ -21,7 +19,6 @@ class AppSpacing {
   static const allXxxl32 = EdgeInsets.all(xxxl32);
   static const allHuge36 = EdgeInsets.all(huge36);
 
-  // Symmetric
   static const hSm8 = EdgeInsets.symmetric(horizontal: sm8);
   static const hMd12 = EdgeInsets.symmetric(horizontal: md12);
   static const hLg16 = EdgeInsets.symmetric(horizontal: lg16);
@@ -30,13 +27,11 @@ class AppSpacing {
   static const vMd12 = EdgeInsets.symmetric(vertical: md12);
   static const vLg16 = EdgeInsets.symmetric(vertical: lg16);
 
-  // Only (common use cases)
   static const topMd12 = EdgeInsets.only(top: md12);
   static const bottomMd12 = EdgeInsets.only(bottom: md12);
   static const leftMd12 = EdgeInsets.only(left: md12);
   static const rightMd12 = EdgeInsets.only(right: md12);
 
-  // SizedBox spacing helpers
   static const gapW8 = SizedBox(width: sm8);
   static const gapW12 = SizedBox(width: md12);
   static const gapW16 = SizedBox(width: lg16);

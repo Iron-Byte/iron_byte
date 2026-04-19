@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/domain/models/home_service_tag.dart';
 
-/// Single rounded tag; use inside a [Wrap] with [Wrap.spacing] / [Wrap.runSpacing].
 class HomeTagPill extends StatelessWidget {
   const HomeTagPill({
     super.key,

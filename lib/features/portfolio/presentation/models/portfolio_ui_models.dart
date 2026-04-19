@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Matches [PortfolioFilter] chips; used to filter the project list.
 enum PortfolioFilter {
   all,
   webApps,
@@ -9,7 +8,6 @@ enum PortfolioFilter {
   ecommerce,
 }
 
-/// Localisation keys for filter labels (prefix `portfolio.filter.`).
 extension PortfolioFilterKeys on PortfolioFilter {
   String get labelKey {
     switch (this) {
@@ -27,7 +25,6 @@ extension PortfolioFilterKeys on PortfolioFilter {
   }
 }
 
-/// Static project data: copy, category badge keys, gradient, emoji key, tech keys.
 @immutable
 class PortfolioProjectData {
   const PortfolioProjectData({

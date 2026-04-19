@@ -8,7 +8,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(const HomeState.loading());
 
       try {
-        // TODO: call usecase
         emit(const HomeState.success());
       } catch (e) {
         emit(HomeState.error(e.toString()));

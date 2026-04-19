@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppRadius {
-  static const double xs6 = 6; // logo mark, icons
-  static const double sm8 = 8; // buttons, inputs, service cards
-  static const double md12 = 12; // service cards alt
-  static const double lg16 = 16; // contact card, outer wrap
-  static const double pill20 = 20; // tag / pill chips
-  static const double padd36 = 36; // tag / padding between chips
+  static const double xs6 = 6;
+  static const double sm8 = 8;
+  static const double md12 = 12;
+  static const double lg16 = 16;
+  static const double pill20 = 20;
+  static const double padd36 = 36;
 
   static const borderXs6 = BorderRadius.all(Radius.circular(xs6));
   static const borderSm8 = BorderRadius.all(Radius.circular(sm8));

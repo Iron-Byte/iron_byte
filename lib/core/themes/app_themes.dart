@@ -4,18 +4,12 @@ import 'package:iron_byte/core/themes/app_colors.dart';
 import 'package:iron_byte/core/themes/app_radius.dart';
 import 'package:iron_byte/core/themes/app_text_style.dart';
 
-// ─────────────────────────────────────────────
-//  AppTheme
-// ─────────────────────────────────────────────
-
 class AppTheme {
   AppTheme._();
- 
+
   static ThemeData get dark => ThemeData(
-        // fontFamily: 'Cinzel',
         useMaterial3: true,
         brightness: Brightness.dark,
-        // ── Color scheme ──────────────────────
         colorScheme: const ColorScheme.dark(
           brightness: Brightness.dark,
           primary: AppColors.primary,
@@ -35,13 +29,11 @@ class AppTheme {
           onError: AppColors.textPrimary,
           scrim: Color(0x80000000),
         ),
- 
-        // ── Scaffold / canvas ─────────────────
+
         scaffoldBackgroundColor: AppColors.background,
         canvasColor: AppColors.background,
         cardColor: AppColors.surface,
- 
-        // ── System overlay (status bar) ────────
+
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors.background,
           foregroundColor: AppColors.textPrimary,
@@ -57,27 +49,25 @@ class AppTheme {
             statusBarBrightness: Brightness.dark,
           ),
         ),
- 
-        // ── Typography ────────────────────────
+
         textTheme: TextTheme(
-          displayLarge:   AppTextStyles.hero,
-          displayMedium:  AppTextStyles.hero,
-          displaySmall:   AppTextStyles.heroAccent,
-          headlineLarge:  AppTextStyles.labelLarge,
+          displayLarge: AppTextStyles.hero,
+          displayMedium: AppTextStyles.hero,
+          displaySmall: AppTextStyles.heroAccent,
+          headlineLarge: AppTextStyles.labelLarge,
           headlineMedium: AppTextStyles.label,
-          headlineSmall:  AppTextStyles.labelSmall,
-          titleLarge:     AppTextStyles.label,
-          titleMedium:    AppTextStyles.labelSmall,
-          titleSmall:     AppTextStyles.caption,
-          bodyLarge:      AppTextStyles.body,
-          bodyMedium:     AppTextStyles.bodySmall,
-          bodySmall:      AppTextStyles.caption,
-          labelLarge:     AppTextStyles.button,
-          labelMedium:    AppTextStyles.pill,
-          labelSmall:     AppTextStyles.tag,
+          headlineSmall: AppTextStyles.labelSmall,
+          titleLarge: AppTextStyles.label,
+          titleMedium: AppTextStyles.labelSmall,
+          titleSmall: AppTextStyles.caption,
+          bodyLarge: AppTextStyles.body,
+          bodyMedium: AppTextStyles.bodySmall,
+          bodySmall: AppTextStyles.caption,
+          labelLarge: AppTextStyles.button,
+          labelMedium: AppTextStyles.pill,
+          labelSmall: AppTextStyles.tag,
         ),
- 
-        // ── Elevated button ───────────────────
+
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
@@ -93,8 +83,7 @@ class AppTheme {
             ),
           ),
         ),
- 
-        // ── Outlined button ───────────────────
+
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             foregroundColor: AppColors.textPrimary,
@@ -107,8 +96,7 @@ class AppTheme {
             ),
           ),
         ),
- 
-        // ── Text button ───────────────────────
+
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             foregroundColor: AppColors.textPrimary,
@@ -119,8 +107,7 @@ class AppTheme {
             ),
           ),
         ),
- 
-        // ── FilledButton ──────────────────────
+
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
             backgroundColor: AppColors.primary,
@@ -132,15 +119,14 @@ class AppTheme {
             ),
           ),
         ),
- 
-        // ── Input / TextField ─────────────────
+
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: AppColors.background,
           hoverColor: Colors.transparent,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
- 
+
           hintStyle: const TextStyle(
             fontSize: 14,
             color: AppColors.textPlaceholder,
@@ -156,7 +142,7 @@ class AppTheme {
             color: AppColors.primary,
             fontWeight: FontWeight.w400,
           ),
- 
+
           enabledBorder: OutlineInputBorder(
             borderRadius: AppRadius.borderSm8,
             borderSide: const BorderSide(
@@ -183,8 +169,7 @@ class AppTheme {
                 color: AppColors.borderSubtle, width: 0.5),
           ),
         ),
- 
-        // ── Card ──────────────────────────────
+
         cardTheme: CardThemeData(
           color: AppColors.surface,
           elevation: 0,
@@ -196,21 +181,18 @@ class AppTheme {
           ),
           margin: EdgeInsets.zero,
         ),
- 
-        // ── Divider ───────────────────────────
+
         dividerTheme: const DividerThemeData(
           color: AppColors.border,
           thickness: 0.5,
           space: 0,
         ),
- 
-        // ── Icon ─────────────────────────────
+
         iconTheme: const IconThemeData(
           color: AppColors.textSecondary,
           size: 20,
         ),
- 
-        // ── Chip ─────────────────────────────
+
         chipTheme: ChipThemeData(
           backgroundColor: AppColors.surface,
           selectedColor: AppColors.primaryBg,
@@ -222,8 +204,7 @@ class AppTheme {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
         ),
- 
-        // ── BottomNavigationBar ───────────────
+
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: AppColors.background,
           selectedItemColor: AppColors.primary,
@@ -233,8 +214,7 @@ class AppTheme {
           selectedLabelStyle: AppTextStyles.pill,
           unselectedLabelStyle: AppTextStyles.pill,
         ),
- 
-        // ── NavigationBar (M3) ────────────────
+
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: AppColors.background,
           indicatorColor: AppColors.primaryBg,
@@ -255,8 +235,7 @@ class AppTheme {
           shadowColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
         ),
- 
-        // ── Drawer ────────────────────────────
+
         drawerTheme: const DrawerThemeData(
           backgroundColor: AppColors.surface,
           elevation: 0,
@@ -268,8 +247,7 @@ class AppTheme {
             ),
           ),
         ),
- 
-        // ── Dialog ────────────────────────────
+
         dialogTheme: DialogThemeData(
           backgroundColor: AppColors.surface,
           elevation: 0,
@@ -283,8 +261,7 @@ class AppTheme {
           titleTextStyle: AppTextStyles.label,
           contentTextStyle: AppTextStyles.body,
         ),
- 
-        // ── SnackBar ──────────────────────────
+
         snackBarTheme: SnackBarThemeData(
           backgroundColor: AppColors.surface,
           contentTextStyle: AppTextStyles.bodySmall,
@@ -297,8 +274,7 @@ class AppTheme {
           ),
           behavior: SnackBarBehavior.floating,
         ),
- 
-        // ── Switch ────────────────────────────
+
         switchTheme: SwitchThemeData(
           thumbColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
@@ -315,8 +291,7 @@ class AppTheme {
           trackOutlineColor:
               WidgetStateProperty.all(Colors.transparent),
         ),
- 
-        // ── Checkbox ──────────────────────────
+
         checkboxTheme: CheckboxThemeData(
           fillColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
@@ -330,8 +305,7 @@ class AppTheme {
             borderRadius: AppRadius.borderXs6,
           ),
         ),
- 
-        // ── Radio ─────────────────────────────
+
         radioTheme: RadioThemeData(
           fillColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
@@ -340,8 +314,7 @@ class AppTheme {
             return AppColors.textMuted;
           }),
         ),
- 
-        // ── Slider ────────────────────────────
+
         sliderTheme: SliderThemeData(
           activeTrackColor: AppColors.primary,
           inactiveTrackColor: AppColors.borderSurface,
@@ -350,15 +323,13 @@ class AppTheme {
           valueIndicatorColor: AppColors.primary,
           valueIndicatorTextStyle: AppTextStyles.caption,
         ),
- 
-        // ── Progress indicator ────────────────
+
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           color: AppColors.primary,
           linearTrackColor: AppColors.borderSurface,
           circularTrackColor: AppColors.borderSurface,
         ),
- 
-        // ── Tab bar ───────────────────────────
+
         tabBarTheme: TabBarThemeData(
           labelColor: AppColors.primary,
           unselectedLabelColor: AppColors.textMuted,
@@ -369,8 +340,7 @@ class AppTheme {
           dividerColor: AppColors.border,
           overlayColor: WidgetStateProperty.all(AppColors.primaryBg),
         ),
- 
-        // ── List tile ─────────────────────────
+
         listTileTheme: ListTileThemeData(
           tileColor: Colors.transparent,
           selectedTileColor: AppColors.primaryBg,
@@ -382,8 +352,7 @@ class AppTheme {
             borderRadius: AppRadius.borderSm8,
           ),
         ),
- 
-        // ── Tooltip ───────────────────────────
+
         tooltipTheme: TooltipThemeData(
           decoration: BoxDecoration(
             color: AppColors.surface,
@@ -393,8 +362,7 @@ class AppTheme {
           textStyle: AppTextStyles.caption,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         ),
- 
-        // ── Misc ──────────────────────────────
+
         splashColor: AppColors.primaryBg,
         highlightColor: AppColors.primaryBg,
         hoverColor: AppColors.primaryBg,
@@ -404,4 +372,3 @@ class AppTheme {
         unselectedWidgetColor: AppColors.textMuted,
       );
 }
- 

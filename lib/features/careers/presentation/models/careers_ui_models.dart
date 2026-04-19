@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iron_byte/core/themes/app_colors.dart';
 
-/// Department colours for the primary role tag (matches design accents).
 enum CareersDepartment {
   engineering,
   design,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iron_byte/core/themes/app_colors.dart';
 
 class AppTextStyles {
-  // Hero
   static TextStyle hero = TextStyle(
     fontSize: 38,
     fontWeight: FontWeight.w500,
@@ -16,7 +15,6 @@ class AppTextStyles {
     color: AppColors.primary,
   );
 
-  // Body
   static TextStyle body = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.w400,
@@ -30,7 +28,6 @@ class AppTextStyles {
     color: AppColors.textSecondary,
   );
 
-  // Labels & UI
   static TextStyle labelLarge = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w500,
@@ -52,7 +49,6 @@ class AppTextStyles {
     color: AppColors.textSecondary,
   );
 
-  // Overline / eyebrow
   static TextStyle overline = TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w400,
@@ -60,7 +56,6 @@ class AppTextStyles {
     color: AppColors.primary,
   );
 
-  // Stats
   static TextStyle statNumber = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.w500,
@@ -72,7 +67,6 @@ class AppTextStyles {
     color: AppColors.textMuted,
   );
 
-  // Pills / tags
   static TextStyle pill = TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.w400,
@@ -84,7 +78,6 @@ class AppTextStyles {
     color: AppColors.primary,
   );
 
-  // Button
   static TextStyle button = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,

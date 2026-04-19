@@ -1,4 +1,3 @@
-/// Hero statistics line item (value + localized label key).
 class StatItem {
   const StatItem({
     required this.valueHeadline,

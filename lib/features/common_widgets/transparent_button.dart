@@ -24,7 +24,7 @@ class TransparentButton extends StatelessWidget {
           ),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppRadius.md12), // adjust if needed
+              borderRadius: BorderRadius.circular(AppRadius.md12),
               side: BorderSide(
                 color: buttonColor ?? AppColors.primary,
                 width: 1,
