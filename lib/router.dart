@@ -1,11 +1,11 @@
 import 'package:go_router/go_router.dart';
+import 'package:iron_byte/features/home/home.dart';
 import 'package:iron_byte/features/main/presentation/screens/main_layout.dart';
-import 'package:iron_byte/pages/about_page.dart';
-import 'package:iron_byte/pages/careers_page.dart';
-import 'package:iron_byte/pages/consultation_page.dart';
-import 'package:iron_byte/pages/home_page.dart';
-import 'package:iron_byte/pages/portfolio_page.dart';
-import 'package:iron_byte/pages/services_page.dart';
+import 'package:iron_byte/features/portfolio/portfolio.dart';
+import 'package:iron_byte/screens/about_screen.dart';
+import 'package:iron_byte/screens/careers_screen.dart';
+import 'package:iron_byte/screens/consultation_screen.dart';
+import 'package:iron_byte/screens/services_screen.dart';
 
 class AppRouter {
   static GoRouter createRouter() {
@@ -26,32 +26,32 @@ class AppRouter {
             GoRoute(
               path: '/',
               name: 'home',
-              builder: (context, state) => const HomePage(),
+              builder: (context, state) => const HomeScreen(),
             ),
             GoRoute(
               path: '/portfolio',
               name: 'portfolio',
-              builder: (context, state) => const PortfolioPage(),
+              builder: (context, state) => const PortfolioScreen(),
             ),
             GoRoute(
               path: '/services',
               name: 'services',
-              builder: (context, state) => const ServicesPage(),
+              builder: (context, state) => const ServicesScreen(),
             ),
             GoRoute(
               path: '/careers',
               name: 'careers',
-              builder: (context, state) => const CareersPage(),
+              builder: (context, state) => const CareersScreen(),
             ),
             GoRoute(
               path: '/about',
               name: 'about',
-              builder: (context, state) => const AboutPage(),
+              builder: (context, state) => const AboutScreen(),
             ),
             GoRoute(
               path: '/consultation',
               name: 'consultation',
-              builder: (context, state) => const ConsultationPage(),
+              builder: (context, state) => const ConsultationScreen(),
             ),
           ],
         ),
