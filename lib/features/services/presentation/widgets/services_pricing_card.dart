@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iron_byte/core/router/app_routes.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/services/presentation/models/services_ui_models.dart';
 
@@ -65,11 +66,11 @@ class ServicesPricingCard extends StatelessWidget {
                   width: double.infinity,
                   child: plan.highlighted
                       ? ElevatedButton(
-                          onPressed: () => context.push('/consultation'),
+                          onPressed: () => context.push(AppRoutes.consultation),
                           child: Text(plan.ctaKey.tr()),
                         )
                       : OutlinedButton(
-                          onPressed: () => context.push('/consultation'),
+                          onPressed: () => context.push(AppRoutes.consultation),
                           child: Text(plan.ctaKey.tr()),
                         ),
                 ),

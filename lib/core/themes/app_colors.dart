@@ -17,5 +17,5 @@ class AppColors {
   static const textMuted = Color(0x80FFFFFF);
   static const textHint = Color(0x66FFFFFF);
   static const textPlaceholder = Color(0x59FFFFFF);
-  static const textPrimary_brand = Color(0xFFE8642A);
+  static const textPrimarybrand = Color(0xFFE8642A);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iron_byte/core/router/app_routes.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/careers/presentation/models/careers_ui_models.dart';
 
@@ -31,7 +32,7 @@ class CareersJobCard extends StatelessWidget {
             );
             final title = Text(opening.titleKey.tr(), style: titleStyle);
             final apply = TextButton(
-              onPressed: () => context.push('/consultation'),
+              onPressed: () => context.push(AppRoutes.consultation),
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
                 padding: EdgeInsets.zero,

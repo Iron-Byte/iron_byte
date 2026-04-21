@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iron_byte/core/router/app_routes.dart';
+import 'package:iron_byte/core/router/main_shell_nav_items.dart';
+import 'package:iron_byte/core/router/shell_nav_location.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/main/presentation/bloc/main_bloc.dart';
 import 'package:iron_byte/features/main/presentation/bloc/main_state.dart';
+import 'package:iron_byte/features/main/presentation/widgets/app_bar_nav_item.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
@@ -11,6 +15,8 @@ class MainLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentLocation = shellNavigationLocation(context);
+
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 0,
@@ -38,56 +44,27 @@ class MainLayout extends StatelessWidget {
                       child: Text('IB', style: AppTextStyles.labelLarge),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      context.go('/');
-                    },
-                    child: Text(
-                      'iron_byte'.tr(),
-                      style: AppTextStyles.labelLarge.copyWith(
-                        letterSpacing: 0,
-                      ),
-                    ),
+                  AppBarNavItem(
+                    label: 'iron_byte'.tr(),
+                    route: AppRoutes.home,
+                    currentLocation: currentLocation,
+                    dense: true,
                   ),
                 ],
               ),
               Row(
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      context.go('/');
-                    },
-                    child: Text('home'.tr()),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.go('/portfolio');
-                    },
-                    child: Text('portfolio'.tr()),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.go('/services');
-                    },
-                    child: Text('services'.tr()),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.go('/careers');
-                    },
-                    child: Text('careers'.tr()),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      context.go('/about');
-                    },
-                    child: Text('about'.tr()),
-                  ),
+                  for (final item in kMainShellNavItems)
+                    AppBarNavItem(
+                      label: item.labelKey.tr(),
+                      route: item.route,
+                      currentLocation: currentLocation,
+                    ),
                 ],
               ),
               ElevatedButton(
                 onPressed: () {
-                  context.push('/consultation');
+                  context.push(AppRoutes.consultation);
                 },
                 child: Text('free_consulatation'.tr()),
               ),

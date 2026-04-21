@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_bloc.dart';
+import 'package:iron_byte/features/home/data/repositories/consultation_mail_repository_impl.dart';
+import 'package:iron_byte/features/home/domain/usecases/send_consultation_inquiry.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_state.dart';
 import 'package:iron_byte/features/home/presentation/widgets/consultation_card.dart';
@@ -14,7 +16,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HomeConsultationBloc(),
+      create: (_) => HomeConsultationBloc(
+        sendConsultationInquiry: SendConsultationInquiry(
+          ConsultationMailRepositoryImpl(),
+        ),
+      ),
       child: const _HomeBody(),
     );
   }

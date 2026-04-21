@@ -1,36 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iron_byte/core/themes/themes.dart';
-import 'package:iron_byte/features/portfolio/presentation/bloc/portfolio_bloc.dart';
-import 'package:iron_byte/features/portfolio/presentation/bloc/portfolio_event.dart';
-import 'package:iron_byte/features/portfolio/presentation/bloc/portfolio_state.dart';
-import 'package:iron_byte/features/portfolio/presentation/models/portfolio_ui_models.dart';
-import 'package:iron_byte/features/portfolio/presentation/widgets/portfolio_filter_bar.dart';
-import 'package:iron_byte/features/portfolio/presentation/widgets/portfolio_project_card.dart';
+import 'package:iron_byte/features/portfolio/data/datasources/portfolio_local_datasource.dart';
+import 'package:iron_byte/features/portfolio/data/repositories/portfolio_repository_impl.dart';
+import 'package:iron_byte/features/portfolio/domain/entities/portfolio_project.dart';
+import 'package:iron_byte/features/portfolio/domain/usecases/get_portfolio_projects.dart';
+import 'package:iron_byte/features/portfolio/presentation/portfolio_bloc.dart';
+import 'package:iron_byte/features/portfolio/presentation/portfolio_event.dart';
+import 'package:iron_byte/features/portfolio/presentation/portfolio_state.dart';
+import 'package:iron_byte/features/portfolio/presentation/widgets/project_image_slider.dart';
 
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({super.key});
 
+  static const double _sliderHeight = 220;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => PortfolioBloc()..add(LoadPortfolio()),
-      child: const _PortfolioBody(),
+      create: (_) => PortfolioBloc(
+        getPortfolioProjects: GetPortfolioProjects(
+          PortfolioRepositoryImpl(PortfolioLocalDataSource()),
+        ),
+      )..add(LoadPortfolio()),
+      child: const _PortfolioView(sliderHeight: _sliderHeight),
     );
   }
 }
 
-class _PortfolioBody extends StatelessWidget {
-  const _PortfolioBody();
+class _PortfolioView extends StatelessWidget {
+  const _PortfolioView({required this.sliderHeight});
 
-  List<PortfolioProjectData> _visible(PortfolioFilter filter) {
-    if (filter == PortfolioFilter.all) {
-      return PortfolioProjectData.showcase;
-    }
-    return PortfolioProjectData.showcase
-        .where((p) => p.filter == filter)
-        .toList();
-  }
+  final double sliderHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -47,63 +48,75 @@ class _PortfolioBody extends StatelessWidget {
                 child: Text(message, style: AppTextStyles.body),
               ),
             ),
-            loaded: (filter) {
-              final visible = _visible(filter);
+            loaded: (projects) {
               return LayoutBuilder(
                 builder: (context, constraints) {
                   final maxW = constraints.maxWidth;
-                  final horizontal = maxW >= 600 ? 48.0 : 24.0;
-                  final crossAxisCount = maxW >= 1100
+                  final padH = maxW >= 720 ? 48.0 : 24.0;
+                  final crossAxisCount = maxW >= 1000
                       ? 3
-                      : maxW >= 700
+                      : maxW >= 600
                           ? 2
                           : 1;
 
-                  return SingleChildScrollView(
-                    padding: EdgeInsets.fromLTRB(
-                      horizontal,
-                      AppSpacing.xxl24,
-                      horizontal,
-                      AppSpacing.huge36,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const _Header(),
-                        const SizedBox(height: AppSpacing.xxl24),
-                        const PortfolioFilterBar(),
-                        const SizedBox(height: AppSpacing.xxl24),
-                        if (visible.isEmpty)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: AppSpacing.xxl24,
-                            ),
-                            child: Text(
-                              'portfolio.empty_category'.tr(),
-                              style: AppTextStyles.body,
-                            ),
-                          )
-                        else
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              mainAxisSpacing: AppSpacing.xxl24,
-                              crossAxisSpacing: AppSpacing.xxl24,
-                              childAspectRatio:
-                                  crossAxisCount == 1 ? 0.72 : 0.68,
-                            ),
-                            itemCount: visible.length,
-                            itemBuilder: (context, index) {
-                              return PortfolioProjectCard(
-                                project: visible[index],
+                  const cardMainExtent = 400.0;
+
+                  return CustomScrollView(
+                    slivers: [
+                      SliverPadding(
+                        padding: EdgeInsets.fromLTRB(
+                          padH,
+                          AppSpacing.xxl24,
+                          padH,
+                          AppSpacing.lg16,
+                        ),
+                        sliver: SliverToBoxAdapter(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Portfolio',
+                                style: AppTextStyles.hero.copyWith(
+                                  fontFamily: 'Cinzel',
+                                  fontSize: maxW >= 600 ? 36 : 28,
+                                ),
+                              ),
+                              const SizedBox(height: AppSpacing.sm8),
+                              Text(
+                                'portfolio.subtitle'.tr(),
+                                style: AppTextStyles.body,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SliverPadding(
+                        padding: EdgeInsets.fromLTRB(
+                          padH,
+                          0,
+                          padH,
+                          AppSpacing.huge36,
+                        ),
+                        sliver: SliverGrid(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            mainAxisSpacing: AppSpacing.lg16,
+                            crossAxisSpacing: AppSpacing.lg16,
+                            mainAxisExtent: cardMainExtent,
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              return _PortfolioProjectCard(
+                                project: projects[index],
+                                sliderHeight: sliderHeight,
                               );
                             },
+                            childCount: projects.length,
                           ),
-                      ],
-                    ),
+                        ),
+                      ),
+                    ],
                   );
                 },
               );
@@ -115,43 +128,66 @@ class _PortfolioBody extends StatelessWidget {
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header();
+class _PortfolioProjectCard extends StatelessWidget {
+  const _PortfolioProjectCard({
+    required this.project,
+    required this.sliderHeight,
+  });
+
+  final PortfolioProject project;
+  final double sliderHeight;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: AppRadius.borderPill36,
-            border: Border.all(color: AppColors.primary),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.lg16,
-              vertical: AppSpacing.sm8,
-            ),
-            child: Text(
-              'portfolio.badge'.tr(),
-              style: AppTextStyles.pill.copyWith(
-                color: AppColors.textSecondary,
+    return Material(
+      color: AppColors.surface,
+      elevation: 4,
+      shadowColor: Colors.black.withValues(alpha: 0.35),
+      borderRadius: AppRadius.borderMd12,
+      child: ClipRRect(
+        borderRadius: AppRadius.borderMd12,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(AppSpacing.sm8),
+              child: ClipRRect(
+                borderRadius: AppRadius.borderSm8,
+                child: ProjectImageSlider(
+                  imagePaths: project.imagePaths,
+                  height: sliderHeight,
+                ),
               ),
             ),
-          ),
+            Padding(
+              padding: AppSpacing.hMd12.add(AppSpacing.vSm8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    project.name,
+                    style: AppTextStyles.label.copyWith(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 17,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  if (project.description.isNotEmpty) ...[
+                    const SizedBox(height: AppSpacing.sm8),
+                    Text(
+                      project.description,
+                      style: AppTextStyles.bodySmall,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: AppSpacing.xl20),
-        Text(
-          'portfolio.title'.tr(),
-          style: AppTextStyles.hero.copyWith(fontFamily: 'Cinzel'),
-        ),
-        const SizedBox(height: AppSpacing.lg16),
-        Text(
-          'portfolio.subtitle'.tr(),
-          style: AppTextStyles.body,
-        ),
-      ],
+      ),
     );
   }
 }

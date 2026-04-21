@@ -36,6 +36,12 @@ flutter:
 
   assets:
     - assets/translations/
+    - assets/images/pictures/language_kit/
+    - assets/images/pictures/migrane_app/
+    - assets/images/pictures/numis_ai/
+    - assets/images/pictures/symptom_tracker/
+    - assets/images/pictures/vibe_kit/
+    - assets/data/portfolio_project_order.json
 
   fonts:
     - family: Roboto

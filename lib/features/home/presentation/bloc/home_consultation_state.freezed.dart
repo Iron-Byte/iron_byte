@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeConsultationState {
 
- String get email; String get message;
+ String get email; String get message; String? get emailValidationError; bool get isSending; String? get sendError; DateTime? get preferredConsultationSlotUtc;
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HomeConsultationStateCopyWith<HomeConsultationState> get copyWith => _$HomeCons
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.sendError, sendError) || other.sendError == sendError)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,message);
+int get hashCode => Object.hash(runtimeType,email,message,emailValidationError,isSending,sendError,preferredConsultationSlotUtc);
 
 @override
 String toString() {
-  return 'HomeConsultationState(email: $email, message: $message)';
+  return 'HomeConsultationState(email: $email, message: $message, emailValidationError: $emailValidationError, isSending: $isSending, sendError: $sendError, preferredConsultationSlotUtc: $preferredConsultationSlotUtc)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $HomeConsultationStateCopyWith<$Res>  {
   factory $HomeConsultationStateCopyWith(HomeConsultationState value, $Res Function(HomeConsultationState) _then) = _$HomeConsultationStateCopyWithImpl;
 @useResult
 $Res call({
- String email, String message
+ String email, String message, String? emailValidationError, bool isSending, String? sendError, DateTime? preferredConsultationSlotUtc
 });
 
 
@@ -62,11 +62,15 @@ class _$HomeConsultationStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? message = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? message = null,Object? emailValidationError = freezed,Object? isSending = null,Object? sendError = freezed,Object? preferredConsultationSlotUtc = freezed,}) {
   return _then(_self.copyWith(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+as String,emailValidationError: freezed == emailValidationError ? _self.emailValidationError : emailValidationError // ignore: cast_nullable_to_non_nullable
+as String?,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
+as bool,sendError: freezed == sendError ? _self.sendError : sendError // ignore: cast_nullable_to_non_nullable
+as String?,preferredConsultationSlotUtc: freezed == preferredConsultationSlotUtc ? _self.preferredConsultationSlotUtc : preferredConsultationSlotUtc // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 
@@ -151,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeConsultationState() when $default != null:
-return $default(_that.email,_that.message);case _:
+return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc);case _:
   return orElse();
 
 }
@@ -172,10 +176,10 @@ return $default(_that.email,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String message)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc)  $default,) {final _that = this;
 switch (_that) {
 case _HomeConsultationState():
-return $default(_that.email,_that.message);case _:
+return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +196,10 @@ return $default(_that.email,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String message)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeConsultationState() when $default != null:
-return $default(_that.email,_that.message);case _:
+return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc);case _:
   return null;
 
 }
@@ -207,11 +211,15 @@ return $default(_that.email,_that.message);case _:
 
 
 class _HomeConsultationState implements HomeConsultationState {
-  const _HomeConsultationState({this.email = '', this.message = ''});
+  const _HomeConsultationState({this.email = '', this.message = '', this.emailValidationError, this.isSending = false, this.sendError, this.preferredConsultationSlotUtc});
   
 
 @override@JsonKey() final  String email;
 @override@JsonKey() final  String message;
+@override final  String? emailValidationError;
+@override@JsonKey() final  bool isSending;
+@override final  String? sendError;
+@override final  DateTime? preferredConsultationSlotUtc;
 
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +231,16 @@ _$HomeConsultationStateCopyWith<_HomeConsultationState> get copyWith => __$HomeC
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.sendError, sendError) || other.sendError == sendError)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,message);
+int get hashCode => Object.hash(runtimeType,email,message,emailValidationError,isSending,sendError,preferredConsultationSlotUtc);
 
 @override
 String toString() {
-  return 'HomeConsultationState(email: $email, message: $message)';
+  return 'HomeConsultationState(email: $email, message: $message, emailValidationError: $emailValidationError, isSending: $isSending, sendError: $sendError, preferredConsultationSlotUtc: $preferredConsultationSlotUtc)';
 }
 
 
@@ -243,7 +251,7 @@ abstract mixin class _$HomeConsultationStateCopyWith<$Res> implements $HomeConsu
   factory _$HomeConsultationStateCopyWith(_HomeConsultationState value, $Res Function(_HomeConsultationState) _then) = __$HomeConsultationStateCopyWithImpl;
 @override @useResult
 $Res call({
- String email, String message
+ String email, String message, String? emailValidationError, bool isSending, String? sendError, DateTime? preferredConsultationSlotUtc
 });
 
 
@@ -260,11 +268,15 @@ class __$HomeConsultationStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? message = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? message = null,Object? emailValidationError = freezed,Object? isSending = null,Object? sendError = freezed,Object? preferredConsultationSlotUtc = freezed,}) {
   return _then(_HomeConsultationState(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+as String,emailValidationError: freezed == emailValidationError ? _self.emailValidationError : emailValidationError // ignore: cast_nullable_to_non_nullable
+as String?,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
+as bool,sendError: freezed == sendError ? _self.sendError : sendError // ignore: cast_nullable_to_non_nullable
+as String?,preferredConsultationSlotUtc: freezed == preferredConsultationSlotUtc ? _self.preferredConsultationSlotUtc : preferredConsultationSlotUtc // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 

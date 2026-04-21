@@ -128,12 +128,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( PortfolioFilter filter)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<PortfolioProject> projects)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.filter);case _Error() when error != null:
+return loaded(_that.projects);case _Error() when error != null:
 return error(_that.message);case _:
   return orElse();
 
@@ -152,12 +152,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( PortfolioFilter filter)  loaded,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<PortfolioProject> projects)  loaded,required TResult Function( String message)  error,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Loading():
 return loading();case _Loaded():
-return loaded(_that.filter);case _Error():
+return loaded(_that.projects);case _Error():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -175,12 +175,12 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( PortfolioFilter filter)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<PortfolioProject> projects)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Loading() when loading != null:
 return loading();case _Loaded() when loaded != null:
-return loaded(_that.filter);case _Error() when error != null:
+return loaded(_that.projects);case _Error() when error != null:
 return error(_that.message);case _:
   return null;
 
@@ -257,10 +257,16 @@ String toString() {
 
 
 class _Loaded implements PortfolioState {
-  const _Loaded({required this.filter});
+  const _Loaded(final  List<PortfolioProject> projects): _projects = projects;
   
 
- final  PortfolioFilter filter;
+ final  List<PortfolioProject> _projects;
+ List<PortfolioProject> get projects {
+  if (_projects is EqualUnmodifiableListView) return _projects;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_projects);
+}
+
 
 /// Create a copy of PortfolioState
 /// with the given fields replaced by the non-null parameter values.
@@ -272,16 +278,16 @@ _$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&(identical(other.filter, filter) || other.filter == filter));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&const DeepCollectionEquality().equals(other._projects, _projects));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,filter);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_projects));
 
 @override
 String toString() {
-  return 'PortfolioState.loaded(filter: $filter)';
+  return 'PortfolioState.loaded(projects: $projects)';
 }
 
 
@@ -292,7 +298,7 @@ abstract mixin class _$LoadedCopyWith<$Res> implements $PortfolioStateCopyWith<$
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
 @useResult
 $Res call({
- PortfolioFilter filter
+ List<PortfolioProject> projects
 });
 
 
@@ -309,10 +315,10 @@ class __$LoadedCopyWithImpl<$Res>
 
 /// Create a copy of PortfolioState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? filter = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? projects = null,}) {
   return _then(_Loaded(
-filter: null == filter ? _self.filter : filter // ignore: cast_nullable_to_non_nullable
-as PortfolioFilter,
+null == projects ? _self._projects : projects // ignore: cast_nullable_to_non_nullable
+as List<PortfolioProject>,
   ));
 }
 
