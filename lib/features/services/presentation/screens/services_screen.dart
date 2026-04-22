@@ -1,129 +1,259 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:iron_byte/core/utils/assets.dart';
-import 'package:iron_byte/core/utils/extensions.dart';
-import 'package:iron_byte/core/utils/sizes.dart';
-import 'package:iron_byte/widgets/info_container.dart';
+import 'package:iron_byte/core/themes/themes.dart';
+import 'package:iron_byte/features/services/presentation/bloc/services_bloc.dart';
+import 'package:iron_byte/features/services/presentation/bloc/services_event.dart';
+import 'package:iron_byte/features/services/presentation/bloc/services_state.dart';
+import 'package:iron_byte/features/services/presentation/models/services_ui_models.dart';
+import 'package:iron_byte/features/services/presentation/widgets/services_capability_card.dart';
+import 'package:iron_byte/features/services/presentation/widgets/services_pricing_card.dart';
 
 class ServicesScreen extends StatelessWidget {
   const ServicesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final shortestSide = MediaQuery.sizeOf(context).shortestSide;
+    return BlocProvider(
+      create: (_) => ServicesBloc()..add(LoadServices()),
+      child: const _ServicesBody(),
+    );
+  }
+}
 
-        // Breakpoints: mobile / tablet / desktop
-        final isMobile = shortestSide < 600;
-        final isTablet = !isMobile && shortestSide < 820;
+class _ServicesBody extends StatelessWidget {
+  const _ServicesBody();
 
-        final horizontalPadding = isMobile ? 16.0 : isTablet ? 40.0 : 80.0;
-        final titleFontSize = isMobile ? 26.0 : isTablet ? 32.0 : 35.0;
-
-        final crossAxisCount = isMobile ? 1 : isTablet ? 2 : 3;
-        final spacing = isMobile ? 18.0 : isTablet ? 32.0 : 50.0;
-        final mainAxisExtent = isMobile ? 240.0 : isTablet ? 260.0 : 280.0;
-
-        return SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalPadding,
-              vertical: isMobile ? 16.0 : 24.0,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: BlocBuilder<ServicesBloc, ServicesState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => const Center(child: CircularProgressIndicator()),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (message) => Center(
+              child: Padding(
+                padding: AppSpacing.allXxl24,
+                child: Text(message, style: AppTextStyles.body),
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Gap(AppSpacing.padding16),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 6),
-                    child: Text(
-                      'ourServices'.tr(),
-                      style: context.displayLarge!.copyWith(
-                        fontSize: titleFontSize,
-                        color: Colors.deepOrangeAccent,
-                      ),
+            loaded: () {
+              return LayoutBuilder(
+                builder: (context, constraints) {
+                  final maxW = constraints.maxWidth;
+                  final horizontal = maxW >= 600 ? 48.0 : 24.0;
+                  final wideCapabilities = maxW >= 900;
+                  final howWeWorkWide = maxW >= 1000;
+                  final pricingWide = maxW >= 1000;
+
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.fromLTRB(
+                      horizontal,
+                      AppSpacing.xxl24,
+                      horizontal,
+                      AppSpacing.huge36,
                     ),
-                  ),
-                ),
-                Gap(AppSpacing.padding16),
-                Text(
-                  'weBring'.tr(),
-                  style: context.titleL,
-                  maxLines: 3,
-                  textAlign: TextAlign.center,
-                ),
-                Gap(isMobile ? AppSpacing.padding16 : AppSpacing.padding32),
-                Center(
-                  child: GridView(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.all(isMobile ? 12 : 20),
-                    gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: spacing,
-                      mainAxisSpacing: spacing,
-                      mainAxisExtent: mainAxisExtent,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const _ServicesHeroHeader(),
+                        const Gap(AppSpacing.xxxl32),
+                        Text(
+                          'services.capabilities.section'.tr(),
+                          style: AppTextStyles.overline.copyWith(
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        const Gap(AppSpacing.xxl24),
+                        if (wideCapabilities)
+                          GridView.count(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            crossAxisCount: 2,
+                            mainAxisSpacing: AppSpacing.xxl24,
+                            crossAxisSpacing: AppSpacing.xxl24,
+                            childAspectRatio: 0.92,
+                            children: [
+                              for (final item in ServicesCapabilityData.items)
+                                ServicesCapabilityCard(data: item),
+                            ],
+                          )
+                        else
+                          Column(
+                            children: [
+                              for (var i = 0;
+                                  i < ServicesCapabilityData.items.length;
+                                  i++) ...[
+                                if (i > 0) const Gap(AppSpacing.xxl24),
+                                ServicesCapabilityCard(
+                                  data: ServicesCapabilityData.items[i],
+                                ),
+                              ],
+                            ],
+                          ),
+                        const Gap(AppSpacing.huge36),
+                        Text(
+                          'services.how_we_work.title'.tr(),
+                          style: AppTextStyles.overline.copyWith(
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        const Gap(AppSpacing.xxl24),
+                        if (howWeWorkWide)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              for (var i = 0;
+                                  i < ServicesHowWeWorkStep.steps.length;
+                                  i++) ...[
+                                Expanded(
+                                  child: _HowWeWorkColumn(
+                                    step: ServicesHowWeWorkStep.steps[i],
+                                  ),
+                                ),
+                                if (i != ServicesHowWeWorkStep.steps.length - 1)
+                                  const Gap(AppSpacing.xxl24),
+                              ],
+                            ],
+                          )
+                        else
+                          Column(
+                            children: [
+                              for (var i = 0;
+                                  i < ServicesHowWeWorkStep.steps.length;
+                                  i++) ...[
+                                if (i > 0) const Gap(AppSpacing.xxl24),
+                                _HowWeWorkColumn(
+                                  step: ServicesHowWeWorkStep.steps[i],
+                                ),
+                              ],
+                            ],
+                          ),
+                        const Gap(AppSpacing.huge36),
+                        Text(
+                          'services.pricing.title'.tr(),
+                          style: AppTextStyles.overline.copyWith(
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1.2,
+                          ),
+                        ),
+                        const Gap(AppSpacing.xxl24),
+                        if (pricingWide)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              for (var i = 0;
+                                  i < ServicesPricingPlanData.plans.length;
+                                  i++) ...[
+                                Expanded(
+                                  child: ServicesPricingCard(
+                                    plan: ServicesPricingPlanData.plans[i],
+                                  ),
+                                ),
+                                if (i != ServicesPricingPlanData.plans.length - 1)
+                                  const Gap(AppSpacing.xxl24),
+                              ],
+                            ],
+                          )
+                        else
+                          Column(
+                            children: [
+                              for (var i = 0;
+                                  i < ServicesPricingPlanData.plans.length;
+                                  i++) ...[
+                                if (i > 0) const Gap(AppSpacing.xxl24),
+                                ServicesPricingCard(
+                                  plan: ServicesPricingPlanData.plans[i],
+                                ),
+                              ],
+                            ],
+                          ),
+                      ],
                     ),
-                    children: [
-                      InfoContainer(
-                        cardItem:
-                            AppAssets.planet.svg(height: 40, width: 40),
-                        cardTitle: 'serviceTitles.webdesign'.tr(),
-                        cardDescription:
-                            'serviseDescription.responsiveWebsites'.tr(),
-                        onTap: () {},
-                      ),
-                      InfoContainer(
-                        cardItem: AppAssets.smartphone.svg(
-                            height: 40, width: 40),
-                        cardTitle:
-                            'serviceTitles.mobileDevelopment'.tr(),
-                        cardDescription:
-                            'serviseDescription.nativeAndCrossPlatform'.tr(),
-                        onTap: () {},
-                      ),
-                      InfoContainer(
-                        cardItem: AppAssets.animation.svg(
-                            height: 40, width: 40),
-                        cardTitle: 'serviceTitles.animations'.tr(),
-                        cardDescription:
-                            'serviseDescription.eyeCatchingAnimations'.tr(),
-                        onTap: () {},
-                      ),
-                      InfoContainer(
-                        cardItem: AppAssets.paint.svg(height: 40, width: 40),
-                        cardTitle: 'serviceTitles.design'.tr(),
-                        cardDescription: 'serviseDescription.uiuxDesign'.tr(),
-                        onTap: () {},
-                      ),
-                      InfoContainer(
-                        cardItem: AppAssets.bag.svg(height: 40, width: 40),
-                        cardTitle: 'serviceTitles.eCommerce'.tr(),
-                        cardDescription:
-                            'serviseDescription.eCommerceSolutions'.tr(),
-                        onTap: () {},
-                      ),
-                      InfoContainer(
-                        cardItem: AppAssets.brand.svg(
-                            height: 40, width: 40),
-                        cardTitle: 'serviceTitles.brand'.tr(),
-                        cardDescription:
-                            'serviseDescription.brandIdentity'.tr(),
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                  );
+                },
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _ServicesHeroHeader extends StatelessWidget {
+  const _ServicesHeroHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: AppRadius.borderPill36,
+            border: Border.all(color: AppColors.primary),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.lg16,
+              vertical: AppSpacing.sm8,
+            ),
+            child: Text(
+              'services.badge'.tr(),
+              style: AppTextStyles.pill.copyWith(
+                color: AppColors.textSecondary,
+              ),
             ),
           ),
-        );
-      },
+        ),
+        const SizedBox(height: AppSpacing.xl20),
+        Text(
+          'services.title'.tr(),
+          style: AppTextStyles.hero.copyWith(fontFamily: 'Cinzel'),
+        ),
+        const SizedBox(height: AppSpacing.lg16),
+        Text(
+          'services.subtitle'.tr(),
+          style: AppTextStyles.body,
+        ),
+      ],
+    );
+  }
+}
+
+class _HowWeWorkColumn extends StatelessWidget {
+  const _HowWeWorkColumn({required this.step});
+
+  final ServicesHowWeWorkStep step;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          step.numberKey.tr(),
+          style: AppTextStyles.tag.copyWith(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const Gap(AppSpacing.sm8),
+        Text(
+          step.titleKey.tr(),
+          style: AppTextStyles.label.copyWith(fontWeight: FontWeight.w700),
+        ),
+        const Gap(AppSpacing.md12),
+        Text(
+          step.descriptionKey.tr(),
+          style: AppTextStyles.bodySmall,
+        ),
+      ],
     );
   }
 }

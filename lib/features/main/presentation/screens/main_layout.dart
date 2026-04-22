@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iron_byte/core/router/app_routes.dart';
+import 'package:iron_byte/core/router/main_shell_nav_items.dart';
+import 'package:iron_byte/core/router/shell_nav_location.dart';
+import 'package:iron_byte/core/themes/themes.dart';
+import 'package:iron_byte/features/main/presentation/bloc/main_bloc.dart';
+import 'package:iron_byte/features/main/presentation/bloc/main_state.dart';
+import 'package:iron_byte/features/main/presentation/widgets/app_bar_nav_item.dart';
+
+class MainLayout extends StatelessWidget {
+  final Widget child;
+  const MainLayout({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final currentLocation = shellNavigationLocation(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        titleSpacing: 0,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(10),
+          child: Container(height: 1.5, color: AppColors.borderSurface),
+        ),
+        title: Padding(
+          padding: AppSpacing.allXxxl32,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: AppSpacing.xxxl32,
+                    width: AppSpacing.xxxl32,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: AppRadius.borderXs6,
+                    ),
+                    child: Center(
+                      child: Text('IB', style: AppTextStyles.labelLarge),
+                    ),
+                  ),
+                  AppBarNavItem(
+                    label: 'iron_byte'.tr(),
+                    route: AppRoutes.home,
+                    currentLocation: currentLocation,
+                    dense: true,
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  for (final item in kMainShellNavItems)
+                    AppBarNavItem(
+                      label: item.labelKey.tr(),
+                      route: item.route,
+                      currentLocation: currentLocation,
+                    ),
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  context.push(AppRoutes.consultation);
+                },
+                child: Text('free_consulatation'.tr()),
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: BlocBuilder<MainBloc, MainState>(
+        builder: (context, state) {
+          return Padding(padding: AppSpacing.allXxxl32, child: child);
+        },
+      ),
+    );
+  }
+}
