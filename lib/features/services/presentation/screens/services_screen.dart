@@ -69,17 +69,24 @@ class _ServicesBody extends StatelessWidget {
                         ),
                         const Gap(AppSpacing.xxl24),
                         if (wideCapabilities)
-                          GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 2,
-                            mainAxisSpacing: AppSpacing.lg16,
-                            crossAxisSpacing: AppSpacing.lg16,
-                            childAspectRatio: 1.08,
-                            children: [
-                              for (final item in ServicesCapabilityData.items)
-                                ServicesCapabilityCard(data: item),
-                            ],
+                          LayoutBuilder(
+                            builder: (context, capabilitiesConstraints) {
+                              final itemWidth =
+                                  (capabilitiesConstraints.maxWidth -
+                                          AppSpacing.lg16) /
+                                      2;
+                              return Wrap(
+                                spacing: AppSpacing.lg16,
+                                runSpacing: AppSpacing.lg16,
+                                children: [
+                                  for (final item in ServicesCapabilityData.items)
+                                    SizedBox(
+                                      width: itemWidth,
+                                      child: ServicesCapabilityCard(data: item),
+                                    ),
+                                ],
+                              );
+                            },
                           )
                         else
                           Column(
