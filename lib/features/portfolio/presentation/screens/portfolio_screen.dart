@@ -40,7 +40,7 @@ class _PortfolioView extends StatelessWidget {
             error: (message) => Center(
               child: Padding(
                 padding: AppSpacing.allXxl24,
-                child: Text(message, style: AppTextStyles.body),
+                child: SelectableText(message, style: AppTextStyles.body),
               ),
             ),
             loaded: (projects) {
@@ -63,7 +63,7 @@ class _PortfolioView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              SelectableText(
                                 'Portfolio',
                                 style: AppTextStyles.hero.copyWith(
                                   fontFamily: 'Cinzel',
@@ -71,7 +71,7 @@ class _PortfolioView extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: AppSpacing.sm8),
-                              Text(
+                              SelectableText(
                                 'portfolio.subtitle'.tr(),
                                 style: AppTextStyles.body,
                               ),

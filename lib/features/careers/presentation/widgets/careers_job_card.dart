@@ -30,7 +30,7 @@ class CareersJobCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
               fontFamily: 'Cinzel',
             );
-            final title = Text(opening.titleKey.tr(), style: titleStyle);
+            final title = SelectableText(opening.titleKey.tr(), style: titleStyle);
             final apply = TextButton(
               onPressed: () => context.push(AppRoutes.consultation),
               style: TextButton.styleFrom(
@@ -107,7 +107,7 @@ class _DepartmentTag extends StatelessWidget {
           horizontal: AppSpacing.md12,
           vertical: AppSpacing.sm8,
         ),
-        child: Text(
+        child: SelectableText(
           department.labelKey.tr(),
           style: AppTextStyles.pill.copyWith(
             color: AppColors.textPrimary,
@@ -137,7 +137,7 @@ class _MetaTag extends StatelessWidget {
           horizontal: AppSpacing.md12,
           vertical: AppSpacing.sm8,
         ),
-        child: Text(
+        child: SelectableText(
           label,
           style: AppTextStyles.pill.copyWith(
             color: AppColors.textSecondary,

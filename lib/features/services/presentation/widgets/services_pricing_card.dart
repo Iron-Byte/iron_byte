@@ -38,12 +38,12 @@ class ServicesPricingCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                SelectableText(
                   plan.nameKey.tr(),
                   style: AppTextStyles.label.copyWith(fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: AppSpacing.lg16),
-                Text(
+                SelectableText(
                   plan.priceKey.tr(),
                   style: AppTextStyles.hero.copyWith(
                     fontSize: 32,
@@ -52,7 +52,7 @@ class ServicesPricingCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm8),
-                Text(
+                SelectableText(
                   plan.subtitleKey.tr(),
                   style: AppTextStyles.caption,
                 ),
@@ -94,7 +94,7 @@ class ServicesPricingCard extends StatelessWidget {
                     horizontal: AppSpacing.lg16,
                     vertical: AppSpacing.sm8,
                   ),
-                  child: Text(
+                  child: SelectableText(
                     'services.pricing.popular_badge'.tr(),
                     style: AppTextStyles.pill.copyWith(
                       color: AppColors.textPrimary,
@@ -128,7 +128,7 @@ class _FeatureRow extends StatelessWidget {
         ),
         const SizedBox(width: AppSpacing.sm8),
         Expanded(
-          child: Text(
+          child: SelectableText(
             text,
             style: AppTextStyles.bodySmall,
           ),

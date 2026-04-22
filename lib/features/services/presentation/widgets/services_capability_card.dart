@@ -39,12 +39,12 @@ class ServicesCapabilityCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg16),
-            Text(
+            SelectableText(
               data.titleKey.tr(),
               style: AppTextStyles.label.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            Text(
+            SelectableText(
               data.descriptionKey.tr(),
               style: AppTextStyles.bodySmall,
             ),
@@ -83,7 +83,7 @@ class _Bullet extends StatelessWidget {
         ),
         const SizedBox(width: AppSpacing.md12),
         Expanded(
-          child: Text(
+          child: SelectableText(
             text,
             style: AppTextStyles.bodySmall.copyWith(
               color: AppColors.textSecondary,

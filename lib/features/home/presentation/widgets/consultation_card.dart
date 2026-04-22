@@ -71,13 +71,13 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                SelectableText(
                   'get_consultation'.tr(),
                   style:
                       AppTextStyles.label.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const Gap(AppSpacing.sm8),
-                Text(
+                SelectableText(
                   'Tell us about your project — no strings attached.',
                   style: AppTextStyles.bodySmall,
                 ),
@@ -118,7 +118,7 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                 ),
                 if (state.preferredConsultationSlotUtc != null) ...[
                   const Gap(AppSpacing.sm8),
-                  Text(
+                  SelectableText(
                     'consultation.calendar.selected'.tr(namedArgs: {
                       'slot': formatConsultationSlotForBody(
                         state.preferredConsultationSlotUtc!,
@@ -155,7 +155,10 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                         child: Divider(color: AppColors.borderSurface)),
                     Padding(
                       padding: AppSpacing.hMd12,
-                      child: Text('or'.tr(), style: AppTextStyles.caption),
+                      child: SelectableText(
+                        'or'.tr(),
+                        style: AppTextStyles.caption,
+                      ),
                     ),
                     const Expanded(
                         child: Divider(color: AppColors.borderSurface)),

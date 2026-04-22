@@ -37,7 +37,7 @@ class _CareersBody extends StatelessWidget {
             error: (message) => Center(
               child: Padding(
                 padding: AppSpacing.allXxl24,
-                child: Text(message, style: AppTextStyles.body),
+                child: SelectableText(message, style: AppTextStyles.body),
               ),
             ),
             loaded: () {
@@ -61,7 +61,7 @@ class _CareersBody extends StatelessWidget {
                       children: [
                         _CareersHero(wide: heroWide),
                         const Gap(AppSpacing.huge36),
-                        Text(
+                        SelectableText(
                           'careers.why.section'.tr(),
                           style: AppTextStyles.overline.copyWith(
                             fontWeight: FontWeight.w600,
@@ -112,7 +112,7 @@ class _CareersBody extends StatelessWidget {
                             ],
                           ),
                         const Gap(AppSpacing.huge36),
-                        Text(
+                        SelectableText(
                           'careers.jobs.section'.tr(),
                           style: AppTextStyles.overline.copyWith(
                             fontWeight: FontWeight.w600,
@@ -168,7 +168,7 @@ class _CareersHero extends StatelessWidget {
               horizontal: AppSpacing.lg16,
               vertical: AppSpacing.sm8,
             ),
-            child: Text(
+            child: SelectableText(
               'careers.badge'.tr(),
               style: AppTextStyles.pill.copyWith(
                 color: AppColors.textSecondary,
@@ -177,12 +177,12 @@ class _CareersHero extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.xl20),
-        Text(
+        SelectableText(
           'careers.title'.tr(),
           style: AppTextStyles.hero.copyWith(fontFamily: 'Cinzel'),
         ),
         const SizedBox(height: AppSpacing.lg16),
-        Text(
+        SelectableText(
           'careers.subtitle'.tr(),
           style: AppTextStyles.body,
         ),
@@ -200,7 +200,7 @@ class _CareersHero extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            SelectableText(
               '$count',
               style: AppTextStyles.heroAccent.copyWith(
                 fontSize: 48,
@@ -209,7 +209,7 @@ class _CareersHero extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            Text(
+            SelectableText(
               'careers.hero.stat_caption'.tr(),
               style: AppTextStyles.caption.copyWith(
                 color: AppColors.textMuted,

@@ -7,7 +7,7 @@ class ConsultationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Free consultation')),
-      body: const Center(child: Text('Free consultation')),
+      body: const Center(child: SelectableText('Free consultation')),
     );
   }
 }

@@ -18,7 +18,7 @@ class ConsultationItemScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
+          SelectableText(
             'get_consultation'.tr(),
             style: AppTextStyles.hero.copyWith(
               fontSize: 24,
@@ -59,7 +59,7 @@ class ConsultationItemScreen extends StatelessWidget {
               ),
               Gap(AppSpacing.lg16),
 
-              Text('or'.tr()),
+              SelectableText('or'.tr()),
               Gap(AppSpacing.lg16),
 
               Expanded(

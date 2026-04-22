@@ -42,7 +42,7 @@ class AboutTeamMemberCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg16),
-            Text(
+            SelectableText(
               member.nameKey.tr(),
               textAlign: TextAlign.center,
               style: AppTextStyles.label.copyWith(
@@ -51,7 +51,7 @@ class AboutTeamMemberCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            Text(
+            SelectableText(
               member.roleKey.tr(),
               textAlign: TextAlign.center,
               style: AppTextStyles.caption,

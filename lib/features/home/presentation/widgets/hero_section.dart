@@ -14,19 +14,22 @@ class HomeHeroSection extends StatelessWidget {
       children: [
         const HomeStatusChip(),
         const Gap(AppSpacing.xl20),
-        Text(
+        SelectableText(
           'we_turn_ideas'.tr(),
           style: AppTextStyles.hero.copyWith(
             fontFamily: 'Cinzel',
             color: AppColors.textPrimary,
           ),
         ),
-        Text(
+        SelectableText(
           'software_works'.tr(),
           style: AppTextStyles.heroAccent.copyWith(fontFamily: 'Cinzel'),
         ),
         const Gap(AppSpacing.lg16),
-        Text('web_apps'.tr(), style: AppTextStyles.body.copyWith(height: 1.75)),
+        SelectableText(
+          'web_apps'.tr(),
+          style: AppTextStyles.body.copyWith(height: 1.75),
+        ),
         const Gap(AppSpacing.xxl24),
         Wrap(
           spacing: AppSpacing.md12,

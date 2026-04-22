@@ -33,7 +33,7 @@ class PortfolioProjectRow extends StatelessWidget {
           children: [
             _ProjectImagesRow(imagePaths: project.imagePaths),
             const SizedBox(height: AppSpacing.lg16),
-            Text(
+            SelectableText(
               project.name,
               style: AppTextStyles.label.copyWith(
                 fontWeight: FontWeight.w700,
@@ -41,7 +41,7 @@ class PortfolioProjectRow extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            Text(
+            SelectableText(
               description,
               style: AppTextStyles.bodySmall.copyWith(
                 color: AppColors.textSecondary,
@@ -172,7 +172,7 @@ class _NoImageTile extends StatelessWidget {
         height: PortfolioProjectRow._imageHeight,
         color: AppColors.background,
         child: Center(
-          child: Text(
+          child: SelectableText(
             'No preview available',
             style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
           ),

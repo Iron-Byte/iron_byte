@@ -39,12 +39,12 @@ class CareersWhyCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg16),
-            Text(
+            SelectableText(
               data.titleKey.tr(),
               style: AppTextStyles.label.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            Text(
+            SelectableText(
               data.descriptionKey.tr(),
               style: AppTextStyles.bodySmall,
             ),

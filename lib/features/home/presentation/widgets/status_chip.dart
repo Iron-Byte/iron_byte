@@ -24,7 +24,7 @@ class HomeTagPill extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
         border: Border.all(color: AppColors.borderSurface),
       ),
-      child: Text(
+      child: SelectableText(
         label,
         style: AppTextStyles.pill.copyWith(color: AppColors.textMuted),
       ),

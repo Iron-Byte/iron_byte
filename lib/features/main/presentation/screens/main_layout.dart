@@ -9,6 +9,12 @@ import 'package:iron_byte/features/main/presentation/bloc/main_bloc.dart';
 import 'package:iron_byte/features/main/presentation/bloc/main_state.dart';
 import 'package:iron_byte/features/main/presentation/widgets/app_bar_nav_item.dart';
 
+// Web text-copy regression checklist:
+// [ ] User can click-drag to highlight text in browser
+// [ ] Ctrl+C / Cmd+C copies selected text
+// [ ] Right-click shows browser native Copy option
+// [ ] Programmatic copy buttons use Clipboard.setData()
+// [ ] No regressions on navigation or tap interactions
 class MainLayout extends StatelessWidget {
   final Widget child;
   const MainLayout({super.key, required this.child});

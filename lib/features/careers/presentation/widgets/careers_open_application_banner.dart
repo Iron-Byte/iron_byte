@@ -22,7 +22,7 @@ class CareersOpenApplicationBanner extends StatelessWidget {
             final textBlock = Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                SelectableText(
                   'careers.open_application.title'.tr(),
                   style: AppTextStyles.label.copyWith(
                     fontWeight: FontWeight.w700,
@@ -30,7 +30,7 @@ class CareersOpenApplicationBanner extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm8),
-                Text(
+                SelectableText(
                   'careers.open_application.subtitle'.tr(),
                   style: AppTextStyles.bodySmall,
                 ),

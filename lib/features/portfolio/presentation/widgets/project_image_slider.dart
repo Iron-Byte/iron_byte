@@ -202,7 +202,7 @@ class _NoPreviewPlaceholder extends StatelessWidget {
               color: AppColors.textMuted.withValues(alpha: 0.9),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            Text(
+            SelectableText(
               'No preview available',
               style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
             ),
