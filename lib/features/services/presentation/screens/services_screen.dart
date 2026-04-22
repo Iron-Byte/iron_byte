@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iron_byte/core/router/app_routes.dart';
+import 'package:iron_byte/core/router/consultation_route_extra.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/services/presentation/bloc/services_bloc.dart';
 import 'package:iron_byte/features/services/presentation/bloc/services_event.dart';
@@ -82,7 +85,17 @@ class _ServicesBody extends StatelessWidget {
                                   for (final item in ServicesCapabilityData.items)
                                     SizedBox(
                                       width: itemWidth,
-                                      child: ServicesCapabilityCard(data: item),
+                                      child: ServicesCapabilityCard(
+                                        data: item,
+                                        onTap: () {
+                                          context.push(
+                                            AppRoutes.consultation,
+                                            extra: ConsultationRouteExtra(
+                                              serviceName: item.titleKey.tr(),
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
                                 ],
                               );
@@ -97,6 +110,15 @@ class _ServicesBody extends StatelessWidget {
                                 if (i > 0) const Gap(AppSpacing.lg16),
                                 ServicesCapabilityCard(
                                   data: ServicesCapabilityData.items[i],
+                                  onTap: () {
+                                    final item = ServicesCapabilityData.items[i];
+                                    context.push(
+                                      AppRoutes.consultation,
+                                      extra: ConsultationRouteExtra(
+                                        serviceName: item.titleKey.tr(),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             ],

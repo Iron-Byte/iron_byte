@@ -96,9 +96,10 @@ class _HorizontalImageStripState extends State<_HorizontalImageStrip> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: PortfolioProjectRow._imageHeight,
-      child: ScrollConfiguration(
+    return RepaintBoundary(
+      child: SizedBox(
+        height: PortfolioProjectRow._imageHeight,
+        child: ScrollConfiguration(
         behavior: const MaterialScrollBehavior().copyWith(
           dragDevices: {
             PointerDeviceKind.touch,
@@ -125,6 +126,7 @@ class _HorizontalImageStripState extends State<_HorizontalImageStrip> {
           ),
         ),
       ),
+      ),
     );
   }
 }
@@ -146,7 +148,7 @@ class _ImageTile extends StatelessWidget {
           fit: BoxFit.cover,
           alignment: Alignment.center,
           gaplessPlayback: true,
-          filterQuality: FilterQuality.high,
+          filterQuality: FilterQuality.medium,
           errorBuilder: (context, error, stackTrace) => const Center(
             child: Icon(
               Icons.broken_image_outlined,

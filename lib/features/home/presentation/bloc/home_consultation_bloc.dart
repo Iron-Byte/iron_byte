@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iron_byte/core/utils/validators.dart';
+import 'package:iron_byte/features/home/domain/services/consultation_default_message_generator.dart';
 import 'package:iron_byte/features/home/domain/usecases/send_consultation_inquiry.dart';
 import 'home_consultation_event.dart';
 import 'home_consultation_state.dart';
@@ -8,8 +9,11 @@ class HomeConsultationBloc
     extends Bloc<HomeConsultationEvent, HomeConsultationState> {
   HomeConsultationBloc({
     required SendConsultationInquiry sendConsultationInquiry,
+    required ConsultationDefaultMessageGenerator messageGenerator,
   })  : _sendConsultationInquiry = sendConsultationInquiry,
+        _messageGenerator = messageGenerator,
         super(const HomeConsultationState()) {
+    on<HomeConsultationInitialized>(_onInitialized);
     on<HomeConsultationEmailChanged>(_onEmailChanged);
     on<HomeConsultationMessageChanged>(_onMessageChanged);
     on<HomeConsultationSendRequested>(_onSendRequested);
@@ -17,6 +21,21 @@ class HomeConsultationBloc
   }
 
   final SendConsultationInquiry _sendConsultationInquiry;
+  final ConsultationDefaultMessageGenerator _messageGenerator;
+
+  void _onInitialized(
+    HomeConsultationInitialized event,
+    Emitter<HomeConsultationState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        message: _messageGenerator(event.serviceName),
+        preferredConsultationSlotUtc: null,
+        sendError: null,
+        emailValidationError: null,
+      ),
+    );
+  }
 
   void _onEmailChanged(
     HomeConsultationEmailChanged event,

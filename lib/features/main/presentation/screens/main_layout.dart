@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iron_byte/core/router/app_routes.dart';
 import 'package:iron_byte/core/router/main_shell_nav_items.dart';
 import 'package:iron_byte/core/router/shell_nav_location.dart';
 import 'package:iron_byte/core/themes/themes.dart';
-import 'package:iron_byte/features/main/presentation/bloc/main_bloc.dart';
-import 'package:iron_byte/features/main/presentation/bloc/main_state.dart';
 import 'package:iron_byte/features/main/presentation/widgets/app_bar_nav_item.dart';
 
 // Web text-copy regression checklist:
@@ -78,11 +75,7 @@ class MainLayout extends StatelessWidget {
           ),
         ),
       ),
-      body: BlocBuilder<MainBloc, MainState>(
-        builder: (context, state) {
-          return Padding(padding: AppSpacing.allXxxl32, child: child);
-        },
-      ),
+      body: Padding(padding: AppSpacing.allXxxl32, child: child),
     );
   }
 }

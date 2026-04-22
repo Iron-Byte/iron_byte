@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:iron_byte/core/router/app_routes.dart';
+import 'package:iron_byte/core/router/consultation_route_extra.dart';
 import 'package:iron_byte/features/home/home.dart';
 import 'package:iron_byte/features/main/presentation/screens/main_layout.dart';
 import 'package:iron_byte/features/portfolio/portfolio.dart';
@@ -55,7 +56,13 @@ class AppRouter {
             GoRoute(
               path: AppRoutes.consultation,
               name: 'consultation',
-              builder: (context, state) => const ConsultationScreen(),
+              builder: (context, state) {
+                final extra = state.extra;
+                final routeExtra = extra is ConsultationRouteExtra ? extra : null;
+                return ConsultationScreen(
+                  selectedServiceName: routeExtra?.serviceName,
+                );
+              },
             ),
           ],
         ),

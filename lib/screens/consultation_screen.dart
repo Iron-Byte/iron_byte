@@ -4,12 +4,19 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/data/repositories/consultation_mail_repository_impl.dart';
+import 'package:iron_byte/features/home/domain/services/consultation_default_message_generator.dart';
 import 'package:iron_byte/features/home/domain/usecases/send_consultation_inquiry.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
+import 'package:iron_byte/features/home/presentation/bloc/home_consultation_event.dart';
 import 'package:iron_byte/features/home/presentation/widgets/consultation_card.dart';
 
 class ConsultationScreen extends StatelessWidget {
-  const ConsultationScreen({super.key});
+  const ConsultationScreen({
+    super.key,
+    this.selectedServiceName,
+  });
+
+  final String? selectedServiceName;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +25,8 @@ class ConsultationScreen extends StatelessWidget {
         sendConsultationInquiry: SendConsultationInquiry(
           ConsultationMailRepositoryImpl(),
         ),
-      ),
+        messageGenerator: const ConsultationDefaultMessageGenerator(),
+      )..add(HomeConsultationInitialized(serviceName: selectedServiceName)),
       child: const _ConsultationBody(),
     );
   }

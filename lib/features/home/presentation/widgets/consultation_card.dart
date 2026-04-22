@@ -40,6 +40,8 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
 
     return BlocConsumer<HomeConsultationBloc, HomeConsultationState>(
       listenWhen: (previous, current) =>
+          previous.message != current.message ||
+          previous.email != current.email ||
           (previous.isSending &&
               !current.isSending &&
               current.sendError == null) ||
@@ -47,6 +49,20 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
               !current.isSending &&
               current.sendError != null),
       listener: (context, state) {
+        if (_messageController.text != state.message) {
+          _messageController.value = _messageController.value.copyWith(
+            text: state.message,
+            selection: TextSelection.collapsed(offset: state.message.length),
+            composing: TextRange.empty,
+          );
+        }
+        if (_emailController.text != state.email) {
+          _emailController.value = _emailController.value.copyWith(
+            text: state.email,
+            selection: TextSelection.collapsed(offset: state.email.length),
+            composing: TextRange.empty,
+          );
+        }
         if (!state.isSending && state.sendError == null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('consultation.snackbar.opening_mail'.tr())),

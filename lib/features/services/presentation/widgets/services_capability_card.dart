@@ -6,9 +6,11 @@ class ServicesCapabilityCard extends StatefulWidget {
   const ServicesCapabilityCard({
     super.key,
     required this.data,
+    this.onTap,
   });
 
   final ServicesCapabilityData data;
+  final VoidCallback? onTap;
 
   @override
   State<ServicesCapabilityCard> createState() => _ServicesCapabilityCardState();
@@ -17,76 +19,94 @@ class ServicesCapabilityCard extends StatefulWidget {
 class _ServicesCapabilityCardState extends State<ServicesCapabilityCard> {
   bool _isHovered = false;
 
+  void _setHovered(bool value) {
+    if (_isHovered == value) return;
+    setState(() => _isHovered = value);
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = widget.data;
     return MouseRegion(
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        curve: Curves.easeOutCubic,
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: AppRadius.borderMd12,
-          border: Border.all(
-            color: _isHovered
-                ? AppColors.borderSurface.withValues(alpha: 0.85)
-                : AppColors.borderSurface,
-          ),
-          boxShadow: _isHovered
-              ? [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.12),
-                    blurRadius: 18,
-                    offset: const Offset(0, 8),
-                  ),
-                ]
-              : const [],
-        ),
-        child: Padding(
-          padding: AppSpacing.allMd12,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  color: data.iconBackground,
-                  borderRadius: AppRadius.borderSm8,
-                  border: Border.all(color: AppColors.border.withValues(alpha: 0.6)),
+      onEnter: (_) => _setHovered(true),
+      onExit: (_) => _setHovered(false),
+      child: RepaintBoundary(
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: widget.onTap,
+            borderRadius: AppRadius.borderMd12,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              curve: Curves.easeOutCubic,
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: AppRadius.borderMd12,
+                border: Border.all(
+                  color: _isHovered
+                      ? AppColors.borderSurface.withValues(alpha: 0.85)
+                      : AppColors.borderSurface,
                 ),
-                child: Padding(
-                  padding: AppSpacing.allSm8,
-                  child: data.illustrationAssetPath != null
-                      ? Image.asset(
-                          data.illustrationAssetPath!,
-                          width: 22,
-                          height: 22,
-                          fit: BoxFit.contain,
-                        )
-                      : Icon(
-                          data.icon,
-                          size: 22,
-                          color: AppColors.textPrimary,
+                boxShadow: _isHovered
+                    ? [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.12),
+                          blurRadius: 18,
+                          offset: const Offset(0, 8),
                         ),
+                      ]
+                    : const [],
+              ),
+              child: Padding(
+                padding: AppSpacing.allMd12,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: data.iconBackground,
+                        borderRadius: AppRadius.borderSm8,
+                        border: Border.all(
+                          color: AppColors.border.withValues(alpha: 0.6),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: AppSpacing.allSm8,
+                        child: data.illustrationAssetPath != null
+                            ? Image.asset(
+                                data.illustrationAssetPath!,
+                                width: 22,
+                                height: 22,
+                                fit: BoxFit.contain,
+                              )
+                            : Icon(
+                                data.icon,
+                                size: 22,
+                                color: AppColors.textPrimary,
+                              ),
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md12),
+                    SelectableText(
+                      data.titleKey.tr(),
+                      style: AppTextStyles.label.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.sm8),
+                    SelectableText(
+                      data.descriptionKey.tr(),
+                      style: AppTextStyles.bodySmall,
+                    ),
+                    const SizedBox(height: AppSpacing.md12),
+                    for (final key in data.bulletKeys) ...[
+                      _Bullet(text: key.tr()),
+                      const SizedBox(height: AppSpacing.sm8),
+                    ],
+                  ],
                 ),
               ),
-              const SizedBox(height: AppSpacing.md12),
-              SelectableText(
-                data.titleKey.tr(),
-                style: AppTextStyles.label.copyWith(fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: AppSpacing.sm8),
-              SelectableText(
-                data.descriptionKey.tr(),
-                style: AppTextStyles.bodySmall,
-              ),
-              const SizedBox(height: AppSpacing.md12),
-              for (final key in data.bulletKeys) ...[
-                _Bullet(text: key.tr()),
-                const SizedBox(height: AppSpacing.sm8),
-              ],
-            ],
+            ),
           ),
         ),
       ),

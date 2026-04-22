@@ -1,5 +1,11 @@
 abstract class HomeConsultationEvent {}
 
+class HomeConsultationInitialized extends HomeConsultationEvent {
+  HomeConsultationInitialized({this.serviceName});
+
+  final String? serviceName;
+}
+
 class HomeConsultationEmailChanged extends HomeConsultationEvent {
   HomeConsultationEmailChanged(this.email);
   final String email;
