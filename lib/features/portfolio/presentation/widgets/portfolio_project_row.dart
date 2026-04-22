@@ -94,21 +94,6 @@ class _HorizontalImageStripState extends State<_HorizontalImageStrip> {
     super.dispose();
   }
 
-  void _onPointerSignal(PointerSignalEvent event) {
-    if (event is! PointerScrollEvent || !_controller.hasClients) return;
-    final delta = event.scrollDelta.dx.abs() > event.scrollDelta.dy.abs()
-        ? event.scrollDelta.dx
-        : event.scrollDelta.dy;
-    if (delta.abs() < 1) return;
-    final next = (_controller.offset + delta).clamp(
-      _controller.position.minScrollExtent,
-      _controller.position.maxScrollExtent,
-    );
-    if (next != _controller.offset) {
-      _controller.jumpTo(next);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -118,29 +103,25 @@ class _HorizontalImageStripState extends State<_HorizontalImageStrip> {
           dragDevices: {
             PointerDeviceKind.touch,
             PointerDeviceKind.stylus,
-            PointerDeviceKind.trackpad,
             PointerDeviceKind.mouse,
           },
         ),
-        child: Listener(
-          onPointerSignal: _onPointerSignal,
-          child: NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (notification) {
-              notification.disallowIndicator();
-              return true;
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (notification) {
+            notification.disallowIndicator();
+            return true;
+          },
+          child: ListView.separated(
+            controller: _controller,
+            scrollDirection: Axis.horizontal,
+            primary: false,
+            physics: const ClampingScrollPhysics(),
+            itemCount: widget.imagePaths.length,
+            separatorBuilder: (context, index) =>
+                const SizedBox(width: AppSpacing.md12),
+            itemBuilder: (context, index) {
+              return _ImageTile(path: widget.imagePaths[index]);
             },
-            child: ListView.separated(
-              controller: _controller,
-              scrollDirection: Axis.horizontal,
-              primary: false,
-              physics: const ClampingScrollPhysics(),
-              itemCount: widget.imagePaths.length,
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: AppSpacing.md12),
-              itemBuilder: (context, index) {
-                return _ImageTile(path: widget.imagePaths[index]);
-              },
-            ),
           ),
         ),
       ),
