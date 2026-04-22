@@ -73,9 +73,9 @@ class _ServicesBody extends StatelessWidget {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             crossAxisCount: 2,
-                            mainAxisSpacing: AppSpacing.xxl24,
-                            crossAxisSpacing: AppSpacing.xxl24,
-                            childAspectRatio: 0.92,
+                            mainAxisSpacing: AppSpacing.lg16,
+                            crossAxisSpacing: AppSpacing.lg16,
+                            childAspectRatio: 1.08,
                             children: [
                               for (final item in ServicesCapabilityData.items)
                                 ServicesCapabilityCard(data: item),
@@ -87,7 +87,7 @@ class _ServicesBody extends StatelessWidget {
                               for (var i = 0;
                                   i < ServicesCapabilityData.items.length;
                                   i++) ...[
-                                if (i > 0) const Gap(AppSpacing.xxl24),
+                                if (i > 0) const Gap(AppSpacing.lg16),
                                 ServicesCapabilityCard(
                                   data: ServicesCapabilityData.items[i],
                                 ),

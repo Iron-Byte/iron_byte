@@ -19,7 +19,7 @@ class ServicesCapabilityCard extends StatelessWidget {
         border: Border.all(color: AppColors.borderSurface),
       ),
       child: Padding(
-        padding: AppSpacing.allLg16,
+        padding: AppSpacing.allMd12,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,7 +38,7 @@ class ServicesCapabilityCard extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: AppSpacing.lg16),
+            const SizedBox(height: AppSpacing.md12),
             SelectableText(
               data.titleKey.tr(),
               style: AppTextStyles.label.copyWith(fontWeight: FontWeight.w700),
@@ -48,7 +48,7 @@ class ServicesCapabilityCard extends StatelessWidget {
               data.descriptionKey.tr(),
               style: AppTextStyles.bodySmall,
             ),
-            const SizedBox(height: AppSpacing.lg16),
+            const SizedBox(height: AppSpacing.md12),
             for (final key in data.bulletKeys) ...[
               _Bullet(text: key.tr()),
               const SizedBox(height: AppSpacing.sm8),
