@@ -24,11 +24,11 @@ class _HorizontalPagerScrollBehavior extends MaterialScrollBehavior {
 
   @override
   Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.stylus,
-        PointerDeviceKind.trackpad,
-        PointerDeviceKind.mouse,
-      };
+    PointerDeviceKind.touch,
+    PointerDeviceKind.stylus,
+    PointerDeviceKind.trackpad,
+    PointerDeviceKind.mouse,
+  };
 }
 
 class _ProjectImageSliderState extends State<ProjectImageSlider> {
@@ -155,18 +155,14 @@ class _SliderImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: AppColors.background,
-      child: Image.asset(
-        path,
-        fit: BoxFit.contain,
-        width: double.infinity,
-        height: double.infinity,
-        gaplessPlayback: true,
-        filterQuality: FilterQuality.high,
-        errorBuilder: (context, error, stackTrace) =>
-            const _SliderImageErrorPlaceholder(),
-      ),
+    return Image.asset(
+      path,
+      fit: BoxFit.cover,
+      width: double.infinity,
+      height: double.infinity,
+      gaplessPlayback: true,
+      errorBuilder: (context, error, stackTrace) =>
+          const _SliderImageErrorPlaceholder(),
     );
   }
 }
@@ -208,9 +204,7 @@ class _NoPreviewPlaceholder extends StatelessWidget {
             const SizedBox(height: AppSpacing.sm8),
             Text(
               'No preview available',
-              style: AppTextStyles.caption.copyWith(
-                color: AppColors.textMuted,
-              ),
+              style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
             ),
           ],
         ),

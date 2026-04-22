@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iron_byte/router.dart';
 import 'package:iron_byte/core/themes/themes.dart';
@@ -39,8 +40,33 @@ class IronByteApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        theme: AppTheme.dark,     
-        routerConfig: AppRouter.createRouter()),
+        theme: AppTheme.dark,
+        scrollBehavior: const AppScrollBehavior(),
+        routerConfig: AppRouter.createRouter(),
+      ),
     );
+  }
+}
+
+/// App-wide scroll behavior with no edge glow/stretch indicators.
+class AppScrollBehavior extends MaterialScrollBehavior {
+  const AppScrollBehavior();
+
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.stylus,
+        PointerDeviceKind.trackpad,
+        PointerDeviceKind.mouse,
+      };
+
+  @override
+  Widget buildOverscrollIndicator(
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) {
+    // Remove glow/stretch/edge hints globally.
+    return child;
   }
 }

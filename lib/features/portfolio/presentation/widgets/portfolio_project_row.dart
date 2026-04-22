@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/portfolio/domain/entities/portfolio_project.dart';
@@ -11,7 +12,7 @@ class PortfolioProjectRow extends StatelessWidget {
 
   final PortfolioProject project;
 
-  static const double _imageHeight = 220;
+  static const double _imageHeight = 720;
   static const double _imageWidth = 320;
 
   @override
@@ -21,7 +22,7 @@ class PortfolioProjectRow extends StatelessWidget {
         : project.description;
 
     return Material(
-      color: AppColors.surface,
+      color: AppColors.primaryBg,
       elevation: 5,
       shadowColor: Colors.black.withValues(alpha: 0.24),
       borderRadius: AppRadius.borderLg16,
@@ -64,16 +65,84 @@ class _ProjectImagesRow extends StatelessWidget {
       return const _NoImageTile();
     }
 
+    return _HorizontalImageStrip(imagePaths: imagePaths);
+  }
+}
+
+/// Isolates horizontal scrolling so trackpad gestures don't bubble into route/nav behavior.
+class _HorizontalImageStrip extends StatefulWidget {
+  const _HorizontalImageStrip({required this.imagePaths});
+
+  final List<String> imagePaths;
+
+  @override
+  State<_HorizontalImageStrip> createState() => _HorizontalImageStripState();
+}
+
+class _HorizontalImageStripState extends State<_HorizontalImageStrip> {
+  late final ScrollController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onPointerSignal(PointerSignalEvent event) {
+    if (event is! PointerScrollEvent || !_controller.hasClients) return;
+    final delta = event.scrollDelta.dx.abs() > event.scrollDelta.dy.abs()
+        ? event.scrollDelta.dx
+        : event.scrollDelta.dy;
+    if (delta.abs() < 1) return;
+    final next = (_controller.offset + delta).clamp(
+      _controller.position.minScrollExtent,
+      _controller.position.maxScrollExtent,
+    );
+    if (next != _controller.offset) {
+      _controller.jumpTo(next);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       height: PortfolioProjectRow._imageHeight,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: imagePaths.length,
-        separatorBuilder: (context, index) =>
-            const SizedBox(width: AppSpacing.md12),
-        itemBuilder: (context, index) {
-          return _ImageTile(path: imagePaths[index]);
-        },
+      child: ScrollConfiguration(
+        behavior: const MaterialScrollBehavior().copyWith(
+          dragDevices: {
+            PointerDeviceKind.touch,
+            PointerDeviceKind.stylus,
+            PointerDeviceKind.trackpad,
+            PointerDeviceKind.mouse,
+          },
+        ),
+        child: Listener(
+          onPointerSignal: _onPointerSignal,
+          child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (notification) {
+              notification.disallowIndicator();
+              return true;
+            },
+            child: ListView.separated(
+              controller: _controller,
+              scrollDirection: Axis.horizontal,
+              primary: false,
+              physics: const ClampingScrollPhysics(),
+              itemCount: widget.imagePaths.length,
+              separatorBuilder: (context, index) =>
+                  const SizedBox(width: AppSpacing.md12),
+              itemBuilder: (context, index) {
+                return _ImageTile(path: widget.imagePaths[index]);
+              },
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -89,12 +158,12 @@ class _ImageTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: AppRadius.borderMd12,
       child: Container(
-        width: PortfolioProjectRow._imageWidth,
-        height: PortfolioProjectRow._imageHeight,
-        color: AppColors.background,
+        // width: PortfolioProjectRow._imageWidth,
+        // height: PortfolioProjectRow._imageHeight,
+        color: AppColors.primaryBg,
         child: Image.asset(
           path,
-          fit: BoxFit.contain,
+          fit: BoxFit.cover,
           alignment: Alignment.center,
           gaplessPlayback: true,
           filterQuality: FilterQuality.high,

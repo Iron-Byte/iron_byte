@@ -12,6 +12,9 @@ class AppRouter {
   static GoRouter createRouter() {
     return GoRouter(
       initialLocation: AppRoutes.home,
+      // Prevent browser history/gesture-driven route transitions.
+      // Navigation remains explicit via context.go/push from UI controls.
+      routerNeglect: true,
       redirect: (context, state) {
         if (state.uri.path == '/porfolio') {
           return AppRoutes.portfolio;
