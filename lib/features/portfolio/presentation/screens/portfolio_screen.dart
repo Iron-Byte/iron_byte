@@ -3,17 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/portfolio/data/datasources/portfolio_local_datasource.dart';
 import 'package:iron_byte/features/portfolio/data/repositories/portfolio_repository_impl.dart';
-import 'package:iron_byte/features/portfolio/domain/entities/portfolio_project.dart';
 import 'package:iron_byte/features/portfolio/domain/usecases/get_portfolio_projects.dart';
 import 'package:iron_byte/features/portfolio/presentation/portfolio_bloc.dart';
 import 'package:iron_byte/features/portfolio/presentation/portfolio_event.dart';
 import 'package:iron_byte/features/portfolio/presentation/portfolio_state.dart';
-import 'package:iron_byte/features/portfolio/presentation/widgets/project_image_slider.dart';
+import 'package:iron_byte/features/portfolio/presentation/widgets/portfolio_project_row.dart';
 
 class PortfolioScreen extends StatelessWidget {
   const PortfolioScreen({super.key});
-
-  static const double _sliderHeight = 220;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +20,13 @@ class PortfolioScreen extends StatelessWidget {
           PortfolioRepositoryImpl(PortfolioLocalDataSource()),
         ),
       )..add(LoadPortfolio()),
-      child: const _PortfolioView(sliderHeight: _sliderHeight),
+      child: const _PortfolioView(),
     );
   }
 }
 
 class _PortfolioView extends StatelessWidget {
-  const _PortfolioView({required this.sliderHeight});
-
-  final double sliderHeight;
+  const _PortfolioView();
 
   @override
   Widget build(BuildContext context) {
@@ -52,14 +47,8 @@ class _PortfolioView extends StatelessWidget {
               return LayoutBuilder(
                 builder: (context, constraints) {
                   final maxW = constraints.maxWidth;
-                  final padH = maxW >= 720 ? 48.0 : 24.0;
-                  final crossAxisCount = maxW >= 1000
-                      ? 3
-                      : maxW >= 600
-                          ? 2
-                          : 1;
-
-                  const cardMainExtent = 400.0;
+                  final padH = maxW >= 720 ? 40.0 : 20.0;
+                  const contentMaxWidth = 1180.0;
 
                   return CustomScrollView(
                     slivers: [
@@ -97,22 +86,25 @@ class _PortfolioView extends StatelessWidget {
                           padH,
                           AppSpacing.huge36,
                         ),
-                        sliver: SliverGrid(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: crossAxisCount,
-                            mainAxisSpacing: AppSpacing.lg16,
-                            crossAxisSpacing: AppSpacing.lg16,
-                            mainAxisExtent: cardMainExtent,
-                          ),
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              return _PortfolioProjectCard(
-                                project: projects[index],
-                                sliderHeight: sliderHeight,
-                              );
-                            },
-                            childCount: projects.length,
+                        sliver: SliverToBoxAdapter(
+                          child: Center(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                maxWidth: contentMaxWidth,
+                              ),
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: projects.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: AppSpacing.xxl24),
+                                itemBuilder: (context, index) {
+                                  return PortfolioProjectRow(
+                                    project: projects[index],
+                                  );
+                                },
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -123,70 +115,6 @@ class _PortfolioView extends StatelessWidget {
             },
           );
         },
-      ),
-    );
-  }
-}
-
-class _PortfolioProjectCard extends StatelessWidget {
-  const _PortfolioProjectCard({
-    required this.project,
-    required this.sliderHeight,
-  });
-
-  final PortfolioProject project;
-  final double sliderHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.surface,
-      elevation: 4,
-      shadowColor: Colors.black.withValues(alpha: 0.35),
-      borderRadius: AppRadius.borderMd12,
-      child: ClipRRect(
-        borderRadius: AppRadius.borderMd12,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(AppSpacing.sm8),
-              child: ClipRRect(
-                borderRadius: AppRadius.borderSm8,
-                child: ProjectImageSlider(
-                  imagePaths: project.imagePaths,
-                  height: sliderHeight,
-                ),
-              ),
-            ),
-            Padding(
-              padding: AppSpacing.hMd12.add(AppSpacing.vSm8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    project.name,
-                    style: AppTextStyles.label.copyWith(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 17,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  if (project.description.isNotEmpty) ...[
-                    const SizedBox(height: AppSpacing.sm8),
-                    Text(
-                      project.description,
-                      style: AppTextStyles.bodySmall,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

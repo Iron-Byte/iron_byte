@@ -155,14 +155,18 @@ class _SliderImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      path,
-      fit: BoxFit.cover,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      errorBuilder: (context, error, stackTrace) =>
-          const _SliderImageErrorPlaceholder(),
+    return ColoredBox(
+      color: AppColors.background,
+      child: Image.asset(
+        path,
+        fit: BoxFit.contain,
+        width: double.infinity,
+        height: double.infinity,
+        gaplessPlayback: true,
+        filterQuality: FilterQuality.high,
+        errorBuilder: (context, error, stackTrace) =>
+            const _SliderImageErrorPlaceholder(),
+      ),
     );
   }
 }
