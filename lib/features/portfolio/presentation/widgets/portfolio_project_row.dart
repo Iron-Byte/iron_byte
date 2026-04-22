@@ -139,8 +139,7 @@ class _ImageTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: AppRadius.borderMd12,
       child: Container(
-        // width: PortfolioProjectRow._imageWidth,
-        // height: PortfolioProjectRow._imageHeight,
+      
         color: AppColors.primaryBg,
         child: Image.asset(
           path,
