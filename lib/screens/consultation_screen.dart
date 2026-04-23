@@ -14,9 +14,11 @@ class ConsultationScreen extends StatelessWidget {
   const ConsultationScreen({
     super.key,
     this.selectedServiceName,
+    this.isJobApplication = false,
   });
 
   final String? selectedServiceName;
+  final bool isJobApplication;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +29,15 @@ class ConsultationScreen extends StatelessWidget {
         ),
         messageGenerator: const ConsultationDefaultMessageGenerator(),
       )..add(HomeConsultationInitialized(serviceName: selectedServiceName)),
-      child: const _ConsultationBody(),
+      child: _ConsultationBody(isJobApplication: isJobApplication),
     );
   }
 }
 
 class _ConsultationBody extends StatelessWidget {
-  const _ConsultationBody();
+  const _ConsultationBody({required this.isJobApplication});
+
+  final bool isJobApplication;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +71,9 @@ class _ConsultationBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SelectableText(
-                      'get_consultation'.tr(),
+                      isJobApplication
+                          ? 'consultation.job.title'.tr()
+                          : 'get_consultation'.tr(),
                       style: AppTextStyles.hero.copyWith(
                         fontFamily: 'Cinzel',
                         fontSize: maxW >= 720 ? 38 : 30,
@@ -76,7 +82,9 @@ class _ConsultationBody extends StatelessWidget {
                     ),
                     const Gap(AppSpacing.md12),
                     SelectableText(
-                      'Tell us about your project and we will help you shape the right delivery plan.',
+                      isJobApplication
+                          ? 'consultation.job.subtitle'.tr()
+                          : 'Tell us about your project and we will help you shape the right delivery plan.',
                       style: AppTextStyles.body.copyWith(
                         color: AppColors.textSecondary,
                       ),
@@ -89,7 +97,9 @@ class _ConsultationBody extends StatelessWidget {
                         tween: Tween(begin: 0.98, end: 1),
                         duration: const Duration(milliseconds: 260),
                         curve: Curves.easeOutCubic,
-                        child: const HomeConsultationCard(),
+                        child: HomeConsultationCard(
+                          isJobApplication: isJobApplication,
+                        ),
                         builder: (context, value, child) {
                           return Opacity(
                             opacity: value.clamp(0.0, 1.0),

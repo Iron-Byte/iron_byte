@@ -29,49 +29,53 @@ class MainLayout extends StatelessWidget {
         ),
         title: Padding(
           padding: AppSpacing.allXxxl32,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
+          child: Expanded(
+            child: SingleChildScrollView(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Container(
-                    height: AppSpacing.xxxl32,
-                    width: AppSpacing.xxxl32,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: AppRadius.borderXs6,
-                    ),
-                    child: Center(
-                      child: Text('IB', style: AppTextStyles.labelLarge),
-                    ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        height: AppSpacing.xxxl32,
+                        width: AppSpacing.xxxl32,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: AppRadius.borderXs6,
+                        ),
+                        child: Center(
+                          child: Text('IB', style: AppTextStyles.labelLarge),
+                        ),
+                      ),
+                      AppBarNavItem(
+                        label: 'iron_byte'.tr(),
+                        route: AppRoutes.home,
+                        currentLocation: currentLocation,
+                        dense: true,
+                      ),
+                    ],
                   ),
-                  AppBarNavItem(
-                    label: 'iron_byte'.tr(),
-                    route: AppRoutes.home,
-                    currentLocation: currentLocation,
-                    dense: true,
+                  Row(
+                    children: [
+                      for (final item in kMainShellNavItems)
+                        AppBarNavItem(
+                          label: item.labelKey.tr(),
+                          route: item.route,
+                          currentLocation: currentLocation,
+                        ),
+                    ],
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      context.push(AppRoutes.consultation);
+                    },
+                    child: Text('free_consulatation'.tr()),
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  for (final item in kMainShellNavItems)
-                    AppBarNavItem(
-                      label: item.labelKey.tr(),
-                      route: item.route,
-                      currentLocation: currentLocation,
-                    ),
-                ],
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  context.push(AppRoutes.consultation);
-                },
-                child: Text('free_consulatation'.tr()),
-              ),
-            ],
+            ),
           ),
         ),
       ),

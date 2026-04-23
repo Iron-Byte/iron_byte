@@ -7,7 +7,12 @@ import 'package:iron_byte/features/home/presentation/bloc/home_consultation_even
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_state.dart';
 
 class HomeConsultationCard extends StatefulWidget {
-  const HomeConsultationCard({super.key});
+  const HomeConsultationCard({
+    super.key,
+    this.isJobApplication = false,
+  });
+
+  final bool isJobApplication;
 
   @override
   State<HomeConsultationCard> createState() => _HomeConsultationCardState();
@@ -86,13 +91,17 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SelectableText(
-                  'get_consultation'.tr(),
+                  widget.isJobApplication
+                      ? 'consultation.job.card_title'.tr()
+                      : 'get_consultation'.tr(),
                   style:
                       AppTextStyles.label.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const Gap(AppSpacing.sm8),
                 SelectableText(
-                  'Tell us about your project — no strings attached.',
+                  widget.isJobApplication
+                      ? 'consultation.job.card_subtitle'.tr()
+                      : 'Tell us about your project — no strings attached.',
                   style: AppTextStyles.bodySmall,
                 ),
                 const Gap(AppSpacing.xxl24),
@@ -122,7 +131,9 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                     color: AppColors.textPrimary,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'consultation.note_hint'.tr(),
+                    hintText: widget.isJobApplication
+                        ? 'consultation.job.note_hint'.tr()
+                        : 'consultation.note_hint'.tr(),
                     alignLabelWithHint: true,
                     contentPadding: const EdgeInsets.symmetric(
                       horizontal: 14,

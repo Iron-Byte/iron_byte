@@ -1,7 +1,9 @@
 class ConsultationRouteExtra {
   const ConsultationRouteExtra({
-    required this.serviceName,
+    this.serviceName,
+    this.isJobApplication = false,
   });
 
-  final String serviceName;
+  final String? serviceName;
+  final bool isJobApplication;
 }

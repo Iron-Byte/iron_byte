@@ -61,6 +61,7 @@ class AppRouter {
                 final routeExtra = extra is ConsultationRouteExtra ? extra : null;
                 return ConsultationScreen(
                   selectedServiceName: routeExtra?.serviceName,
+                  isJobApplication: routeExtra?.isJobApplication ?? false,
                 );
               },
             ),
