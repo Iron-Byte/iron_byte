@@ -30,6 +30,13 @@ class MainLayout extends StatelessWidget {
         title: LayoutBuilder(
           builder: (context, constraints) {
             final maxW = constraints.maxWidth;
+            // Padding must live *inside* the scroll extent so minWidth matches the
+            // viewport; otherwise the row is wider than the visible area and clips
+            // trailing actions (e.g. the consultation button).
+            final horizontalInset = AppSpacing.xxxl32 * 2;
+            final minRowWidth = maxW.isFinite
+                ? (maxW - horizontalInset).clamp(0.0, double.infinity)
+                : 0.0;
             final row = Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,13 +82,13 @@ class MainLayout extends StatelessWidget {
                 ),
               ],
             );
-            return Padding(
-              padding: AppSpacing.allXxxl32,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: maxW.isFinite
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: AppSpacing.allXxxl32,
+                child: maxW.isFinite && minRowWidth > 0
                     ? ConstrainedBox(
-                        constraints: BoxConstraints(minWidth: maxW),
+                        constraints: BoxConstraints(minWidth: minRowWidth),
                         child: row,
                       )
                     : row,
