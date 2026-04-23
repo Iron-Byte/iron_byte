@@ -1,3 +1,5 @@
+import 'package:file_picker/file_picker.dart';
+
 abstract class HomeConsultationEvent {}
 
 class HomeConsultationInitialized extends HomeConsultationEvent {
@@ -22,3 +24,10 @@ class HomeConsultationPreferredSlotChanged extends HomeConsultationEvent {
   HomeConsultationPreferredSlotChanged(this.slotUtc);
   final DateTime? slotUtc;
 }
+
+class HomeConsultationAttachmentPicked extends HomeConsultationEvent {
+  HomeConsultationAttachmentPicked(this.platformFile);
+  final PlatformFile platformFile;
+}
+
+class HomeConsultationAttachmentCleared extends HomeConsultationEvent {}

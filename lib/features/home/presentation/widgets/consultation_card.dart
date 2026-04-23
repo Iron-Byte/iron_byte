@@ -1,3 +1,5 @@
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -141,6 +143,79 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                     ),
                   ).applyDefaults(theme.inputDecorationTheme),
                 ),
+                const Gap(AppSpacing.lg16),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Wrap(
+                    spacing: AppSpacing.sm8,
+                    runSpacing: AppSpacing.sm8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      OutlinedButton.icon(
+                        onPressed: state.isSending
+                            ? null
+                            : () async {
+                                final result = await FilePicker.pickFiles(
+                                  type: FileType.custom,
+                                  allowedExtensions: const [
+                                    'pdf',
+                                    'doc',
+                                    'docx',
+                                    'png',
+                                    'jpg',
+                                    'jpeg',
+                                  ],
+                                  withData: kIsWeb,
+                                );
+                                if (result == null || result.files.isEmpty) {
+                                  return;
+                                }
+                                if (!context.mounted) return;
+                                context.read<HomeConsultationBloc>().add(
+                                      HomeConsultationAttachmentPicked(
+                                        result.files.single,
+                                      ),
+                                    );
+                              },
+                        icon: const Icon(Icons.attach_file, size: 18),
+                        label: Text(
+                          state.attachment == null
+                              ? 'consultation.attachment.pick'.tr()
+                              : 'consultation.attachment.replace'.tr(),
+                        ),
+                      ),
+                      if (state.attachment != null)
+                        IconButton(
+                          tooltip:
+                              MaterialLocalizations.of(context).deleteButtonTooltip,
+                          onPressed: state.isSending
+                              ? null
+                              : () => context
+                                  .read<HomeConsultationBloc>()
+                                  .add(HomeConsultationAttachmentCleared()),
+                          icon: const Icon(Icons.close),
+                        ),
+                    ],
+                  ),
+                ),
+                if (state.attachment != null) ...[
+                  const Gap(AppSpacing.sm8),
+                  Text(
+                    state.attachment!.fileName,
+                    style: AppTextStyles.bodySmall,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+                if (state.attachmentErrorKey != null) ...[
+                  const Gap(AppSpacing.sm8),
+                  Text(
+                    state.attachmentErrorKey!.tr(),
+                    style: AppTextStyles.bodySmall.copyWith(
+                      color: theme.colorScheme.error,
+                    ),
+                  ),
+                ],
                 const Gap(AppSpacing.xxl24),
                 SizedBox(
                   width: double.infinity,
