@@ -22,6 +22,10 @@ dependencies:
   freezed_annotation: ^3.1.0
   json_annotation: ^4.8.1
   freezed: ^3.2.5
+  flutter_email_sender: ^8.0.0
+  path_provider: ^2.1.5
+  path: ^1.9.1
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:

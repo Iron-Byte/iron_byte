@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:iron_byte/core/themes/themes.dart';
-import 'package:iron_byte/core/utils/consultation_schedule.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_event.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_state.dart';
-import 'package:iron_byte/features/home/presentation/utils/consultation_slot_picker.dart';
 
 class HomeConsultationCard extends StatefulWidget {
   const HomeConsultationCard({super.key});
@@ -132,17 +130,6 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                     ),
                   ).applyDefaults(theme.inputDecorationTheme),
                 ),
-                if (state.preferredConsultationSlotUtc != null) ...[
-                  const Gap(AppSpacing.sm8),
-                  SelectableText(
-                    'consultation.calendar.selected'.tr(namedArgs: {
-                      'slot': formatConsultationSlotForBody(
-                        state.preferredConsultationSlotUtc!,
-                      ),
-                    }),
-                    style: AppTextStyles.caption,
-                  ),
-                ],
                 const Gap(AppSpacing.xxl24),
                 SizedBox(
                   width: double.infinity,
@@ -162,43 +149,6 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                             ),
                           )
                         : Text('send_message'.tr()),
-                  ),
-                ),
-                const Gap(AppSpacing.lg16),
-                Row(
-                  children: [
-                    const Expanded(
-                        child: Divider(color: AppColors.borderSurface)),
-                    Padding(
-                      padding: AppSpacing.hMd12,
-                      child: SelectableText(
-                        'or'.tr(),
-                        style: AppTextStyles.caption,
-                      ),
-                    ),
-                    const Expanded(
-                        child: Divider(color: AppColors.borderSurface)),
-                  ],
-                ),
-                const Gap(AppSpacing.lg16),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: state.isSending
-                        ? null
-                        : () async {
-                            final slot = await pickConsultationSlot(context);
-                            if (!context.mounted || slot == null) return;
-                            context.read<HomeConsultationBloc>().add(
-                                  HomeConsultationPreferredSlotChanged(slot),
-                                );
-                          },
-                    icon: const Icon(
-                      Icons.calendar_today_outlined,
-                      size: 18,
-                      color: AppColors.textPrimary,
-                    ),
-                    label: Text('consultation.calendar.cta'.tr()),
                   ),
                 ),
               ],
