@@ -27,56 +27,67 @@ class MainLayout extends StatelessWidget {
           preferredSize: const Size.fromHeight(10),
           child: Container(height: 1.5, color: AppColors.borderSurface),
         ),
-        title: Padding(
-          padding: AppSpacing.allXxxl32,
-          child: Expanded(
-            child: SingleChildScrollView(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        height: AppSpacing.xxxl32,
-                        width: AppSpacing.xxxl32,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: AppRadius.borderXs6,
-                        ),
-                        child: Center(
-                          child: Text('IB', style: AppTextStyles.labelLarge),
-                        ),
+        title: LayoutBuilder(
+          builder: (context, constraints) {
+            final maxW = constraints.maxWidth;
+            final row = Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      height: AppSpacing.xxxl32,
+                      width: AppSpacing.xxxl32,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: AppRadius.borderXs6,
                       ),
+                      child: Center(
+                        child: Text('IB', style: AppTextStyles.labelLarge),
+                      ),
+                    ),
+                    AppBarNavItem(
+                      label: 'iron_byte'.tr(),
+                      route: AppRoutes.home,
+                      currentLocation: currentLocation,
+                      dense: true,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final item in kMainShellNavItems)
                       AppBarNavItem(
-                        label: 'iron_byte'.tr(),
-                        route: AppRoutes.home,
+                        label: item.labelKey.tr(),
+                        route: item.route,
                         currentLocation: currentLocation,
-                        dense: true,
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      for (final item in kMainShellNavItems)
-                        AppBarNavItem(
-                          label: item.labelKey.tr(),
-                          route: item.route,
-                          currentLocation: currentLocation,
-                        ),
-                    ],
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.push(AppRoutes.consultation);
-                    },
-                    child: Text('free_consulatation'.tr()),
-                  ),
-                ],
+                  ],
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.push(AppRoutes.consultation);
+                  },
+                  child: Text('free_consulatation'.tr()),
+                ),
+              ],
+            );
+            return Padding(
+              padding: AppSpacing.allXxxl32,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: maxW.isFinite
+                    ? ConstrainedBox(
+                        constraints: BoxConstraints(minWidth: maxW),
+                        child: row,
+                      )
+                    : row,
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
       body: Padding(padding: AppSpacing.allXxxl32, child: child),
