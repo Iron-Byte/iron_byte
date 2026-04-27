@@ -12,9 +12,6 @@ class PortfolioProjectRow extends StatelessWidget {
 
   final PortfolioProject project;
 
-  static const double _imageHeight = 720;
-  static const double _imageWidth = 320;
-
   @override
   Widget build(BuildContext context) {
     final description = project.description.trim().isEmpty
@@ -96,52 +93,74 @@ class _HorizontalImageStripState extends State<_HorizontalImageStrip> {
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: SizedBox(
-        height: PortfolioProjectRow._imageHeight,
-        child: ScrollConfiguration(
-        behavior: const MaterialScrollBehavior().copyWith(
-          dragDevices: {
-            PointerDeviceKind.touch,
-            PointerDeviceKind.stylus,
-            PointerDeviceKind.mouse,
-          },
-        ),
-        child: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (notification) {
-            notification.disallowIndicator();
-            return true;
-          },
-          child: ListView.separated(
-            controller: _controller,
-            scrollDirection: Axis.horizontal,
-            primary: false,
-            physics: const ClampingScrollPhysics(),
-            itemCount: widget.imagePaths.length,
-            separatorBuilder: (context, index) =>
-                const SizedBox(width: AppSpacing.md12),
-            itemBuilder: (context, index) {
-              return _ImageTile(path: widget.imagePaths[index]);
-            },
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxW = constraints.maxWidth;
+        final imageHeight = maxW >= 1200
+            ? 560.0
+            : (maxW >= 900 ? 480.0 : (maxW >= 700 ? 360.0 : 280.0));
+        final imageWidth = maxW >= 1200
+            ? 300.0
+            : (maxW >= 900 ? 260.0 : (maxW >= 700 ? 220.0 : 180.0));
+        return RepaintBoundary(
+          child: SizedBox(
+            height: imageHeight,
+            child: ScrollConfiguration(
+              behavior: const MaterialScrollBehavior().copyWith(
+                dragDevices: {
+                  PointerDeviceKind.touch,
+                  PointerDeviceKind.stylus,
+                  PointerDeviceKind.mouse,
+                },
+              ),
+              child: NotificationListener<OverscrollIndicatorNotification>(
+                onNotification: (notification) {
+                  notification.disallowIndicator();
+                  return true;
+                },
+                child: ListView.separated(
+                  controller: _controller,
+                  scrollDirection: Axis.horizontal,
+                  primary: false,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: widget.imagePaths.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: AppSpacing.md12),
+                  itemBuilder: (context, index) {
+                    return _ImageTile(
+                      path: widget.imagePaths[index],
+                      width: imageWidth,
+                      height: imageHeight,
+                    );
+                  },
+                ),
+              ),
+            ),
           ),
-        ),
-      ),
-      ),
+        );
+      },
     );
   }
 }
 
 class _ImageTile extends StatelessWidget {
-  const _ImageTile({required this.path});
+  const _ImageTile({
+    required this.path,
+    required this.width,
+    required this.height,
+  });
 
   final String path;
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: AppRadius.borderMd12,
       child: Container(
-      
+        width: width,
+        height: height,
         color: AppColors.primaryBg,
         child: Image.asset(
           path,
@@ -167,11 +186,16 @@ class _NoImageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final maxW = MediaQuery.sizeOf(context).width;
+    final width = maxW >= 1200 ? 300.0 : (maxW >= 700 ? 220.0 : 180.0);
+    final height = maxW >= 1200
+        ? 560.0
+        : (maxW >= 900 ? 480.0 : (maxW >= 700 ? 360.0 : 280.0));
     return ClipRRect(
       borderRadius: AppRadius.borderMd12,
       child: Container(
-        width: PortfolioProjectRow._imageWidth,
-        height: PortfolioProjectRow._imageHeight,
+        width: width,
+        height: height,
         color: AppColors.background,
         child: Center(
           child: SelectableText(

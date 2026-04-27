@@ -47,7 +47,9 @@ class _PortfolioView extends StatelessWidget {
               return LayoutBuilder(
                 builder: (context, constraints) {
                   final maxW = constraints.maxWidth;
-                  final padH = maxW >= 720 ? 40.0 : 20.0;
+                  final padH = maxW >= 1200
+                      ? 40.0
+                      : (maxW >= 700 ? 24.0 : 12.0);
                   const contentMaxWidth = 1180.0;
 
                   return CustomScrollView(
@@ -86,26 +88,22 @@ class _PortfolioView extends StatelessWidget {
                           padH,
                           AppSpacing.huge36,
                         ),
-                        sliver: SliverToBoxAdapter(
-                          child: Center(
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                maxWidth: contentMaxWidth,
+                        sliver: SliverList.separated(
+                          itemCount: projects.length,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: AppSpacing.xxl24),
+                          itemBuilder: (context, index) {
+                            return Center(
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  maxWidth: contentMaxWidth,
+                                ),
+                                child: PortfolioProjectRow(
+                                  project: projects[index],
+                                ),
                               ),
-                              child: ListView.separated(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: projects.length,
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(height: AppSpacing.xxl24),
-                                itemBuilder: (context, index) {
-                                  return PortfolioProjectRow(
-                                    project: projects[index],
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       ),
                     ],

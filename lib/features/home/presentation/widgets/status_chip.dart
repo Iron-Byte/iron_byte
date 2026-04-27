@@ -42,6 +42,7 @@ class HomeStatusChip extends StatelessWidget {
     return Wrap(
       spacing: AppSpacing.md12,
       runSpacing: AppSpacing.md12,
+      direction: Axis.horizontal,
       children: [
         for (final tag in HomeServiceTags.defaults)
           HomeTagPill(label: tag.translationKey.tr()),

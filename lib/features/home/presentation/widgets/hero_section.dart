@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iron_byte/core/router/app_routes.dart';
 import 'package:iron_byte/core/themes/themes.dart';
-import 'package:iron_byte/features/home/presentation/widgets/status_chip.dart';
 import 'package:iron_byte/features/home/presentation/widgets/stats_row.dart';
 
 class HomeHeroSection extends StatelessWidget {
@@ -14,8 +13,6 @@ class HomeHeroSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const HomeStatusChip(),
-        const Gap(AppSpacing.xl20),
         SelectableText(
           'we_turn_ideas'.tr(),
           style: AppTextStyles.hero.copyWith(
@@ -49,6 +46,8 @@ class HomeHeroSection extends StatelessWidget {
         ),
         const Gap(AppSpacing.huge36),
         const HomeStatsRow(),
+        const Gap(AppSpacing.huge36),
+        
       ],
     );
   }
