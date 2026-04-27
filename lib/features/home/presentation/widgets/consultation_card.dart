@@ -246,8 +246,7 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                 ),
               ),
             ),
-            const Gap(82),
-            // const HomeStatusChip(),
+            const Gap(AppSpacing.xxl24),
           ],
         );
       },

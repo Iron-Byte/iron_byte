@@ -1,15 +1,27 @@
-2026/04/24-15:57:04.324 8e29c6 Reusing MANIFEST /private/var/folders/84/_vl472bj1lz4vgnm4h0cs6n00000gn/T/flutter_tools.fZuV3w/flutter_tools_chrome_device.flPKmG/Default/shared_proto_db/MANIFEST-000001
-2026/04/24-15:57:04.324 8e29c6 Recovering log #29
-2026/04/24-15:57:04.325 8e29c6 Reusing old log /private/var/folders/84/_vl472bj1lz4vgnm4h0cs6n00000gn/T/flutter_tools.fZuV3w/flutter_tools_chrome_device.flPKmG/Default/shared_proto_db/000029.log 
-2026/04/24-15:57:04.325 8e29c6 Delete type=0 #13
-2026/04/24-15:57:04.326 8e29c6 Delete type=0 #7
-2026/04/24-15:57:04.326 8e29c6 Delete type=0 #4
-2026/04/24-15:57:04.326 8e29c6 Delete type=0 #10
-2026/04/24-15:57:04.326 8e29c6 Delete type=0 #16
-2026/04/24-15:57:04.326 8e29c6 Delete type=2 #14
-2026/04/24-15:57:04.326 8e29c6 Delete type=2 #17
-2026/04/24-15:57:04.326 8e29c6 Delete type=2 #11
-2026/04/24-15:57:04.326 8e29c6 Delete type=2 #8
-2026/04/24-15:57:04.326 8e29c6 Delete type=0 #26
-2026/04/24-15:57:04.326 8e29c6 Delete type=0 #19
-2026/04/24-15:57:04.326 8e29c6 Delete type=0 #23
+2026/04/27-15:01:37.173 9a75ba Reusing MANIFEST /private/var/folders/84/_vl472bj1lz4vgnm4h0cs6n00000gn/T/flutter_tools.dh7BYT/flutter_tools_chrome_device.VTzTSY/Default/shared_proto_db/MANIFEST-000001
+2026/04/27-15:01:37.174 9a75ba Recovering log #29
+2026/04/27-15:01:37.175 9a75ba Reusing old log /private/var/folders/84/_vl472bj1lz4vgnm4h0cs6n00000gn/T/flutter_tools.dh7BYT/flutter_tools_chrome_device.VTzTSY/Default/shared_proto_db/000029.log 
+2026/04/27-15:01:37.176 9a75ba Delete type=0 #13
+2026/04/27-15:01:37.176 9a75ba Delete type=0 #7
+2026/04/27-15:01:37.176 9a75ba Delete type=0 #4
+2026/04/27-15:01:37.176 9a75ba Delete type=0 #10
+2026/04/27-15:01:37.176 9a75ba Delete type=0 #16
+2026/04/27-15:01:37.176 9a75ba Delete type=2 #14
+2026/04/27-15:01:37.176 9a75ba Delete type=2 #17
+2026/04/27-15:01:37.176 9a75ba Delete type=2 #11
+2026/04/27-15:01:37.176 9a75ba Delete type=2 #8
+2026/04/27-15:01:37.176 9a75ba Delete type=0 #26
+2026/04/27-15:01:37.176 9a75ba Delete type=0 #19
+2026/04/27-15:01:37.176 9a75ba Delete type=0 #23
+2026/04/27-15:01:50.992 9a75b8 Level-0 table #33: started
+2026/04/27-15:01:51.012 9a75b8 Level-0 table #33: 129492 bytes OK
+2026/04/27-15:01:51.016 9a75b8 Delete type=0 #29
+2026/04/27-15:01:51.016 9a75b8 Compacting 4@0 + 1@1 files
+2026/04/27-15:01:51.020 9a75b8 Generated table #34@0: 1944 keys, 152220 bytes
+2026/04/27-15:01:51.020 9a75b8 Compacted 4@0 + 1@1 files => 152220 bytes
+2026/04/27-15:01:51.021 9a75b8 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/04/27-15:01:51.021 9a75b8 Delete type=2 #21
+2026/04/27-15:01:51.021 9a75b8 Delete type=2 #33
+2026/04/27-15:01:51.022 9a75b8 Delete type=2 #27
+2026/04/27-15:01:51.022 9a75b8 Delete type=2 #24
+2026/04/27-15:01:51.022 9a75b8 Delete type=2 #30

@@ -8,7 +8,9 @@ import 'package:iron_byte/features/home/domain/usecases/send_consultation_inquir
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
 import 'package:iron_byte/features/home/presentation/widgets/consultation_card.dart';
 import 'package:iron_byte/features/home/presentation/widgets/hero_section.dart';
-import 'package:iron_byte/features/project_brief_review/presentation/widgets/project_brief_review_section.dart';
+import 'package:iron_byte/features/project_brief_review/presentation/widgets/project_info.dart';
+
+import '../../../project_brief_review/domain/entities/project_brief_review.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -47,40 +49,31 @@ class _HomeBody extends StatelessWidget {
 
                   const hero = RepaintBoundary(child: HomeHeroSection());
                   const card = RepaintBoundary(child: HomeConsultationCard());
-                  const reviewSection = ProjectBriefReviewSection();
+                  const reviewSection = ProjectInfo();
 
                   return SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: horizontal,
-                            vertical: AppSpacing.xxl24,
-                          ),
-                          child: wide
-                              ? Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Expanded(flex: 3, child: hero),
-                                    const Gap(AppSpacing.xxxl32),
-                                    const Expanded(flex: 2, child: card),
-                                  ],
-                                )
-                              : const Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    hero,
-                                    Gap(AppSpacing.xxxl32),
-                                    card,
-                                  ],
-                                ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: AppSpacing.huge36),
-                          child: reviewSection,
-                        ),
+                        wide
+                            ? Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Expanded(flex: 3, child: hero),
+                                  const Gap(AppSpacing.xxxl32),
+                                  const Expanded(flex: 2, child: card),
+                                ],
+                              )
+                            : const Column(
+                                crossAxisAlignment:
+                                    CrossAxisAlignment.stretch,
+                                children: [
+                                  hero,
+                                  Gap(AppSpacing.xxxl32),
+                                  card,
+                                ],
+                              ),
+                         reviewSection,
                       ],
                     ),
                   );
