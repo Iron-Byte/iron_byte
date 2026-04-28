@@ -40,14 +40,16 @@ class _PortfolioView extends StatelessWidget {
             error: (message) => Center(
               child: Padding(
                 padding: AppSpacing.allXxl24,
-                child: Text(message, style: AppTextStyles.body),
+                child: SelectableText(message, style: AppTextStyles.body),
               ),
             ),
             loaded: (projects) {
               return LayoutBuilder(
                 builder: (context, constraints) {
                   final maxW = constraints.maxWidth;
-                  final padH = maxW >= 720 ? 40.0 : 20.0;
+                  final padH = maxW >= 1200
+                      ? 40.0
+                      : (maxW >= 700 ? 24.0 : 12.0);
                   const contentMaxWidth = 1180.0;
 
                   return CustomScrollView(
@@ -63,7 +65,7 @@ class _PortfolioView extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              SelectableText(
                                 'Portfolio',
                                 style: AppTextStyles.hero.copyWith(
                                   fontFamily: 'Cinzel',
@@ -71,7 +73,7 @@ class _PortfolioView extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: AppSpacing.sm8),
-                              Text(
+                              SelectableText(
                                 'portfolio.subtitle'.tr(),
                                 style: AppTextStyles.body,
                               ),
@@ -86,26 +88,22 @@ class _PortfolioView extends StatelessWidget {
                           padH,
                           AppSpacing.huge36,
                         ),
-                        sliver: SliverToBoxAdapter(
-                          child: Center(
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                maxWidth: contentMaxWidth,
+                        sliver: SliverList.separated(
+                          itemCount: projects.length,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: AppSpacing.xxl24),
+                          itemBuilder: (context, index) {
+                            return Center(
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  maxWidth: contentMaxWidth,
+                                ),
+                                child: PortfolioProjectRow(
+                                  project: projects[index],
+                                ),
                               ),
-                              child: ListView.separated(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: projects.length,
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(height: AppSpacing.xxl24),
-                                itemBuilder: (context, index) {
-                                  return PortfolioProjectRow(
-                                    project: projects[index],
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       ),
                     ],

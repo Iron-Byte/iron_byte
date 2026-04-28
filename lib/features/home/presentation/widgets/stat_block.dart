@@ -17,12 +17,12 @@ class HomeStatBlock extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        SelectableText(
           top,
           style: AppTextStyles.statNumber.copyWith(fontFamily: 'Cinzel'),
         ),
         const Gap(AppSpacing.xs4),
-        Text(bottom, style: AppTextStyles.statLabel),
+        SelectableText(bottom, style: AppTextStyles.statLabel),
       ],
     );
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:iron_byte/core/router/app_routes.dart';
+import 'package:iron_byte/core/router/consultation_route_extra.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/services/presentation/bloc/services_bloc.dart';
 import 'package:iron_byte/features/services/presentation/bloc/services_event.dart';
@@ -36,7 +39,7 @@ class _ServicesBody extends StatelessWidget {
             error: (message) => Center(
               child: Padding(
                 padding: AppSpacing.allXxl24,
-                child: Text(message, style: AppTextStyles.body),
+                child: SelectableText(message, style: AppTextStyles.body),
               ),
             ),
             loaded: () {
@@ -60,7 +63,7 @@ class _ServicesBody extends StatelessWidget {
                       children: [
                         const _ServicesHeroHeader(),
                         const Gap(AppSpacing.xxxl32),
-                        Text(
+                        SelectableText(
                           'services.capabilities.section'.tr(),
                           style: AppTextStyles.overline.copyWith(
                             fontWeight: FontWeight.w600,
@@ -69,17 +72,34 @@ class _ServicesBody extends StatelessWidget {
                         ),
                         const Gap(AppSpacing.xxl24),
                         if (wideCapabilities)
-                          GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 2,
-                            mainAxisSpacing: AppSpacing.xxl24,
-                            crossAxisSpacing: AppSpacing.xxl24,
-                            childAspectRatio: 0.92,
-                            children: [
-                              for (final item in ServicesCapabilityData.items)
-                                ServicesCapabilityCard(data: item),
-                            ],
+                          LayoutBuilder(
+                            builder: (context, capabilitiesConstraints) {
+                              final itemWidth =
+                                  (capabilitiesConstraints.maxWidth -
+                                          AppSpacing.lg16) /
+                                      2;
+                              return Wrap(
+                                spacing: AppSpacing.lg16,
+                                runSpacing: AppSpacing.lg16,
+                                children: [
+                                  for (final item in ServicesCapabilityData.items)
+                                    SizedBox(
+                                      width: itemWidth,
+                                      child: ServicesCapabilityCard(
+                                        data: item,
+                                        onTap: () {
+                                          context.push(
+                                            AppRoutes.consultation,
+                                            extra: ConsultationRouteExtra(
+                                              serviceName: item.titleKey.tr(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                ],
+                              );
+                            },
                           )
                         else
                           Column(
@@ -87,15 +107,24 @@ class _ServicesBody extends StatelessWidget {
                               for (var i = 0;
                                   i < ServicesCapabilityData.items.length;
                                   i++) ...[
-                                if (i > 0) const Gap(AppSpacing.xxl24),
+                                if (i > 0) const Gap(AppSpacing.lg16),
                                 ServicesCapabilityCard(
                                   data: ServicesCapabilityData.items[i],
+                                  onTap: () {
+                                    final item = ServicesCapabilityData.items[i];
+                                    context.push(
+                                      AppRoutes.consultation,
+                                      extra: ConsultationRouteExtra(
+                                        serviceName: item.titleKey.tr(),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             ],
                           ),
                         const Gap(AppSpacing.huge36),
-                        Text(
+                        SelectableText(
                           'services.how_we_work.title'.tr(),
                           style: AppTextStyles.overline.copyWith(
                             fontWeight: FontWeight.w600,
@@ -134,7 +163,7 @@ class _ServicesBody extends StatelessWidget {
                             ],
                           ),
                         const Gap(AppSpacing.huge36),
-                        Text(
+                        SelectableText(
                           'services.pricing.title'.tr(),
                           style: AppTextStyles.overline.copyWith(
                             fontWeight: FontWeight.w600,
@@ -203,7 +232,7 @@ class _ServicesHeroHeader extends StatelessWidget {
               horizontal: AppSpacing.lg16,
               vertical: AppSpacing.sm8,
             ),
-            child: Text(
+            child: SelectableText(
               'services.badge'.tr(),
               style: AppTextStyles.pill.copyWith(
                 color: AppColors.textSecondary,
@@ -212,12 +241,12 @@ class _ServicesHeroHeader extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.xl20),
-        Text(
+        SelectableText(
           'services.title'.tr(),
           style: AppTextStyles.hero.copyWith(fontFamily: 'Cinzel'),
         ),
         const SizedBox(height: AppSpacing.lg16),
-        Text(
+        SelectableText(
           'services.subtitle'.tr(),
           style: AppTextStyles.body,
         ),
@@ -236,7 +265,7 @@ class _HowWeWorkColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        SelectableText(
           step.numberKey.tr(),
           style: AppTextStyles.tag.copyWith(
             fontSize: 13,
@@ -244,12 +273,12 @@ class _HowWeWorkColumn extends StatelessWidget {
           ),
         ),
         const Gap(AppSpacing.sm8),
-        Text(
+        SelectableText(
           step.titleKey.tr(),
           style: AppTextStyles.label.copyWith(fontWeight: FontWeight.w700),
         ),
         const Gap(AppSpacing.md12),
-        Text(
+        SelectableText(
           step.descriptionKey.tr(),
           style: AppTextStyles.bodySmall,
         ),

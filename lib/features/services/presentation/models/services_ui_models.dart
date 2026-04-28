@@ -1,64 +1,97 @@
 import 'package:flutter/material.dart';
 
+enum ServicesCapabilitySection {
+  web,
+  mobile,
+  cloud,
+  saas,
+  cicd,
+  uiux,
+  webview,
+  animations,
+}
+
 class ServicesCapabilityData {
   const ServicesCapabilityData({
+    required this.section,
     required this.icon,
     required this.iconBackground,
     required this.titleKey,
     required this.descriptionKey,
     required this.bulletKeys,
+    this.illustrationAssetPath,
   });
 
+  final ServicesCapabilitySection section;
   final IconData icon;
   final Color iconBackground;
   final String titleKey;
   final String descriptionKey;
   final List<String> bulletKeys;
+  final String? illustrationAssetPath;
 
-  static const List<ServicesCapabilityData> items = [
-    ServicesCapabilityData(
+  ServicesCapabilityData.section({
+    required this.section,
+    required this.icon,
+    required this.iconBackground,
+    required String sectionId,
+    this.illustrationAssetPath,
+  }) : titleKey = 'services.capabilities.$sectionId.title',
+       descriptionKey = 'services.capabilities.$sectionId.description',
+       bulletKeys = [
+         'services.capabilities.$sectionId.bullet1',
+         'services.capabilities.$sectionId.bullet2',
+         'services.capabilities.$sectionId.bullet3',
+       ];
+
+  static final List<ServicesCapabilityData> items = [
+    ServicesCapabilityData.section(
+      section: ServicesCapabilitySection.web,
       icon: Icons.public_rounded,
       iconBackground: Color(0xFF1E3A5F),
-      titleKey: 'services.capabilities.web.title',
-      descriptionKey: 'services.capabilities.web.description',
-      bulletKeys: [
-        'services.capabilities.web.bullet1',
-        'services.capabilities.web.bullet2',
-        'services.capabilities.web.bullet3',
-      ],
+      sectionId: 'web',
     ),
-    ServicesCapabilityData(
+    ServicesCapabilityData.section(
+      section: ServicesCapabilitySection.mobile,
       icon: Icons.smartphone_rounded,
       iconBackground: Color(0xFF2A3F4F),
-      titleKey: 'services.capabilities.mobile.title',
-      descriptionKey: 'services.capabilities.mobile.description',
-      bulletKeys: [
-        'services.capabilities.mobile.bullet1',
-        'services.capabilities.mobile.bullet2',
-        'services.capabilities.mobile.bullet3',
-      ],
+      sectionId: 'mobile',
     ),
-    ServicesCapabilityData(
-      icon: Icons.settings_rounded,
+    ServicesCapabilityData.section(
+      section: ServicesCapabilitySection.cloud,
+      icon: Icons.cloud_queue_rounded,
       iconBackground: Color(0xFF263D4A),
-      titleKey: 'services.capabilities.backend.title',
-      descriptionKey: 'services.capabilities.backend.description',
-      bulletKeys: [
-        'services.capabilities.backend.bullet1',
-        'services.capabilities.backend.bullet2',
-        'services.capabilities.backend.bullet3',
-      ],
+      sectionId: 'cloud',
     ),
-    ServicesCapabilityData(
-      icon: Icons.shopping_cart_outlined,
+    ServicesCapabilityData.section(
+      section: ServicesCapabilitySection.saas,
+      icon: Icons.rocket_launch_rounded,
       iconBackground: Color(0xFF2F3848),
-      titleKey: 'services.capabilities.ecommerce.title',
-      descriptionKey: 'services.capabilities.ecommerce.description',
-      bulletKeys: [
-        'services.capabilities.ecommerce.bullet1',
-        'services.capabilities.ecommerce.bullet2',
-        'services.capabilities.ecommerce.bullet3',
-      ],
+      sectionId: 'saas',
+    ),
+    ServicesCapabilityData.section(
+      section: ServicesCapabilitySection.cicd,
+      icon: Icons.alt_route_rounded,
+      iconBackground: Color(0xFF1F3342),
+      sectionId: 'cicd',
+    ),
+    ServicesCapabilityData.section(
+      section: ServicesCapabilitySection.uiux,
+      icon: Icons.design_services_rounded,
+      iconBackground: Color(0xFF30404A),
+      sectionId: 'uiux',
+    ),
+    ServicesCapabilityData.section(
+      section: ServicesCapabilitySection.webview,
+      icon: Icons.web_asset_rounded,
+      iconBackground: Color(0xFF2A3A4A),
+      sectionId: 'webview',
+    ),
+    ServicesCapabilityData.section(
+      section: ServicesCapabilitySection.animations,
+      icon: Icons.animation_rounded,
+      iconBackground: Color(0xFF263347),
+      sectionId: 'animations',
     ),
   ];
 }

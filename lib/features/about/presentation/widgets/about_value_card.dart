@@ -23,7 +23,7 @@ class AboutValueCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            SelectableText(
               data.indexKey.tr(),
               style: AppTextStyles.tag.copyWith(
                 fontWeight: FontWeight.w600,
@@ -31,7 +31,7 @@ class AboutValueCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.md12),
-            Text(
+            SelectableText(
               data.titleKey.tr(),
               style: AppTextStyles.label.copyWith(
                 fontWeight: FontWeight.w700,
@@ -40,7 +40,7 @@ class AboutValueCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            Text(
+            SelectableText(
               data.bodyKey.tr(),
               style: AppTextStyles.bodySmall,
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iron_byte/core/router/app_routes.dart';
+import 'package:iron_byte/core/router/consultation_route_extra.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/careers/presentation/models/careers_ui_models.dart';
 
@@ -30,9 +31,14 @@ class CareersJobCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
               fontFamily: 'Cinzel',
             );
-            final title = Text(opening.titleKey.tr(), style: titleStyle);
+            final title = SelectableText(opening.titleKey.tr(), style: titleStyle);
             final apply = TextButton(
-              onPressed: () => context.push(AppRoutes.consultation),
+              onPressed: () => context.push(
+                    AppRoutes.consultation,
+                    extra: const ConsultationRouteExtra(
+                      isJobApplication: true,
+                    ),
+                  ),
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
                 padding: EdgeInsets.zero,
@@ -107,7 +113,7 @@ class _DepartmentTag extends StatelessWidget {
           horizontal: AppSpacing.md12,
           vertical: AppSpacing.sm8,
         ),
-        child: Text(
+        child: SelectableText(
           department.labelKey.tr(),
           style: AppTextStyles.pill.copyWith(
             color: AppColors.textPrimary,
@@ -137,7 +143,7 @@ class _MetaTag extends StatelessWidget {
           horizontal: AppSpacing.md12,
           vertical: AppSpacing.sm8,
         ),
-        child: Text(
+        child: SelectableText(
           label,
           style: AppTextStyles.pill.copyWith(
             color: AppColors.textSecondary,

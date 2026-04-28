@@ -22,7 +22,7 @@ class AboutCtaBanner extends StatelessWidget {
             final textBlock = Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                SelectableText(
                   'about.cta.title'.tr(),
                   style: AppTextStyles.hero.copyWith(
                     fontSize: 24,
@@ -31,7 +31,7 @@ class AboutCtaBanner extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm8),
-                Text(
+                SelectableText(
                   'about.cta.subtitle'.tr(),
                   style: AppTextStyles.bodySmall,
                 ),

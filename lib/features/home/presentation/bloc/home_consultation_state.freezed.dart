@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeConsultationState {
 
- String get email; String get message; String? get emailValidationError; bool get isSending; String? get sendError; DateTime? get preferredConsultationSlotUtc;
+ String get email; String get message; String? get emailValidationError; bool get isSending; String? get sendError; DateTime? get preferredConsultationSlotUtc; ConsultationAttachment? get attachment; String? get attachmentErrorKey;
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $HomeConsultationStateCopyWith<HomeConsultationState> get copyWith => _$HomeCons
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.sendError, sendError) || other.sendError == sendError)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.sendError, sendError) || other.sendError == sendError)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc)&&(identical(other.attachment, attachment) || other.attachment == attachment)&&(identical(other.attachmentErrorKey, attachmentErrorKey) || other.attachmentErrorKey == attachmentErrorKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,message,emailValidationError,isSending,sendError,preferredConsultationSlotUtc);
+int get hashCode => Object.hash(runtimeType,email,message,emailValidationError,isSending,sendError,preferredConsultationSlotUtc,attachment,attachmentErrorKey);
 
 @override
 String toString() {
-  return 'HomeConsultationState(email: $email, message: $message, emailValidationError: $emailValidationError, isSending: $isSending, sendError: $sendError, preferredConsultationSlotUtc: $preferredConsultationSlotUtc)';
+  return 'HomeConsultationState(email: $email, message: $message, emailValidationError: $emailValidationError, isSending: $isSending, sendError: $sendError, preferredConsultationSlotUtc: $preferredConsultationSlotUtc, attachment: $attachment, attachmentErrorKey: $attachmentErrorKey)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $HomeConsultationStateCopyWith<$Res>  {
   factory $HomeConsultationStateCopyWith(HomeConsultationState value, $Res Function(HomeConsultationState) _then) = _$HomeConsultationStateCopyWithImpl;
 @useResult
 $Res call({
- String email, String message, String? emailValidationError, bool isSending, String? sendError, DateTime? preferredConsultationSlotUtc
+ String email, String message, String? emailValidationError, bool isSending, String? sendError, DateTime? preferredConsultationSlotUtc, ConsultationAttachment? attachment, String? attachmentErrorKey
 });
 
 
@@ -62,7 +62,7 @@ class _$HomeConsultationStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? message = null,Object? emailValidationError = freezed,Object? isSending = null,Object? sendError = freezed,Object? preferredConsultationSlotUtc = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? message = null,Object? emailValidationError = freezed,Object? isSending = null,Object? sendError = freezed,Object? preferredConsultationSlotUtc = freezed,Object? attachment = freezed,Object? attachmentErrorKey = freezed,}) {
   return _then(_self.copyWith(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
@@ -70,7 +70,9 @@ as String,emailValidationError: freezed == emailValidationError ? _self.emailVal
 as String?,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
 as bool,sendError: freezed == sendError ? _self.sendError : sendError // ignore: cast_nullable_to_non_nullable
 as String?,preferredConsultationSlotUtc: freezed == preferredConsultationSlotUtc ? _self.preferredConsultationSlotUtc : preferredConsultationSlotUtc // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,attachment: freezed == attachment ? _self.attachment : attachment // ignore: cast_nullable_to_non_nullable
+as ConsultationAttachment?,attachmentErrorKey: freezed == attachmentErrorKey ? _self.attachmentErrorKey : attachmentErrorKey // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -155,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeConsultationState() when $default != null:
-return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc);case _:
+return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
   return orElse();
 
 }
@@ -176,10 +178,10 @@ return $default(_that.email,_that.message,_that.emailValidationError,_that.isSen
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)  $default,) {final _that = this;
 switch (_that) {
 case _HomeConsultationState():
-return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc);case _:
+return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +198,10 @@ return $default(_that.email,_that.message,_that.emailValidationError,_that.isSen
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeConsultationState() when $default != null:
-return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc);case _:
+return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
   return null;
 
 }
@@ -211,7 +213,7 @@ return $default(_that.email,_that.message,_that.emailValidationError,_that.isSen
 
 
 class _HomeConsultationState implements HomeConsultationState {
-  const _HomeConsultationState({this.email = '', this.message = '', this.emailValidationError, this.isSending = false, this.sendError, this.preferredConsultationSlotUtc});
+  const _HomeConsultationState({this.email = '', this.message = '', this.emailValidationError, this.isSending = false, this.sendError, this.preferredConsultationSlotUtc, this.attachment, this.attachmentErrorKey});
   
 
 @override@JsonKey() final  String email;
@@ -220,6 +222,8 @@ class _HomeConsultationState implements HomeConsultationState {
 @override@JsonKey() final  bool isSending;
 @override final  String? sendError;
 @override final  DateTime? preferredConsultationSlotUtc;
+@override final  ConsultationAttachment? attachment;
+@override final  String? attachmentErrorKey;
 
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
@@ -231,16 +235,16 @@ _$HomeConsultationStateCopyWith<_HomeConsultationState> get copyWith => __$HomeC
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.sendError, sendError) || other.sendError == sendError)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.sendError, sendError) || other.sendError == sendError)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc)&&(identical(other.attachment, attachment) || other.attachment == attachment)&&(identical(other.attachmentErrorKey, attachmentErrorKey) || other.attachmentErrorKey == attachmentErrorKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,message,emailValidationError,isSending,sendError,preferredConsultationSlotUtc);
+int get hashCode => Object.hash(runtimeType,email,message,emailValidationError,isSending,sendError,preferredConsultationSlotUtc,attachment,attachmentErrorKey);
 
 @override
 String toString() {
-  return 'HomeConsultationState(email: $email, message: $message, emailValidationError: $emailValidationError, isSending: $isSending, sendError: $sendError, preferredConsultationSlotUtc: $preferredConsultationSlotUtc)';
+  return 'HomeConsultationState(email: $email, message: $message, emailValidationError: $emailValidationError, isSending: $isSending, sendError: $sendError, preferredConsultationSlotUtc: $preferredConsultationSlotUtc, attachment: $attachment, attachmentErrorKey: $attachmentErrorKey)';
 }
 
 
@@ -251,7 +255,7 @@ abstract mixin class _$HomeConsultationStateCopyWith<$Res> implements $HomeConsu
   factory _$HomeConsultationStateCopyWith(_HomeConsultationState value, $Res Function(_HomeConsultationState) _then) = __$HomeConsultationStateCopyWithImpl;
 @override @useResult
 $Res call({
- String email, String message, String? emailValidationError, bool isSending, String? sendError, DateTime? preferredConsultationSlotUtc
+ String email, String message, String? emailValidationError, bool isSending, String? sendError, DateTime? preferredConsultationSlotUtc, ConsultationAttachment? attachment, String? attachmentErrorKey
 });
 
 
@@ -268,7 +272,7 @@ class __$HomeConsultationStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? message = null,Object? emailValidationError = freezed,Object? isSending = null,Object? sendError = freezed,Object? preferredConsultationSlotUtc = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? message = null,Object? emailValidationError = freezed,Object? isSending = null,Object? sendError = freezed,Object? preferredConsultationSlotUtc = freezed,Object? attachment = freezed,Object? attachmentErrorKey = freezed,}) {
   return _then(_HomeConsultationState(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
@@ -276,7 +280,9 @@ as String,emailValidationError: freezed == emailValidationError ? _self.emailVal
 as String?,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
 as bool,sendError: freezed == sendError ? _self.sendError : sendError // ignore: cast_nullable_to_non_nullable
 as String?,preferredConsultationSlotUtc: freezed == preferredConsultationSlotUtc ? _self.preferredConsultationSlotUtc : preferredConsultationSlotUtc // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as DateTime?,attachment: freezed == attachment ? _self.attachment : attachment // ignore: cast_nullable_to_non_nullable
+as ConsultationAttachment?,attachmentErrorKey: freezed == attachmentErrorKey ? _self.attachmentErrorKey : attachmentErrorKey // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

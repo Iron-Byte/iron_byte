@@ -24,7 +24,7 @@ class HomeTagPill extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
         border: Border.all(color: AppColors.borderSurface),
       ),
-      child: Text(
+      child: SelectableText(
         label,
         style: AppTextStyles.pill.copyWith(color: AppColors.textMuted),
       ),
@@ -42,6 +42,7 @@ class HomeStatusChip extends StatelessWidget {
     return Wrap(
       spacing: AppSpacing.md12,
       runSpacing: AppSpacing.md12,
+      direction: Axis.horizontal,
       children: [
         for (final tag in HomeServiceTags.defaults)
           HomeTagPill(label: tag.translationKey.tr()),

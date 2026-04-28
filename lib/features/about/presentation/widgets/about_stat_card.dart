@@ -24,7 +24,7 @@ class AboutStatCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            SelectableText(
               value,
               style: AppTextStyles.heroAccent.copyWith(
                 fontSize: 28,
@@ -33,7 +33,7 @@ class AboutStatCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            Text(
+            SelectableText(
               label,
               style: AppTextStyles.caption.copyWith(
                 color: AppColors.textMuted,

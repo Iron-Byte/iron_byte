@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:iron_byte/features/home/domain/models/consultation_attachment.dart';
 
 part 'home_consultation_state.freezed.dart';
 
@@ -11,5 +12,7 @@ abstract class HomeConsultationState with _$HomeConsultationState {
     @Default(false) bool isSending,
     String? sendError,
     DateTime? preferredConsultationSlotUtc,
+    ConsultationAttachment? attachment,
+    String? attachmentErrorKey,
   }) = _HomeConsultationState;
 }

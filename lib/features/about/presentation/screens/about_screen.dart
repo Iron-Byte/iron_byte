@@ -38,7 +38,7 @@ class _AboutBody extends StatelessWidget {
             error: (message) => Center(
               child: Padding(
                 padding: AppSpacing.allXxl24,
-                child: Text(message, style: AppTextStyles.body),
+                child: SelectableText(message, style: AppTextStyles.body),
               ),
             ),
             loaded: () {
@@ -64,7 +64,7 @@ class _AboutBody extends StatelessWidget {
                       children: [
                         _AboutHero(wide: heroWide),
                         const Gap(AppSpacing.huge36),
-                        Text(
+                        SelectableText(
                           'about.story.section'.tr(),
                           style: AppTextStyles.overline.copyWith(
                             fontWeight: FontWeight.w600,
@@ -72,17 +72,17 @@ class _AboutBody extends StatelessWidget {
                           ),
                         ),
                         const Gap(AppSpacing.xxl24),
-                        Text(
+                        SelectableText(
                           'about.story.p1'.tr(),
                           style: AppTextStyles.body,
                         ),
                         const Gap(AppSpacing.lg16),
-                        Text(
+                        SelectableText(
                           'about.story.p2'.tr(),
                           style: AppTextStyles.body,
                         ),
                         const Gap(AppSpacing.huge36),
-                        Text(
+                        SelectableText(
                           'about.values.section'.tr(),
                           style: AppTextStyles.overline.copyWith(
                             fontWeight: FontWeight.w600,
@@ -133,7 +133,7 @@ class _AboutBody extends StatelessWidget {
                             ],
                           ),
                         const Gap(AppSpacing.huge36),
-                        Text(
+                        SelectableText(
                           'about.team.section'.tr(),
                           style: AppTextStyles.overline.copyWith(
                             fontWeight: FontWeight.w600,
@@ -218,7 +218,7 @@ class _AboutHero extends StatelessWidget {
               horizontal: AppSpacing.lg16,
               vertical: AppSpacing.sm8,
             ),
-            child: Text(
+            child: SelectableText(
               'about.badge'.tr(),
               style: AppTextStyles.pill.copyWith(
                 color: AppColors.textSecondary,
@@ -227,7 +227,7 @@ class _AboutHero extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.xl20),
-        Text.rich(
+        SelectableText.rich(
           TextSpan(
             style: AppTextStyles.hero.copyWith(fontFamily: 'Cinzel'),
             children: [
@@ -243,7 +243,7 @@ class _AboutHero extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.lg16),
-        Text(
+        SelectableText(
           'about.hero.body'.tr(),
           style: AppTextStyles.body,
         ),
