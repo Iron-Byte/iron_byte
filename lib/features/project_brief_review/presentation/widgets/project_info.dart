@@ -23,10 +23,11 @@ class ProjectInfo extends StatelessWidget {
     final carousel = ClipRect(
       child: ImageCarousel(
         imagePaths: LanguageKitPaths.carousel,
-        aspectRatio: 9 / 16,
-        viewportFraction: 0.82,
-        activeScaleBoost: 1.08,
+        aspectRatio: 9.5 / 16,
+        viewportFraction: 0.87,
+        activeScaleBoost:  1.08,
         horizontalClipGutter: 6,
+        precacheImages: true,
       ),
     );
 
@@ -38,8 +39,11 @@ class ProjectInfo extends StatelessWidget {
       ),
     );
 
-    return ColoredBox(
-      color: AppColors.background,
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color:  AppColors.primary,
+        borderRadius: AppRadius.borderMd12
+      ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(
           horizontal,
@@ -58,11 +62,11 @@ class ProjectInfo extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-               Expanded(child: carousel),
+               Expanded(flex: 3, child: carousel),
                 SizedBox(
                   width: width >= 480 ? AppSpacing.xxl24 : AppSpacing.sm8,
                 ),
-                Expanded(flex: 4, child: textBlock),
+                Expanded(flex: 7, child: textBlock),
               ],
             ),
           ],

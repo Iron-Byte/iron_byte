@@ -15,9 +15,9 @@ class ImageCarousel extends StatefulWidget {
   const ImageCarousel({
     super.key,
     required this.imagePaths,
-    this.aspectRatio = 9 / 16,
-    this.viewportFraction = 0.78, // 0.78,
-    this.itemSpacing = 10,
+    this.aspectRatio = 9.5 / 16,
+    this.viewportFraction = 0.33, // 0.78,
+    this.itemSpacing = 22,
     this.activeScaleBoost = 1.06,
     this.imageFit = BoxFit.cover,
 
@@ -221,8 +221,10 @@ class _ImageCarouselState extends State<ImageCarousel> {
     final maxHeight = math.min(shortest * 0.52, 560.0);
     final idealHeight = maxWidth / widget.aspectRatio;
     final height = idealHeight.clamp(140.0, maxHeight);
-    final width = height * widget.aspectRatio;
-    return (width: math.min(width, maxWidth), height: height);
+    final baseWidth = height * widget.aspectRatio;
+    final widenedWidth = math.min(baseWidth * 1.3, maxWidth);
+    final widenedHeight = widenedWidth / widget.aspectRatio;
+    return (width: widenedWidth, height: widenedHeight);
   }
 
   @override
