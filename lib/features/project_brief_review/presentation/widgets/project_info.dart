@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iron_byte/assets/assets.dart';
 import 'package:iron_byte/core/themes/themes.dart';
-import 'package:iron_byte/features/profile_info/presentation/widgets/language_kit_carousel.dart';
+import 'package:iron_byte/features/common_widgets/image_carousel.dart';
 
 const _loremShort =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do '
@@ -21,7 +21,7 @@ class ProjectInfo extends StatelessWidget {
     /// [ClipRect]: keep adjacent slide art from painting over the text column.
     /// Peek carousel: viewportFraction plus scale keeps center slide large and sides smaller.
     final carousel = ClipRect(
-      child: LanguageKitCarousel(
+      child: ImageCarousel(
         imagePaths: LanguageKitPaths.carousel,
         aspectRatio: 9 / 16,
         viewportFraction: 0.82,
@@ -58,11 +58,12 @@ class ProjectInfo extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(flex: 3, child: carousel),
+                Expanded(flex: 2, child: carousel),
                 SizedBox(width: width >= 480 ? AppSpacing.xxl24 : AppSpacing.sm8),
-                Expanded(flex: 2, child: textBlock),
+                Expanded(flex: 4, child: textBlock),
               ],
             ),
+             
           ],
         ),
       ),

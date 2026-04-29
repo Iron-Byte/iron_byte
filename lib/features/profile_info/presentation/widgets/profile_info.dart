@@ -3,7 +3,7 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/profile_info/data/datasources/language_kit_assets_local_datasource.dart';
 import 'package:iron_byte/features/profile_info/data/repositories/language_kit_assets_repository_impl.dart';
 import 'package:iron_byte/features/profile_info/domain/usecases/get_language_kit_image_paths.dart';
-import 'package:iron_byte/features/profile_info/presentation/widgets/language_kit_carousel.dart';
+import 'package:iron_byte/features/common_widgets/image_carousel.dart';
 
 class ProfileInfo extends StatefulWidget {
   const ProfileInfo({
@@ -44,7 +44,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
       builder: (context, snapshot) {
         final paths = snapshot.data ?? const <String>[];
 
-        Widget carousel = LanguageKitCarousel(imagePaths: paths);
+        Widget carousel = ImageCarousel(imagePaths: paths);
 
         if (snapshot.connectionState == ConnectionState.waiting &&
             paths.isEmpty) {
