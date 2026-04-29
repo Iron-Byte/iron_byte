@@ -304,6 +304,9 @@ class _ImageCarouselState extends State<ImageCarousel> {
                                 itemSnapping: true,
                                 shrinkExtent: itemExtent * 0.62,
                                 padding: EdgeInsets.zero,
+                                backgroundColor: Colors.transparent,
+                                elevation: 0,
+                                itemClipBehavior: Clip.none,
                                 enableSplash: false,
                                 children: [
                                   for (
@@ -387,18 +390,15 @@ class _CarouselImageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: borderRadius,
-      child: ColoredBox(
-        color: AppColors.background,
-        child: Image.asset(
-          path,
-          fit: fit,
-          alignment: Alignment.center,
-          width: double.infinity,
-          height: double.infinity,
-          gaplessPlayback: true,
-          errorBuilder: (context, error, stackTrace) =>
-              const _CarouselImageError(),
-        ),
+      child: Image.asset(
+        path,
+        fit: fit,
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: double.infinity,
+        gaplessPlayback: true,
+        errorBuilder: (context, error, stackTrace) =>
+            const _CarouselImageError(),
       ),
     );
   }
@@ -409,14 +409,11 @@ class _CarouselImageError extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ColoredBox(
-      color: AppColors.background,
-      child: Center(
-        child: Icon(
-          Icons.broken_image_outlined,
-          size: 40,
-          color: AppColors.textMuted,
-        ),
+    return const Center(
+      child: Icon(
+        Icons.broken_image_outlined,
+        size: 40,
+        color: AppColors.textMuted,
       ),
     );
   }

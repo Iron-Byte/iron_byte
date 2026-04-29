@@ -25,7 +25,7 @@ class ProjectInfo extends StatelessWidget {
         imagePaths: LanguageKitPaths.carousel,
         aspectRatio: 9.5 / 16,
         viewportFraction: 0.87,
-        activeScaleBoost:  1.08,
+        activeScaleBoost: 1.08,
         horizontalClipGutter: 6,
         precacheImages: true,
       ),
@@ -40,37 +40,29 @@ class ProjectInfo extends StatelessWidget {
     );
 
     return DecoratedBox(
+      
       decoration: BoxDecoration(
-        color:  AppColors.primary,
-        borderRadius: AppRadius.borderMd12
+        color: AppColors.primary,
+        borderRadius: AppRadius.borderMd12,
       ),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(
-          horizontal,
-          padding.top + AppSpacing.lg16,
-          horizontal,
-          AppSpacing.xxl24,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Language Kit',
-              style: AppTextStyles.labelLarge.copyWith(fontSize: 20),
-            ),
-            const SizedBox(height: AppSpacing.lg16),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-               Expanded(flex: 3, child: carousel),
-                SizedBox(
-                  width: width >= 480 ? AppSpacing.xxl24 : AppSpacing.sm8,
-                ),
-                Expanded(flex: 7, child: textBlock),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Language Kit',
+            style: AppTextStyles.labelLarge.copyWith(fontSize: 20),
+          ),
+          const SizedBox(height: AppSpacing.lg16),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 3, child: carousel),
+              SizedBox(width: width >= 480 ? AppSpacing.xxl24 : AppSpacing.sm8),
+              Expanded(flex: 7, child: textBlock),
+            ],
+          ),
+        ],
       ),
     );
   }
