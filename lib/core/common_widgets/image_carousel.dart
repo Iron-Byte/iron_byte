@@ -15,11 +15,11 @@ class ImageCarousel extends StatefulWidget {
   const ImageCarousel({
     super.key,
     required this.imagePaths,
-    this.aspectRatio = 16 / 9,
-    this.viewportFraction = 0.33, // 0.78,
+    this.aspectRatio = 9 / 16,
+    this.viewportFraction = 0.78, // 0.78,
     this.itemSpacing = 10,
     this.activeScaleBoost = 1.06,
-    this.imageFit = BoxFit.contain,
+    this.imageFit = BoxFit.cover,
 
     /// Inset for the pager so scaled “active” slides are not clipped by an
     /// outer [ClipRect].
