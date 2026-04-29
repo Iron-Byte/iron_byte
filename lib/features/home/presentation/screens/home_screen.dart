@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:iron_byte/assets/image_paths.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/data/repositories/consultation_mail_repository_impl.dart';
 import 'package:iron_byte/features/home/domain/services/consultation_default_message_generator.dart';
@@ -63,7 +64,12 @@ class _HomeBody extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [hero, Gap(AppSpacing.xxxl32), card],
                             ),
-                     ProjectInfo(),
+                      ProjectInfo(
+                        appName: tr('language_kit'),
+                        appDescription: tr('language_kit_desc'),
+                        appDownloads: '10.000+',
+                        appRate: '4.5',
+                      ),
                     ],
                   ),
                 );

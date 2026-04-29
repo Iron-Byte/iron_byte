@@ -4,7 +4,17 @@ import 'package:iron_byte/core/common_widgets/image_carousel.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 
 class ProjectInfo extends StatelessWidget {
-  const ProjectInfo({super.key});
+  final String appName;
+  final String appDescription;
+  final String appDownloads;
+  final String appRate;
+  const ProjectInfo({
+    super.key,
+    required this.appName,
+    required this.appDescription,
+    required this.appDownloads,
+    required this.appRate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +60,10 @@ class ProjectInfo extends StatelessWidget {
                 ),
                 Expanded(
                   child: ProjectInfoWidget(
-                    appName: 'Language Kit',
-                    appDescription: 'some desc',
-                    appDownloads: '200',
-                    appRate: '4/5',
+                    appName: appName,
+                    appDescription: appDescription,
+                    appDownloads: appDownloads,
+                    appRate: appRate,
                   ),
                 ),
               ],
