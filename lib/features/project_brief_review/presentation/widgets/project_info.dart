@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iron_byte/assets/assets.dart';
+import 'package:iron_byte/core/common_widgets/image_carousel.dart';
 import 'package:iron_byte/core/themes/themes.dart';
-import 'package:iron_byte/features/common_widgets/image_carousel.dart';
 
 const _loremShort =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do '
@@ -58,12 +58,13 @@ class ProjectInfo extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(flex: 2, child: carousel),
-                SizedBox(width: width >= 480 ? AppSpacing.xxl24 : AppSpacing.sm8),
+               Expanded(child: carousel),
+                SizedBox(
+                  width: width >= 480 ? AppSpacing.xxl24 : AppSpacing.sm8,
+                ),
                 Expanded(flex: 4, child: textBlock),
               ],
             ),
-             
           ],
         ),
       ),

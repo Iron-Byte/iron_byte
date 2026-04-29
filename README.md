@@ -194,7 +194,7 @@ Thin export: [`lib/screens/about_screen.dart`](lib/screens/about_screen.dart).
 
 | File |
 |------|
-| [`lib/features/common_widgets/transparent_button.dart`](lib/features/common_widgets/transparent_button.dart) |
+| [`lib/core/common_widgets/transparent_button.dart`](lib/core/common_widgets/transparent_button.dart) |
 
 ## Code generation
 

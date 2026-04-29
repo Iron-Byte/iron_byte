@@ -20,6 +20,7 @@ class ImageCarousel extends StatefulWidget {
     this.itemSpacing = 10,
     this.activeScaleBoost = 1.06,
     this.imageFit = BoxFit.contain,
+
     /// Inset for the pager so scaled “active” slides are not clipped by an
     /// outer [ClipRect].
     this.horizontalClipGutter = 0,
@@ -34,6 +35,7 @@ class ImageCarousel extends StatefulWidget {
   final double viewportFraction;
   final double itemSpacing;
   final double activeScaleBoost;
+
   /// [BoxFit.cover] fills the frame but crops; [BoxFit.contain] shows the full image.
   final BoxFit imageFit;
   final double horizontalClipGutter;
@@ -51,25 +53,29 @@ class _HorizontalPagerScrollBehavior extends MaterialScrollBehavior {
 
   @override
   Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.stylus,
-        PointerDeviceKind.trackpad,
-        PointerDeviceKind.mouse,
-      };
+    PointerDeviceKind.touch,
+    PointerDeviceKind.stylus,
+    PointerDeviceKind.trackpad,
+    PointerDeviceKind.mouse,
+  };
 }
 
 class _ImageCarouselState extends State<ImageCarousel> {
-  late final PageController _pageController;
+  late final CarouselController _carouselController;
+
   /// Settled index for dots; [ValueNotifier] avoids [setState] full rebuild on snap.
   late final ValueNotifier<int> _settledPage;
+  late final ValueNotifier<double> _scrollItemValue;
   String? _loadedSignature;
   bool _allImagesReady = false;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: widget.viewportFraction);
+    _carouselController = CarouselController();
+    _carouselController.addListener(_syncScrollState);
     _settledPage = ValueNotifier(0);
+    _scrollItemValue = ValueNotifier(0);
     _allImagesReady = !widget.precacheImages;
   }
 
@@ -133,19 +139,39 @@ class _ImageCarouselState extends State<ImageCarousel> {
 
   @override
   void dispose() {
+    _carouselController.removeListener(_syncScrollState);
+    _carouselController.dispose();
     _settledPage.dispose();
-    _pageController.dispose();
+    _scrollItemValue.dispose();
     super.dispose();
   }
 
+  double _carouselItemExtent(double viewportWidth) {
+    return (viewportWidth * widget.viewportFraction).clamp(1.0, viewportWidth);
+  }
+
+  void _syncScrollState() {
+    if (!_carouselController.hasClients || widget.imagePaths.isEmpty) return;
+    final position = _carouselController.position;
+    final viewport = position.viewportDimension;
+    if (viewport <= 0) return;
+    final itemExtent = _carouselItemExtent(viewport);
+    final rawItem = (position.pixels / itemExtent).clamp(
+      0.0,
+      (widget.imagePaths.length - 1).toDouble(),
+    );
+    _scrollItemValue.value = rawItem;
+    _settledPage.value = rawItem.round();
+  }
+
   void _goRelative(int delta) {
-    if (!_pageController.hasClients || widget.imagePaths.length < 2) return;
+    if (!_carouselController.hasClients || widget.imagePaths.length < 2) return;
     final cur = _settledPage.value;
     final target = (cur + delta).clamp(0, widget.imagePaths.length - 1);
     if (target == cur) return;
-    _pageController.animateToPage(
+    _carouselController.animateToItem(
       target,
-      duration: const Duration(milliseconds: 320),
+      duration: const Duration(milliseconds: 360),
       curve: Curves.easeOutCubic,
     );
   }
@@ -166,9 +192,9 @@ class _ImageCarouselState extends State<ImageCarousel> {
   }
 
   void _onTapDot(int index) {
-    _pageController.animateToPage(
+    _carouselController.animateToItem(
       index,
-      duration: const Duration(milliseconds: 320),
+      duration: const Duration(milliseconds: 360),
       curve: Curves.easeOutCubic,
     );
   }
@@ -222,9 +248,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
               width: box.width,
               height: box.height,
               child: const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
+                child: CircularProgressIndicator(color: AppColors.primary),
               ),
             ),
           );
@@ -263,54 +287,62 @@ class _ImageCarouselState extends State<ImageCarousel> {
                     behavior: const _HorizontalPagerScrollBehavior(),
                     child: Listener(
                       onPointerSignal: _onPointerSignal,
-                      child: AnimatedBuilder(
-                        animation: _pageController,
-                        builder: (context, _) {
-                          final pageVal =
-                              _pageController.hasClients &&
-                                      _pageController.page != null
-                                  ? _pageController.page!
-                                  : _settledPage.value.toDouble();
-
+                      child: LayoutBuilder(
+                        builder: (context, carouselConstraints) {
+                          final itemExtent = _carouselItemExtent(
+                            carouselConstraints.maxWidth,
+                          );
                           // Eager [children]: every slide is built & decoded before paging.
-                          return PageView(
-                            controller: _pageController,
-                            clipBehavior: Clip.none,
-                            padEnds: true,
-                            physics: const BouncingScrollPhysics(),
-                            onPageChanged: (i) => _settledPage.value = i,
-                            children: [
-                              for (var index = 0;
-                                  index < paths.length;
-                                  index++)
-                                KeyedSubtree(
-                                  key: ValueKey(paths[index]),
-                                  child: RepaintBoundary(
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: widget.itemSpacing / 2,
-                                      ),
-                                      child: Opacity(
-                                        opacity: _opacityForIndex(
-                                          pageVal,
-                                          index,
-                                        ),
-                                        child: Transform.scale(
-                                          scale:
-                                              _scaleForIndex(pageVal, index),
-                                          alignment: Alignment.center,
-                                          filterQuality: FilterQuality.medium,
-                                          child: _CarouselImageTile(
-                                            path: paths[index],
-                                            borderRadius: widget.borderRadius,
-                                            fit: widget.imageFit,
+                          return ValueListenableBuilder<double>(
+                            valueListenable: _scrollItemValue,
+                            builder: (context, pageVal, _) {
+                              return CarouselView(
+                                controller: _carouselController,
+                                itemExtent: itemExtent,
+                                itemSnapping: true,
+                                shrinkExtent: itemExtent * 0.62,
+                                padding: EdgeInsets.zero,
+                                enableSplash: false,
+                                children: [
+                                  for (
+                                    var index = 0;
+                                    index < paths.length;
+                                    index++
+                                  )
+                                    KeyedSubtree(
+                                      key: ValueKey(paths[index]),
+                                      child: RepaintBoundary(
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: widget.itemSpacing / 2,
+                                          ),
+                                          child: Opacity(
+                                            opacity: _opacityForIndex(
+                                              pageVal,
+                                              index,
+                                            ),
+                                            child: Transform.scale(
+                                              scale: _scaleForIndex(
+                                                pageVal,
+                                                index,
+                                              ),
+                                              alignment: Alignment.center,
+                                              filterQuality:
+                                                  FilterQuality.medium,
+                                              child: _CarouselImageTile(
+                                                path: paths[index],
+                                                borderRadius:
+                                                    widget.borderRadius,
+                                                fit: widget.imageFit,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                            ],
+                                ],
+                              );
+                            },
                           );
                         },
                       ),
@@ -319,8 +351,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                 ),
               ),
             ),
-            if (widget.pageIndicator)
-              const SizedBox(height: AppSpacing.sm8),
+            if (widget.pageIndicator) const SizedBox(height: AppSpacing.sm8),
             if (widget.pageIndicator)
               ValueListenableBuilder<int>(
                 valueListenable: _settledPage,
@@ -390,10 +421,7 @@ class _CarouselImageError extends StatelessWidget {
 }
 
 class _CarouselPlaceholder extends StatelessWidget {
-  const _CarouselPlaceholder({
-    required this.aspectRatio,
-    required this.text,
-  });
+  const _CarouselPlaceholder({required this.aspectRatio, required this.text});
 
   final double aspectRatio;
   final String text;
@@ -454,4 +482,3 @@ class _CarouselPageIndicator extends StatelessWidget {
     );
   }
 }
-

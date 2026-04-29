@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iron_byte/router.dart';
+import 'package:iron_byte/core/router/app_router.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'features/home/home.dart';
 import 'features/main/main.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await EasyLocalization.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
-    runApp(
+  runApp(
     EasyLocalization(
       supportedLocales: [Locale('en')],
       path: 'assets/translations',
@@ -33,7 +33,6 @@ class IronByteApp extends StatelessWidget {
         BlocProvider<HomeBloc>(
           create: (context) => HomeBloc()..add(LoadHome()),
         ),
-        
       ],
 
       child: MaterialApp.router(
@@ -54,11 +53,11 @@ class AppScrollBehavior extends MaterialScrollBehavior {
 
   @override
   Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.stylus,
-        PointerDeviceKind.trackpad,
-        PointerDeviceKind.mouse,
-      };
+    PointerDeviceKind.touch,
+    PointerDeviceKind.stylus,
+    PointerDeviceKind.trackpad,
+    PointerDeviceKind.mouse,
+  };
 
   @override
   Widget buildOverscrollIndicator(
