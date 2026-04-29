@@ -475,7 +475,7 @@ class _CarouselPageIndicator extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
               color: active
-                  ? AppColors.primary
+                  ? AppColors.background
                   : AppColors.textMuted.withValues(alpha: 0.45),
             ),
           ),
