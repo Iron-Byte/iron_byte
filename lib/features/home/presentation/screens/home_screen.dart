@@ -45,10 +45,8 @@ class _HomeBody extends StatelessWidget {
                 final maxW = constraints.maxWidth;
                 final wide = maxW >= 900;
                 final horizontal = maxW >= 600 ? 48.0 : 24.0;
-      
                 const hero = RepaintBoundary(child: HomeHeroSection());
                 const card = RepaintBoundary(child: HomeConsultationCard());
-                const reviewSection = ProjectInfo();
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -62,15 +60,10 @@ class _HomeBody extends StatelessWidget {
                               ],
                             )
                           : const Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.stretch,
-                              children: [
-                                hero,
-                                Gap(AppSpacing.xxxl32),
-                                card,
-                              ],
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [hero, Gap(AppSpacing.xxxl32), card],
                             ),
-                       reviewSection,
+                     ProjectInfo(),
                     ],
                   ),
                 );

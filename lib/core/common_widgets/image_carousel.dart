@@ -208,7 +208,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
   /// Scroll-linked fade: centered slide fully opaque; neighbors fade toward [_opacityFloor]
   /// so outgoing/incoming slides crossfade smoothly while peek rails stay
   /// faintly visible at rest.
-  static const double _opacityFloor = 0.32;
+  static const double _opacityFloor = 0.001;
 
   double _opacityForIndex(double pageValue, int index) {
     final delta = (pageValue - index).abs().clamp(0.0, 1.0);
@@ -278,13 +278,11 @@ class _ImageCarouselState extends State<ImageCarousel> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Center(
-              child: SizedBox(
-                width: box.width,
-                height: box.height,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: widget.horizontalClipGutter,
-                  ),
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: SizedBox(
+                  width: box.width,
+                  height: box.height,
                   child: ScrollConfiguration(
                     behavior: const _HorizontalPagerScrollBehavior(),
                     child: Listener(
@@ -304,9 +302,6 @@ class _ImageCarouselState extends State<ImageCarousel> {
                                 itemSnapping: true,
                                 shrinkExtent: itemExtent * 0.62,
                                 padding: EdgeInsets.zero,
-                                backgroundColor: Colors.transparent,
-                                elevation: 0,
-                                itemClipBehavior: Clip.none,
                                 enableSplash: false,
                                 children: [
                                   for (
@@ -356,6 +351,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
                 ),
               ),
             ),
+
             if (widget.pageIndicator) const SizedBox(height: AppSpacing.sm8),
             if (widget.pageIndicator)
               ValueListenableBuilder<int>(
@@ -472,7 +468,7 @@ class _CarouselPageIndicator extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
               color: active
-                  ? AppColors.background
+                  ? AppColors.primary
                   : AppColors.textMuted.withValues(alpha: 0.45),
             ),
           ),
