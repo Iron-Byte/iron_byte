@@ -58,12 +58,12 @@ abstract final class LanguageKitPaths {
 
 abstract final class MigraneAppPaths {
   static const String _d = '$kPicturesRoot/migrane_app';
-
   static const shot01 = '$_d/${ImageKey.migraneApp01}';
   static const shot02 = '$_d/${ImageKey.migraneApp02}';
   static const shot03 = '$_d/${ImageKey.migraneApp03}';
   static const shot04 = '$_d/${ImageKey.migraneApp04}';
   static const shot05 = '$_d/${ImageKey.migraneApp05}';
+  static const List<String> carousel = [shot01, shot02, shot03, shot04, shot05];
 }
 
 abstract final class NumisAiPaths {
@@ -74,6 +74,7 @@ abstract final class NumisAiPaths {
   static const shot03 = '$_d/${ImageKey.numisAi03}';
   static const shot04 = '$_d/${ImageKey.numisAi04}';
   static const shot05 = '$_d/${ImageKey.numisAi05}';
+  static const List<String> carousel = [shot01, shot02, shot03, shot04, shot05];
 }
 
 abstract final class SymptomTrackerPaths {
@@ -83,6 +84,7 @@ abstract final class SymptomTrackerPaths {
   static const shot02 = '$_d/${ImageKey.symptomTracker02}';
   static const shot03 = '$_d/${ImageKey.symptomTracker03}';
   static const shot04 = '$_d/${ImageKey.symptomTracker04}';
+  static const List<String> carousel = [cover, shot02, shot03, shot04];
 }
 
 abstract final class VibeKitPaths {
@@ -93,6 +95,7 @@ abstract final class VibeKitPaths {
   static const shot03 = '$_d/${ImageKey.vibeKit03}';
   static const shot04 = '$_d/${ImageKey.vibeKit04}';
   static const shot05 = '$_d/${ImageKey.vibeKit05}';
+  static const List<String> carousel = [cover, shot02, shot03, shot04, shot05];
 }
 
 /// Every picture asset keyed by its filename (last segment), for dynamic lookup.

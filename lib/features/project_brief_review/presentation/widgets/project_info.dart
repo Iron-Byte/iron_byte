@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:iron_byte/assets/assets.dart';
 import 'package:iron_byte/core/common_widgets/image_carousel.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 
 class ProjectInfo extends StatelessWidget {
   final String appName;
   final String appDescription;
-  final String appDownloads;
-  final String appRate;
+  final List<String> imagePath;
   const ProjectInfo({
     super.key,
     required this.appName,
     required this.appDescription,
-    required this.appDownloads,
-    required this.appRate,
+    required this.imagePath,
   });
 
   @override
@@ -25,7 +22,7 @@ class ProjectInfo extends StatelessWidget {
     /// [ClipRect]: keep adjacent slide art from painting over the text column.
     /// Peek carousel: viewportFraction plus scale keeps center slide large and sides smaller.
     final carousel = ImageCarousel(
-      imagePaths: LanguageKitPaths.carousel,
+      imagePaths: imagePath,
       aspectRatio: 9.5 / 16,
       viewportFraction: 0.87,
       activeScaleBoost: 1.08,
@@ -62,8 +59,7 @@ class ProjectInfo extends StatelessWidget {
                   child: ProjectInfoWidget(
                     appName: appName,
                     appDescription: appDescription,
-                    appDownloads: appDownloads,
-                    appRate: appRate,
+                
                   ),
                 ),
               ],
@@ -78,15 +74,13 @@ class ProjectInfo extends StatelessWidget {
 class ProjectInfoWidget extends StatelessWidget {
   final String appName;
   final String appDescription;
-  final String appDownloads;
-  final String appRate;
+  
 
   const ProjectInfoWidget({
     super.key,
     required this.appName,
     required this.appDescription,
-    required this.appDownloads,
-    required this.appRate,
+   
   });
 
   @override
@@ -98,10 +92,10 @@ class ProjectInfoWidget extends StatelessWidget {
       children: [
         Text(appName, style: AppTextStyles.hero.copyWith(fontFamily: 'Cinzel')),
         const SizedBox(height: AppSpacing.sm8),
-        Text(appDescription, style: AppTextStyles.body),
+        Text(appDescription, style: AppTextStyles.caption.copyWith(fontSize: 18)),
         const SizedBox(height: AppSpacing.sm8),
-        Text('Downloads: $appDownloads', style: AppTextStyles.bodySmall),
-        Text('Rate: $appRate', style: AppTextStyles.bodySmall),
+    
+      
       ],
     );
   }

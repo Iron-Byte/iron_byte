@@ -11,8 +11,6 @@ import 'package:iron_byte/features/home/presentation/widgets/consultation_card.d
 import 'package:iron_byte/features/home/presentation/widgets/hero_section.dart';
 import 'package:iron_byte/features/project_brief_review/presentation/widgets/project_info.dart';
 
-import '../../../project_brief_review/domain/entities/project_brief_review.dart';
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -64,12 +62,42 @@ class _HomeBody extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [hero, Gap(AppSpacing.xxxl32), card],
                             ),
+                      Gap(AppSpacing.lg16),
+
                       ProjectInfo(
+                        imagePath: LanguageKitPaths.carousel,
                         appName: tr('language_kit'),
                         appDescription: tr('language_kit_desc'),
-                        appDownloads: '10.000+',
-                        appRate: '4.5',
                       ),
+
+                      Gap(AppSpacing.lg16),
+                      ProjectInfo(
+                        imagePath: MigraneAppPaths.carousel,
+                        appName: tr('migrane_tracker'),
+                        appDescription: tr('migrane_tracker_desc'),
+                      ),
+
+                      Gap(AppSpacing.lg16),
+
+                      ProjectInfo(
+                        imagePath: NumisAiPaths.carousel,
+                        appName: tr('nums_ai'),
+                        appDescription: tr('numis_ai_desc'),
+                      ),
+                      Gap(AppSpacing.lg16),
+                      ProjectInfo(
+                        imagePath: SymptomTrackerPaths.carousel,
+                        appName: tr('symptom_tracker'),
+                        appDescription: tr('symptom_tracker_desc'),
+                      ),
+                      Gap(AppSpacing.lg16),
+
+                      ProjectInfo(
+                        imagePath: VibeKitPaths.carousel,
+                        appName: tr('vibe_kit'),
+                        appDescription: tr('vibe_kit_desc'),
+                      ),
+                      Gap(AppSpacing.lg16),
                     ],
                   ),
                 );
