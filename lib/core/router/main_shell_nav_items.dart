@@ -4,10 +4,7 @@ import 'package:iron_byte/core/router/app_routes.dart';
 /// Top-level shell destinations shown in the app bar (order = display order).
 @immutable
 class MainShellNavItem {
-  const MainShellNavItem({
-    required this.labelKey,
-    required this.route,
-  });
+  const MainShellNavItem({required this.labelKey, required this.route});
 
   final String labelKey;
   final String route;

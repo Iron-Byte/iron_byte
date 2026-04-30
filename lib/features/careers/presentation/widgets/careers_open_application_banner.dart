@@ -42,11 +42,9 @@ class CareersOpenApplicationBanner extends StatelessWidget {
               width: narrow ? double.infinity : null,
               child: ElevatedButton(
                 onPressed: () => context.push(
-                      AppRoutes.consultation,
-                      extra: const ConsultationRouteExtra(
-                        isJobApplication: true,
-                      ),
-                    ),
+                  AppRoutes.consultation,
+                  extra: const ConsultationRouteExtra(isJobApplication: true),
+                ),
                 child: Text('careers.open_application.cta'.tr()),
               ),
             );

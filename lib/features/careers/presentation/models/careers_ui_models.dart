@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iron_byte/core/themes/app_colors.dart';
 
-enum CareersDepartment {
-  engineering,
-  design,
-  operations,
-  sales,
-}
+enum CareersDepartment { engineering, design, operations, sales }
 
 extension CareersDepartmentX on CareersDepartment {
   Color get tagBackground {
@@ -88,54 +83,36 @@ class CareerOpeningData {
     CareerOpeningData(
       titleKey: 'careers.jobs.senior_fullstack.title',
       department: CareersDepartment.engineering,
-      metaTagKeys: [
-        'careers.tags.remote',
-        'careers.tags.full_time',
-      ],
+      metaTagKeys: ['careers.tags.remote', 'careers.tags.full_time'],
       stackKey: 'careers.jobs.senior_fullstack.stack',
     ),
     CareerOpeningData(
       titleKey: 'careers.jobs.mobile_flutter.title',
       department: CareersDepartment.engineering,
-      metaTagKeys: [
-        'careers.tags.remote',
-        'careers.tags.full_time',
-      ],
+      metaTagKeys: ['careers.tags.remote', 'careers.tags.full_time'],
       stackKey: 'careers.jobs.mobile_flutter.stack',
     ),
     CareerOpeningData(
       titleKey: 'careers.jobs.ux_ui.title',
       department: CareersDepartment.design,
-      metaTagKeys: [
-        'careers.tags.remote',
-        'careers.tags.full_time',
-      ],
+      metaTagKeys: ['careers.tags.remote', 'careers.tags.full_time'],
       stackKey: 'careers.jobs.ux_ui.stack',
     ),
     CareerOpeningData(
       titleKey: 'careers.jobs.devops.title',
       department: CareersDepartment.engineering,
-      metaTagKeys: [
-        'careers.tags.remote',
-        'careers.tags.contract',
-      ],
+      metaTagKeys: ['careers.tags.remote', 'careers.tags.contract'],
       stackKey: 'careers.jobs.devops.stack',
     ),
     CareerOpeningData(
       titleKey: 'careers.jobs.pm.title',
       department: CareersDepartment.operations,
-      metaTagKeys: [
-        'careers.tags.remote',
-        'careers.tags.full_time',
-      ],
+      metaTagKeys: ['careers.tags.remote', 'careers.tags.full_time'],
     ),
     CareerOpeningData(
       titleKey: 'careers.jobs.bd_lead.title',
       department: CareersDepartment.sales,
-      metaTagKeys: [
-        'careers.tags.hybrid',
-        'careers.tags.full_time',
-      ],
+      metaTagKeys: ['careers.tags.hybrid', 'careers.tags.full_time'],
     ),
   ];
 }

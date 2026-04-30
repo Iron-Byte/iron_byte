@@ -5,10 +5,7 @@ import 'package:iron_byte/features/portfolio/domain/entities/portfolio_project.d
 
 /// Full-width portfolio row with all project images shown together.
 class PortfolioProjectRow extends StatelessWidget {
-  const PortfolioProjectRow({
-    super.key,
-    required this.project,
-  });
+  const PortfolioProjectRow({super.key, required this.project});
 
   final PortfolioProject project;
 

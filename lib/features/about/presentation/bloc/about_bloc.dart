@@ -7,10 +7,7 @@ class AboutBloc extends Bloc<AboutEvent, AboutState> {
     on<LoadAbout>(_onLoad);
   }
 
-  Future<void> _onLoad(
-    LoadAbout event,
-    Emitter<AboutState> emit,
-  ) async {
+  Future<void> _onLoad(LoadAbout event, Emitter<AboutState> emit) async {
     emit(const AboutState.loading());
     try {
       emit(const AboutState.loaded());

@@ -6,10 +6,7 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/careers/presentation/models/careers_ui_models.dart';
 
 class CareersJobCard extends StatelessWidget {
-  const CareersJobCard({
-    super.key,
-    required this.opening,
-  });
+  const CareersJobCard({super.key, required this.opening});
 
   final CareerOpeningData opening;
 
@@ -31,14 +28,15 @@ class CareersJobCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
               fontFamily: 'Cinzel',
             );
-            final title = SelectableText(opening.titleKey.tr(), style: titleStyle);
+            final title = SelectableText(
+              opening.titleKey.tr(),
+              style: titleStyle,
+            );
             final apply = TextButton(
               onPressed: () => context.push(
-                    AppRoutes.consultation,
-                    extra: const ConsultationRouteExtra(
-                      isJobApplication: true,
-                    ),
-                  ),
+                AppRoutes.consultation,
+                extra: const ConsultationRouteExtra(isJobApplication: true),
+              ),
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
                 padding: EdgeInsets.zero,
@@ -62,10 +60,7 @@ class CareersJobCard extends StatelessWidget {
                     children: [
                       title,
                       const SizedBox(height: AppSpacing.md12),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: apply,
-                      ),
+                      Align(alignment: Alignment.centerLeft, child: apply),
                     ],
                   )
                 else
@@ -82,7 +77,8 @@ class CareersJobCard extends StatelessWidget {
                   runSpacing: AppSpacing.sm8,
                   children: [
                     _DepartmentTag(department: opening.department),
-                    for (final key in opening.metaTagKeys) _MetaTag(label: key.tr()),
+                    for (final key in opening.metaTagKeys)
+                      _MetaTag(label: key.tr()),
                     if (opening.stackKey != null)
                       _MetaTag(label: opening.stackKey!.tr()),
                   ],
@@ -145,9 +141,7 @@ class _MetaTag extends StatelessWidget {
         ),
         child: SelectableText(
           label,
-          style: AppTextStyles.pill.copyWith(
-            color: AppColors.textSecondary,
-          ),
+          style: AppTextStyles.pill.copyWith(color: AppColors.textSecondary),
         ),
       ),
     );

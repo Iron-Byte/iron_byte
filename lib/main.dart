@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iron_byte/core/navigation/home_scroll_coordinator.dart';
 import 'package:iron_byte/core/router/app_router.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'features/home/home.dart';
@@ -20,28 +21,49 @@ void main() async {
   );
 }
 
-class IronByteApp extends StatelessWidget {
+class IronByteApp extends StatefulWidget {
   const IronByteApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<MainBloc>(
-          create: (context) => MainBloc()..add(LoadMain()),
-        ),
-        BlocProvider<HomeBloc>(
-          create: (context) => HomeBloc()..add(LoadHome()),
-        ),
-      ],
+  State<IronByteApp> createState() => _IronByteAppState();
+}
 
-      child: MaterialApp.router(
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        theme: AppTheme.dark,
-        scrollBehavior: const AppScrollBehavior(),
-        routerConfig: AppRouter.createRouter(),
+class _IronByteAppState extends State<IronByteApp> {
+  late final HomeScrollCoordinator _homeScrollCoordinator;
+
+  @override
+  void initState() {
+    super.initState();
+    _homeScrollCoordinator = HomeScrollCoordinator();
+  }
+
+  @override
+  void dispose() {
+    _homeScrollCoordinator.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return HomeScrollScope(
+      coordinator: _homeScrollCoordinator,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<MainBloc>(
+            create: (context) => MainBloc()..add(LoadMain()),
+          ),
+          BlocProvider<HomeBloc>(
+            create: (context) => HomeBloc()..add(LoadHome()),
+          ),
+        ],
+        child: MaterialApp.router(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          theme: AppTheme.dark,
+          scrollBehavior: const AppScrollBehavior(),
+          routerConfig: AppRouter.createRouter(),
+        ),
       ),
     );
   }

@@ -13,8 +13,7 @@ DateTime consultationFirstSelectableDay() {
 
 /// Last selectable day: end of the month **after** the current month.
 DateTime consultationLastSelectableDay(DateTime now) {
-  final startOfMonthAfterNext =
-      DateTime(now.year, now.month + 2, 1);
+  final startOfMonthAfterNext = DateTime(now.year, now.month + 2, 1);
   return startOfMonthAfterNext.subtract(const Duration(days: 1));
 }
 

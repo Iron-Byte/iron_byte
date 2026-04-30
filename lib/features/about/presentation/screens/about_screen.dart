@@ -46,12 +46,6 @@ class _AboutBody extends StatelessWidget {
                 builder: (context, constraints) {
                   final maxW = constraints.maxWidth;
                   final horizontal = maxW >= 600 ? 48.0 : 24.0;
-                  final heroWide = maxW >= 900;
-                  final valuesRow = maxW >= 1000;
-                  final valuesGrid = maxW >= 640 && !valuesRow;
-                  final teamRow = maxW >= 1100;
-                  final teamGrid = maxW >= 520 && !teamRow;
-
                   return SingleChildScrollView(
                     padding: EdgeInsets.fromLTRB(
                       horizontal,
@@ -59,134 +53,7 @@ class _AboutBody extends StatelessWidget {
                       horizontal,
                       AppSpacing.huge36,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _AboutHero(wide: heroWide),
-                        const Gap(AppSpacing.huge36),
-                        SelectableText(
-                          'about.story.section'.tr(),
-                          style: AppTextStyles.overline.copyWith(
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                        const Gap(AppSpacing.xxl24),
-                        SelectableText(
-                          'about.story.p1'.tr(),
-                          style: AppTextStyles.body,
-                        ),
-                        const Gap(AppSpacing.lg16),
-                        SelectableText(
-                          'about.story.p2'.tr(),
-                          style: AppTextStyles.body,
-                        ),
-                        const Gap(AppSpacing.huge36),
-                        SelectableText(
-                          'about.values.section'.tr(),
-                          style: AppTextStyles.overline.copyWith(
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                        const Gap(AppSpacing.xxl24),
-                        if (valuesRow)
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (var i = 0;
-                                  i < AboutValuePillarData.pillars.length;
-                                  i++) ...[
-                                if (i > 0) const Gap(AppSpacing.xxl24),
-                                Expanded(
-                                  child: AboutValueCard(
-                                    data: AboutValuePillarData.pillars[i],
-                                  ),
-                                ),
-                              ],
-                            ],
-                          )
-                        else if (valuesGrid)
-                          GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 2,
-                            mainAxisSpacing: AppSpacing.xxl24,
-                            crossAxisSpacing: AppSpacing.xxl24,
-                            childAspectRatio: 0.92,
-                            children: [
-                              for (final p in AboutValuePillarData.pillars)
-                                AboutValueCard(data: p),
-                            ],
-                          )
-                        else
-                          Column(
-                            children: [
-                              for (var i = 0;
-                                  i < AboutValuePillarData.pillars.length;
-                                  i++) ...[
-                                if (i > 0) const Gap(AppSpacing.xxl24),
-                                AboutValueCard(
-                                  data: AboutValuePillarData.pillars[i],
-                                ),
-                              ],
-                            ],
-                          ),
-                        const Gap(AppSpacing.huge36),
-                        SelectableText(
-                          'about.team.section'.tr(),
-                          style: AppTextStyles.overline.copyWith(
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                        const Gap(AppSpacing.xxl24),
-                        if (teamRow)
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (var i = 0;
-                                  i < AboutTeamMemberData.team.length;
-                                  i++) ...[
-                                if (i > 0) const Gap(AppSpacing.xxl24),
-                                Expanded(
-                                  child: AboutTeamMemberCard(
-                                    member: AboutTeamMemberData.team[i],
-                                  ),
-                                ),
-                              ],
-                            ],
-                          )
-                        else if (teamGrid)
-                          GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 2,
-                            mainAxisSpacing: AppSpacing.xxl24,
-                            crossAxisSpacing: AppSpacing.xxl24,
-                            childAspectRatio: 0.72,
-                            children: [
-                              for (final m in AboutTeamMemberData.team)
-                                AboutTeamMemberCard(member: m),
-                            ],
-                          )
-                        else
-                          Column(
-                            children: [
-                              for (var i = 0;
-                                  i < AboutTeamMemberData.team.length;
-                                  i++) ...[
-                                if (i > 0) const Gap(AppSpacing.xxl24),
-                                AboutTeamMemberCard(
-                                  member: AboutTeamMemberData.team[i],
-                                ),
-                              ],
-                            ],
-                          ),
-                        const Gap(AppSpacing.huge36),
-                        const AboutCtaBanner(),
-                      ],
-                    ),
+                    child: const AboutPageColumn(),
                   );
                 },
               );
@@ -194,6 +61,144 @@ class _AboutBody extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+/// Column body for About (no scroll). Embed in home or standalone scroll.
+class AboutPageColumn extends StatelessWidget {
+  const AboutPageColumn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxW = constraints.maxWidth;
+        final heroWide = maxW >= 900;
+        final valuesRow = maxW >= 1000;
+        final valuesGrid = maxW >= 640 && !valuesRow;
+        final teamRow = maxW >= 1100;
+        final teamGrid = maxW >= 520 && !teamRow;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _AboutHero(wide: heroWide),
+            const Gap(AppSpacing.huge36),
+            SelectableText(
+              'about.story.section'.tr(),
+              style: AppTextStyles.overline.copyWith(
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
+              ),
+            ),
+            const Gap(AppSpacing.xxl24),
+            SelectableText('about.story.p1'.tr(), style: AppTextStyles.body),
+            const Gap(AppSpacing.lg16),
+            SelectableText('about.story.p2'.tr(), style: AppTextStyles.body),
+            const Gap(AppSpacing.huge36),
+            SelectableText(
+              'about.values.section'.tr(),
+              style: AppTextStyles.overline.copyWith(
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
+              ),
+            ),
+            const Gap(AppSpacing.xxl24),
+            if (valuesRow)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (
+                    var i = 0;
+                    i < AboutValuePillarData.pillars.length;
+                    i++
+                  ) ...[
+                    if (i > 0) const Gap(AppSpacing.xxl24),
+                    Expanded(
+                      child: AboutValueCard(
+                        data: AboutValuePillarData.pillars[i],
+                      ),
+                    ),
+                  ],
+                ],
+              )
+            else if (valuesGrid)
+              GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                mainAxisSpacing: AppSpacing.xxl24,
+                crossAxisSpacing: AppSpacing.xxl24,
+                childAspectRatio: 0.92,
+                children: [
+                  for (final p in AboutValuePillarData.pillars)
+                    AboutValueCard(data: p),
+                ],
+              )
+            else
+              Column(
+                children: [
+                  for (
+                    var i = 0;
+                    i < AboutValuePillarData.pillars.length;
+                    i++
+                  ) ...[
+                    if (i > 0) const Gap(AppSpacing.xxl24),
+                    AboutValueCard(data: AboutValuePillarData.pillars[i]),
+                  ],
+                ],
+              ),
+            const Gap(AppSpacing.huge36),
+            SelectableText(
+              'about.team.section'.tr(),
+              style: AppTextStyles.overline.copyWith(
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
+              ),
+            ),
+            const Gap(AppSpacing.xxl24),
+            if (teamRow)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (var i = 0; i < AboutTeamMemberData.team.length; i++) ...[
+                    if (i > 0) const Gap(AppSpacing.xxl24),
+                    Expanded(
+                      child: AboutTeamMemberCard(
+                        member: AboutTeamMemberData.team[i],
+                      ),
+                    ),
+                  ],
+                ],
+              )
+            else if (teamGrid)
+              GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                mainAxisSpacing: AppSpacing.xxl24,
+                crossAxisSpacing: AppSpacing.xxl24,
+                childAspectRatio: 0.72,
+                children: [
+                  for (final m in AboutTeamMemberData.team)
+                    AboutTeamMemberCard(member: m),
+                ],
+              )
+            else
+              Column(
+                children: [
+                  for (var i = 0; i < AboutTeamMemberData.team.length; i++) ...[
+                    if (i > 0) const Gap(AppSpacing.xxl24),
+                    AboutTeamMemberCard(member: AboutTeamMemberData.team[i]),
+                  ],
+                ],
+              ),
+            const Gap(AppSpacing.huge36),
+            const AboutCtaBanner(),
+          ],
+        );
+      },
     );
   }
 }
@@ -243,10 +248,7 @@ class _AboutHero extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.lg16),
-        SelectableText(
-          'about.hero.body'.tr(),
-          style: AppTextStyles.body,
-        ),
+        SelectableText('about.hero.body'.tr(), style: AppTextStyles.body),
       ],
     );
 
@@ -259,10 +261,7 @@ class _AboutHero extends StatelessWidget {
       childAspectRatio: 1.45,
       children: [
         for (final s in AboutStatData.stats)
-          AboutStatCard(
-            value: s.valueKey.tr(),
-            label: s.labelKey.tr(),
-          ),
+          AboutStatCard(value: s.valueKey.tr(), label: s.labelKey.tr()),
       ],
     );
 
@@ -279,11 +278,7 @@ class _AboutHero extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        intro,
-        const Gap(AppSpacing.xxxl32),
-        stats,
-      ],
+      children: [intro, const Gap(AppSpacing.xxxl32), stats],
     );
   }
 }

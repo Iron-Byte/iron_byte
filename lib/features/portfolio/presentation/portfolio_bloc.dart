@@ -5,8 +5,8 @@ import 'package:iron_byte/features/portfolio/presentation/portfolio_state.dart';
 
 class PortfolioBloc extends Bloc<PortfolioEvent, PortfolioState> {
   PortfolioBloc({required GetPortfolioProjects getPortfolioProjects})
-      : _getPortfolioProjects = getPortfolioProjects,
-        super(const PortfolioState.initial()) {
+    : _getPortfolioProjects = getPortfolioProjects,
+      super(const PortfolioState.initial()) {
     on<LoadPortfolio>(_onLoad);
   }
 

@@ -59,7 +59,6 @@ class ProjectInfo extends StatelessWidget {
                   child: ProjectInfoWidget(
                     appName: appName,
                     appDescription: appDescription,
-                
                   ),
                 ),
               ],
@@ -74,13 +73,11 @@ class ProjectInfo extends StatelessWidget {
 class ProjectInfoWidget extends StatelessWidget {
   final String appName;
   final String appDescription;
-  
 
   const ProjectInfoWidget({
     super.key,
     required this.appName,
     required this.appDescription,
-   
   });
 
   @override
@@ -92,10 +89,11 @@ class ProjectInfoWidget extends StatelessWidget {
       children: [
         Text(appName, style: AppTextStyles.hero.copyWith(fontFamily: 'Cinzel')),
         const SizedBox(height: AppSpacing.sm8),
-        Text(appDescription, style: AppTextStyles.caption.copyWith(fontSize: 18)),
+        Text(
+          appDescription,
+          style: AppTextStyles.caption.copyWith(fontSize: 18),
+        ),
         const SizedBox(height: AppSpacing.sm8),
-    
-      
       ],
     );
   }

@@ -7,10 +7,7 @@ class CareersBloc extends Bloc<CareersEvent, CareersState> {
     on<LoadCareers>(_onLoad);
   }
 
-  Future<void> _onLoad(
-    LoadCareers event,
-    Emitter<CareersState> emit,
-  ) async {
+  Future<void> _onLoad(LoadCareers event, Emitter<CareersState> emit) async {
     emit(const CareersState.loading());
     try {
       emit(const CareersState.loaded());

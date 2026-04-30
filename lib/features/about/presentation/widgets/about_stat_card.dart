@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 
 class AboutStatCard extends StatelessWidget {
-  const AboutStatCard({
-    super.key,
-    required this.value,
-    required this.label,
-  });
+  const AboutStatCard({super.key, required this.value, required this.label});
 
   final String value;
   final String label;
@@ -35,9 +31,7 @@ class AboutStatCard extends StatelessWidget {
             const SizedBox(height: AppSpacing.sm8),
             SelectableText(
               label,
-              style: AppTextStyles.caption.copyWith(
-                color: AppColors.textMuted,
-              ),
+              style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
             ),
           ],
         ),

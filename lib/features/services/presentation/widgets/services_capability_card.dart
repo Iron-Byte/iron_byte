@@ -3,11 +3,7 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/services/presentation/models/services_ui_models.dart';
 
 class ServicesCapabilityCard extends StatefulWidget {
-  const ServicesCapabilityCard({
-    super.key,
-    required this.data,
-    this.onTap,
-  });
+  const ServicesCapabilityCard({super.key, required this.data, this.onTap});
 
   final ServicesCapabilityData data;
   final VoidCallback? onTap;
