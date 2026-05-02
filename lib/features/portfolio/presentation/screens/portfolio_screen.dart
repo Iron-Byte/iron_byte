@@ -6,6 +6,7 @@ import 'package:iron_byte/features/portfolio/data/repositories/portfolio_reposit
 import 'package:iron_byte/features/portfolio/domain/usecases/get_portfolio_projects.dart';
 import 'package:iron_byte/features/portfolio/presentation/portfolio_bloc.dart';
 import 'package:iron_byte/features/portfolio/presentation/portfolio_event.dart';
+import 'package:iron_byte/features/portfolio/domain/entities/portfolio_project.dart';
 import 'package:iron_byte/features/portfolio/presentation/portfolio_state.dart';
 import 'package:iron_byte/features/portfolio/presentation/widgets/portfolio_project_row.dart';
 
@@ -21,6 +22,51 @@ class PortfolioScreen extends StatelessWidget {
         ),
       )..add(LoadPortfolio()),
       child: const _PortfolioView(),
+    );
+  }
+}
+
+/// Portfolio list as a [Column] (no scroll). Requires [PortfolioBloc] in tree when
+/// used from home, or pass [projects] from parent.
+class PortfolioLoadedColumn extends StatelessWidget {
+  const PortfolioLoadedColumn({super.key, required this.projects});
+
+  final List<PortfolioProject> projects;
+
+  @override
+  Widget build(BuildContext context) {
+    const contentMaxWidth = 1180.0;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxW = constraints.maxWidth;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SelectableText(
+              'Portfolio',
+              style: AppTextStyles.hero.copyWith(
+                fontFamily: 'Cinzel',
+                fontSize: maxW >= 600 ? 36 : 28,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.sm8),
+            SelectableText(
+              'portfolio.subtitle'.tr(),
+              style: AppTextStyles.body,
+            ),
+            const SizedBox(height: AppSpacing.xxl24),
+            for (var i = 0; i < projects.length; i++) ...[
+              if (i > 0) const SizedBox(height: AppSpacing.xxl24),
+              Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: contentMaxWidth),
+                  child: PortfolioProjectRow(project: projects[i]),
+                ),
+              ),
+            ],
+          ],
+        );
+      },
     );
   }
 }
@@ -50,63 +96,14 @@ class _PortfolioView extends StatelessWidget {
                   final padH = maxW >= 1200
                       ? 40.0
                       : (maxW >= 700 ? 24.0 : 12.0);
-                  const contentMaxWidth = 1180.0;
-
-                  return CustomScrollView(
-                    slivers: [
-                      SliverPadding(
-                        padding: EdgeInsets.fromLTRB(
-                          padH,
-                          AppSpacing.xxl24,
-                          padH,
-                          AppSpacing.lg16,
-                        ),
-                        sliver: SliverToBoxAdapter(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SelectableText(
-                                'Portfolio',
-                                style: AppTextStyles.hero.copyWith(
-                                  fontFamily: 'Cinzel',
-                                  fontSize: maxW >= 600 ? 36 : 28,
-                                ),
-                              ),
-                              const SizedBox(height: AppSpacing.sm8),
-                              SelectableText(
-                                'portfolio.subtitle'.tr(),
-                                style: AppTextStyles.body,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SliverPadding(
-                        padding: EdgeInsets.fromLTRB(
-                          padH,
-                          0,
-                          padH,
-                          AppSpacing.huge36,
-                        ),
-                        sliver: SliverList.separated(
-                          itemCount: projects.length,
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(height: AppSpacing.xxl24),
-                          itemBuilder: (context, index) {
-                            return Center(
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                  maxWidth: contentMaxWidth,
-                                ),
-                                child: PortfolioProjectRow(
-                                  project: projects[index],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.fromLTRB(
+                      padH,
+                      AppSpacing.xxl24,
+                      padH,
+                      AppSpacing.huge36,
+                    ),
+                    child: PortfolioLoadedColumn(projects: projects),
                   );
                 },
               );

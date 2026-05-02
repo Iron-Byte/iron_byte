@@ -3,11 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 
 class HomeStatBlock extends StatelessWidget {
-  const HomeStatBlock({
-    super.key,
-    required this.top,
-    required this.bottom,
-  });
+  const HomeStatBlock({super.key, required this.top, required this.bottom});
 
   final String top;
   final String bottom;

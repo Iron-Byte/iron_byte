@@ -3,11 +3,7 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/domain/models/home_service_tag.dart';
 
 class HomeTagPill extends StatelessWidget {
-  const HomeTagPill({
-    super.key,
-    required this.label,
-    this.backgroundColor,
-  });
+  const HomeTagPill({super.key, required this.label, this.backgroundColor});
 
   final String label;
   final Color? backgroundColor;
@@ -34,8 +30,6 @@ class HomeTagPill extends StatelessWidget {
 
 class HomeStatusChip extends StatelessWidget {
   const HomeStatusChip({super.key});
-
-
 
   @override
   Widget build(BuildContext context) {

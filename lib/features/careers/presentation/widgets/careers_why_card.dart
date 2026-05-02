@@ -3,10 +3,7 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/careers/presentation/models/careers_ui_models.dart';
 
 class CareersWhyCard extends StatelessWidget {
-  const CareersWhyCard({
-    super.key,
-    required this.data,
-  });
+  const CareersWhyCard({super.key, required this.data});
 
   final CareersWhyFeatureData data;
 
@@ -31,11 +28,7 @@ class CareersWhyCard extends StatelessWidget {
               ),
               child: Padding(
                 padding: AppSpacing.allSm8,
-                child: Icon(
-                  data.icon,
-                  size: 22,
-                  color: AppColors.textPrimary,
-                ),
+                child: Icon(data.icon, size: 22, color: AppColors.textPrimary),
               ),
             ),
             const SizedBox(height: AppSpacing.lg16),

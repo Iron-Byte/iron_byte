@@ -10,25 +10,35 @@ import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_event.dart';
 import 'package:iron_byte/features/home/presentation/widgets/consultation_card.dart';
 
-class ConsultationScreen extends StatelessWidget {
-  const ConsultationScreen({
+typedef ConsultationBlocFactory =
+    HomeConsultationBloc Function(String? selectedServiceName);
+
+class ConsultationPage extends StatelessWidget {
+  const ConsultationPage({
     super.key,
     this.selectedServiceName,
     this.isJobApplication = false,
+    this.blocFactory,
   });
 
   final String? selectedServiceName;
   final bool isJobApplication;
+  final ConsultationBlocFactory? blocFactory;
+
+  HomeConsultationBloc _createDefaultBloc(String? serviceName) {
+    return HomeConsultationBloc(
+      sendConsultationInquiry: SendConsultationInquiry(
+        ConsultationMailRepositoryImpl(),
+      ),
+      messageGenerator: const ConsultationDefaultMessageGenerator(),
+    )..add(HomeConsultationInitialized(serviceName: serviceName));
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => HomeConsultationBloc(
-        sendConsultationInquiry: SendConsultationInquiry(
-          ConsultationMailRepositoryImpl(),
-        ),
-        messageGenerator: const ConsultationDefaultMessageGenerator(),
-      )..add(HomeConsultationInitialized(serviceName: selectedServiceName)),
+      create: (_) =>
+          (blocFactory ?? _createDefaultBloc).call(selectedServiceName),
       child: _ConsultationBody(isJobApplication: isJobApplication),
     );
   }
@@ -38,6 +48,18 @@ class _ConsultationBody extends StatelessWidget {
   const _ConsultationBody({required this.isJobApplication});
 
   final bool isJobApplication;
+
+  double _horizontalPadding(double maxW) {
+    if (maxW >= 900) return 72.0;
+    if (maxW >= 600) return 48.0;
+    return 20.0;
+  }
+
+  double _cardMaxWidth(double maxW) {
+    if (maxW >= 1200) return 640.0;
+    if (maxW >= 700) return 560.0;
+    return 520.0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +76,8 @@ class _ConsultationBody extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final maxW = constraints.maxWidth;
-            final horizontal = maxW >= 900 ? 72.0 : (maxW >= 600 ? 48.0 : 20.0);
-            final cardMaxWidth = maxW >= 1200
-                ? 640.0
-                : (maxW >= 700 ? 560.0 : 520.0);
+            final horizontal = _horizontalPadding(maxW);
+            final cardMaxWidth = _cardMaxWidth(maxW);
 
             return SingleChildScrollView(
               child: Padding(

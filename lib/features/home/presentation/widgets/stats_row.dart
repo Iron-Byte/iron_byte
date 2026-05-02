@@ -10,12 +10,7 @@ class HomeStatsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = StatItem.homeDefaults
-        .map(
-          (e) => (
-            top: e.valueHeadline,
-            bottom: e.labelTranslationKey.tr(),
-          ),
-        )
+        .map((e) => (top: e.valueHeadline, bottom: e.labelTranslationKey.tr()))
         .toList();
 
     return LayoutBuilder(

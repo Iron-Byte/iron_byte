@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
+import 'package:iron_byte/core/navigation/home_scroll_coordinator.dart';
 import 'package:iron_byte/core/router/app_routes.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/presentation/widgets/stats_row.dart';
@@ -35,11 +35,15 @@ class HomeHeroSection extends StatelessWidget {
           runSpacing: AppSpacing.md12,
           children: [
             ElevatedButton(
-              onPressed: () => context.go(AppRoutes.portfolio),
+              onPressed: () => HomeScrollScope.maybeOf(
+                context,
+              )?.onShellNavTap(context, AppRoutes.portfolio),
               child: const Text('See our work'),
             ),
             OutlinedButton(
-              onPressed: () => context.go(AppRoutes.services),
+              onPressed: () => HomeScrollScope.maybeOf(
+                context,
+              )?.onShellNavTap(context, AppRoutes.services),
               child: const Text('Learn more'),
             ),
           ],
@@ -47,7 +51,6 @@ class HomeHeroSection extends StatelessWidget {
         const Gap(AppSpacing.huge36),
         const HomeStatsRow(),
         const Gap(AppSpacing.huge36),
-        
       ],
     );
   }

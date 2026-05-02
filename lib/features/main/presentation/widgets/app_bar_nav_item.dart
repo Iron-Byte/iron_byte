@@ -11,11 +11,15 @@ class AppBarNavItem extends StatelessWidget {
     required this.route,
     required this.currentLocation,
     this.dense = false,
+    this.onPressed,
   });
 
   final String label;
   final String route;
   final String currentLocation;
+
+  /// When set, called instead of [context.go(route)] (e.g. Home / Portfolio).
+  final VoidCallback? onPressed;
 
   /// Tighter padding for the brand / logo text button.
   final bool dense;
@@ -34,7 +38,7 @@ class AppBarNavItem extends StatelessWidget {
     final baseStyle = dense ? AppTextStyles.labelLarge : AppTextStyles.label;
 
     return TextButton(
-      onPressed: () => context.go(route),
+      onPressed: onPressed ?? () => context.go(route),
       style: TextButton.styleFrom(
         padding: dense
             ? const EdgeInsets.symmetric(horizontal: 8)

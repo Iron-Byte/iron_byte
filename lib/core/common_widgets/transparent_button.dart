@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../core/themes/themes.dart';
+import 'package:iron_byte/core/themes/themes.dart';
 
 class TransparentButton extends StatelessWidget {
   final Widget child;

@@ -13,9 +13,9 @@ class HomeConsultationBloc
   HomeConsultationBloc({
     required SendConsultationInquiry sendConsultationInquiry,
     required ConsultationDefaultMessageGenerator messageGenerator,
-  })  : _sendConsultationInquiry = sendConsultationInquiry,
-        _messageGenerator = messageGenerator,
-        super(const HomeConsultationState()) {
+  }) : _sendConsultationInquiry = sendConsultationInquiry,
+       _messageGenerator = messageGenerator,
+       super(const HomeConsultationState()) {
     on<HomeConsultationInitialized>(_onInitialized);
     on<HomeConsultationEmailChanged>(_onEmailChanged);
     on<HomeConsultationMessageChanged>(_onMessageChanged);
@@ -48,12 +48,7 @@ class HomeConsultationBloc
     HomeConsultationEmailChanged event,
     Emitter<HomeConsultationState> emit,
   ) {
-    emit(
-      state.copyWith(
-        email: event.email,
-        emailValidationError: null,
-      ),
-    );
+    emit(state.copyWith(email: event.email, emailValidationError: null));
   }
 
   void _onMessageChanged(
@@ -161,12 +156,7 @@ class HomeConsultationBloc
       );
       emit(state.copyWith(isSending: false));
     } catch (e) {
-      emit(
-        state.copyWith(
-          isSending: false,
-          sendError: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isSending: false, sendError: e.toString()));
     }
   }
 }

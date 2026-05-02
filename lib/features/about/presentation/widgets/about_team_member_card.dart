@@ -4,10 +4,7 @@ import 'package:iron_byte/features/about/presentation/models/about_ui_models.dar
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutTeamMemberCard extends StatelessWidget {
-  const AboutTeamMemberCard({
-    super.key,
-    required this.member,
-  });
+  const AboutTeamMemberCard({super.key, required this.member});
 
   final AboutTeamMemberData member;
 

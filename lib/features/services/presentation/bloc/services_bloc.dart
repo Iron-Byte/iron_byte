@@ -7,10 +7,7 @@ class ServicesBloc extends Bloc<ServicesEvent, ServicesState> {
     on<LoadServices>(_onLoad);
   }
 
-  Future<void> _onLoad(
-    LoadServices event,
-    Emitter<ServicesState> emit,
-  ) async {
+  Future<void> _onLoad(LoadServices event, Emitter<ServicesState> emit) async {
     emit(const ServicesState.loading());
     try {
       emit(const ServicesState.loaded());

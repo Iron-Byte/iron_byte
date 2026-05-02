@@ -5,10 +5,7 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/services/presentation/models/services_ui_models.dart';
 
 class ServicesPricingCard extends StatelessWidget {
-  const ServicesPricingCard({
-    super.key,
-    required this.plan,
-  });
+  const ServicesPricingCard({super.key, required this.plan});
 
   final ServicesPricingPlanData plan;
 
@@ -40,7 +37,9 @@ class ServicesPricingCard extends StatelessWidget {
               children: [
                 SelectableText(
                   plan.nameKey.tr(),
-                  style: AppTextStyles.label.copyWith(fontWeight: FontWeight.w700),
+                  style: AppTextStyles.label.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.lg16),
                 SelectableText(
@@ -121,18 +120,9 @@ class _FeatureRow extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Icon(
-          Icons.check_rounded,
-          size: 20,
-          color: AppColors.primary,
-        ),
+        const Icon(Icons.check_rounded, size: 20, color: AppColors.primary),
         const SizedBox(width: AppSpacing.sm8),
-        Expanded(
-          child: SelectableText(
-            text,
-            style: AppTextStyles.bodySmall,
-          ),
-        ),
+        Expanded(child: SelectableText(text, style: AppTextStyles.bodySmall)),
       ],
     );
   }

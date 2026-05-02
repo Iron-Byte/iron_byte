@@ -12,7 +12,8 @@ class ProjectBriefReviewLocalDataSource {
           'daily speaking drills, and vocabulary training designed for real conversations.',
       rating: '4.8/5 (App Store)',
       downloads: '50K+ downloads (estimated)',
-      imageAssetPath: 'assets/images/pictures/language_kit/language_kit_01.webp',
+      imageAssetPath:
+          'assets/images/pictures/language_kit/language_kit_01.webp',
       storeUrl:
           'https://apps.apple.com/us/app/learn-english-languagekit/id6476380601',
     );

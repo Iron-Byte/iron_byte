@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AboutStatData {
-  const AboutStatData({
-    required this.valueKey,
-    required this.labelKey,
-  });
+  const AboutStatData({required this.valueKey, required this.labelKey});
 
   final String valueKey;
   final String labelKey;
@@ -60,10 +57,7 @@ class AboutValuePillarData {
 }
 
 class AboutSocialLinkData {
-  const AboutSocialLinkData({
-    required this.labelKey,
-    required this.uri,
-  });
+  const AboutSocialLinkData({required this.labelKey, required this.uri});
 
   final String labelKey;
   final Uri uri;

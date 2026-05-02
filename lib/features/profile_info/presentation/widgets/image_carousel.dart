@@ -15,6 +15,7 @@ class LanguageKitCarousel extends StatefulWidget {
     this.itemSpacing = 10,
     this.activeScaleBoost = 1.06,
     this.imageFit = BoxFit.contain,
+
     /// Inset for the pager so scaled “active” slides are not clipped by an outer [ClipRect].
     this.horizontalClipGutter = 0,
   });
@@ -24,6 +25,7 @@ class LanguageKitCarousel extends StatefulWidget {
   final double viewportFraction;
   final double itemSpacing;
   final double activeScaleBoost;
+
   /// [BoxFit.cover] fills the frame but crops; [BoxFit.contain] shows the full image.
   final BoxFit imageFit;
   final double horizontalClipGutter;
@@ -46,6 +48,7 @@ class _HorizontalPagerScrollBehavior extends MaterialScrollBehavior {
 
 class _LanguageKitCarouselState extends State<LanguageKitCarousel> {
   late final PageController _pageController;
+
   /// Settled index for dots; [ValueNotifier] avoids [setState] full rebuild on snap.
   late final ValueNotifier<int> _settledPage;
   String? _loadedSignature;
@@ -93,8 +96,7 @@ class _LanguageKitCarouselState extends State<LanguageKitCarousel> {
     if (_loadedSignature == sig && _allImagesReady) return;
 
     await Future.wait([
-      for (final path in paths)
-        precacheImage(AssetImage(path), context),
+      for (final path in paths) precacheImage(AssetImage(path), context),
     ]);
 
     if (!mounted) return;
@@ -192,9 +194,7 @@ class _LanguageKitCarouselState extends State<LanguageKitCarousel> {
               width: box.width,
               height: box.height,
               child: const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
+                child: CircularProgressIndicator(color: AppColors.primary),
               ),
             ),
           );
@@ -250,16 +250,13 @@ class _LanguageKitCarouselState extends State<LanguageKitCarousel> {
                             physics: const BouncingScrollPhysics(),
                             onPageChanged: (i) => _settledPage.value = i,
                             children: [
-                              for (var index = 0;
-                                  index < paths.length;
-                                  index++)
+                              for (var index = 0; index < paths.length; index++)
                                 KeyedSubtree(
                                   key: ValueKey(paths[index]),
                                   child: RepaintBoundary(
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
-                                        horizontal:
-                                            widget.itemSpacing / 2,
+                                        horizontal: widget.itemSpacing / 2,
                                       ),
                                       child: Opacity(
                                         opacity: _opacityForIndex(
@@ -267,17 +264,12 @@ class _LanguageKitCarouselState extends State<LanguageKitCarousel> {
                                           index,
                                         ),
                                         child: Transform.scale(
-                                          scale: _scaleForIndex(
-                                            pageVal,
-                                            index,
-                                          ),
+                                          scale: _scaleForIndex(pageVal, index),
                                           alignment: Alignment.center,
-                                          filterQuality:
-                                              FilterQuality.medium,
+                                          filterQuality: FilterQuality.medium,
                                           child: _CarouselImageTile(
                                             path: paths[index],
-                                            borderRadius:
-                                                AppRadius.borderMd12,
+                                            borderRadius: AppRadius.borderMd12,
                                             fit: widget.imageFit,
                                           ),
                                         ),

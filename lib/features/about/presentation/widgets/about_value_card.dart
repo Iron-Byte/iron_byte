@@ -3,10 +3,7 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/about/presentation/models/about_ui_models.dart';
 
 class AboutValueCard extends StatelessWidget {
-  const AboutValueCard({
-    super.key,
-    required this.data,
-  });
+  const AboutValueCard({super.key, required this.data});
 
   final AboutValuePillarData data;
 
@@ -40,10 +37,7 @@ class AboutValueCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.sm8),
-            SelectableText(
-              data.bodyKey.tr(),
-              style: AppTextStyles.bodySmall,
-            ),
+            SelectableText(data.bodyKey.tr(), style: AppTextStyles.bodySmall),
           ],
         ),
       ),

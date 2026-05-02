@@ -45,10 +45,6 @@ class _CareersBody extends StatelessWidget {
                 builder: (context, constraints) {
                   final maxW = constraints.maxWidth;
                   final horizontal = maxW >= 600 ? 48.0 : 24.0;
-                  final heroWide = maxW >= 900;
-                  final whyRow = maxW >= 1100;
-                  final whyGrid = maxW >= 640 && !whyRow;
-
                   return SingleChildScrollView(
                     padding: EdgeInsets.fromLTRB(
                       horizontal,
@@ -56,86 +52,7 @@ class _CareersBody extends StatelessWidget {
                       horizontal,
                       AppSpacing.huge36,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _CareersHero(wide: heroWide),
-                        const Gap(AppSpacing.huge36),
-                        SelectableText(
-                          'careers.why.section'.tr(),
-                          style: AppTextStyles.overline.copyWith(
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                        const Gap(AppSpacing.xxl24),
-                        if (whyRow)
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (var i = 0;
-                                  i < CareersWhyFeatureData.features.length;
-                                  i++) ...[
-                                if (i > 0) const Gap(AppSpacing.xxl24),
-                                Expanded(
-                                  child: CareersWhyCard(
-                                    data: CareersWhyFeatureData.features[i],
-                                  ),
-                                ),
-                              ],
-                            ],
-                          )
-                        else if (whyGrid)
-                          GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 2,
-                            mainAxisSpacing: AppSpacing.xxl24,
-                            crossAxisSpacing: AppSpacing.xxl24,
-                            childAspectRatio: 1.05,
-                            children: [
-                              for (final f in CareersWhyFeatureData.features)
-                                CareersWhyCard(data: f),
-                            ],
-                          )
-                        else
-                          Column(
-                            children: [
-                              for (var i = 0;
-                                  i < CareersWhyFeatureData.features.length;
-                                  i++) ...[
-                                if (i > 0) const Gap(AppSpacing.xxl24),
-                                CareersWhyCard(
-                                  data: CareersWhyFeatureData.features[i],
-                                ),
-                              ],
-                            ],
-                          ),
-                        const Gap(AppSpacing.huge36),
-                        SelectableText(
-                          'careers.jobs.section'.tr(),
-                          style: AppTextStyles.overline.copyWith(
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                        const Gap(AppSpacing.xxl24),
-                        Column(
-                          children: [
-                            for (var i = 0;
-                                i < CareerOpeningData.openings.length;
-                                i++) ...[
-                              if (i > 0) const Gap(AppSpacing.xxl24),
-                              CareersJobCard(
-                                opening: CareerOpeningData.openings[i],
-                              ),
-                            ],
-                          ],
-                        ),
-                        const Gap(AppSpacing.huge36),
-                        const CareersOpenApplicationBanner(),
-                      ],
-                    ),
+                    child: const CareersPageColumn(),
                   );
                 },
               );
@@ -143,6 +60,102 @@ class _CareersBody extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+/// Column body for Careers (no scroll). Embed in home or standalone scroll.
+class CareersPageColumn extends StatelessWidget {
+  const CareersPageColumn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final maxW = constraints.maxWidth;
+        final heroWide = maxW >= 900;
+        final whyRow = maxW >= 1100;
+        final whyGrid = maxW >= 640 && !whyRow;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _CareersHero(wide: heroWide),
+            const Gap(AppSpacing.huge36),
+            SelectableText(
+              'careers.why.section'.tr(),
+              style: AppTextStyles.overline.copyWith(
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
+              ),
+            ),
+            const Gap(AppSpacing.xxl24),
+            if (whyRow)
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (
+                    var i = 0;
+                    i < CareersWhyFeatureData.features.length;
+                    i++
+                  ) ...[
+                    if (i > 0) const Gap(AppSpacing.xxl24),
+                    Expanded(
+                      child: CareersWhyCard(
+                        data: CareersWhyFeatureData.features[i],
+                      ),
+                    ),
+                  ],
+                ],
+              )
+            else if (whyGrid)
+              GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                mainAxisSpacing: AppSpacing.xxl24,
+                crossAxisSpacing: AppSpacing.xxl24,
+                childAspectRatio: 1.05,
+                children: [
+                  for (final f in CareersWhyFeatureData.features)
+                    CareersWhyCard(data: f),
+                ],
+              )
+            else
+              Column(
+                children: [
+                  for (
+                    var i = 0;
+                    i < CareersWhyFeatureData.features.length;
+                    i++
+                  ) ...[
+                    if (i > 0) const Gap(AppSpacing.xxl24),
+                    CareersWhyCard(data: CareersWhyFeatureData.features[i]),
+                  ],
+                ],
+              ),
+            const Gap(AppSpacing.huge36),
+            SelectableText(
+              'careers.jobs.section'.tr(),
+              style: AppTextStyles.overline.copyWith(
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.2,
+              ),
+            ),
+            const Gap(AppSpacing.xxl24),
+            Column(
+              children: [
+                for (var i = 0; i < CareerOpeningData.openings.length; i++) ...[
+                  if (i > 0) const Gap(AppSpacing.xxl24),
+                  CareersJobCard(opening: CareerOpeningData.openings[i]),
+                ],
+              ],
+            ),
+            const Gap(AppSpacing.huge36),
+            const CareersOpenApplicationBanner(),
+          ],
+        );
+      },
     );
   }
 }
@@ -182,10 +195,7 @@ class _CareersHero extends StatelessWidget {
           style: AppTextStyles.hero.copyWith(fontFamily: 'Cinzel'),
         ),
         const SizedBox(height: AppSpacing.lg16),
-        SelectableText(
-          'careers.subtitle'.tr(),
-          style: AppTextStyles.body,
-        ),
+        SelectableText('careers.subtitle'.tr(), style: AppTextStyles.body),
       ],
     );
 
@@ -211,9 +221,7 @@ class _CareersHero extends StatelessWidget {
             const SizedBox(height: AppSpacing.sm8),
             SelectableText(
               'careers.hero.stat_caption'.tr(),
-              style: AppTextStyles.caption.copyWith(
-                color: AppColors.textMuted,
-              ),
+              style: AppTextStyles.caption.copyWith(color: AppColors.textMuted),
               textAlign: TextAlign.center,
             ),
           ],
@@ -234,11 +242,7 @@ class _CareersHero extends StatelessWidget {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        intro,
-        const Gap(AppSpacing.xxxl32),
-        statCard,
-      ],
+      children: [intro, const Gap(AppSpacing.xxxl32), statCard],
     );
   }
 }

@@ -4,7 +4,9 @@ import 'package:iron_byte/features/home/domain/models/consultation_attachment.da
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
-Future<String> persistAttachmentForEmail(ConsultationAttachment attachment) async {
+Future<String> persistAttachmentForEmail(
+  ConsultationAttachment attachment,
+) async {
   final existing = attachment.filePath;
   if (existing != null && existing.isNotEmpty) {
     final f = File(existing);

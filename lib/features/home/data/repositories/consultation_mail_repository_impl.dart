@@ -48,17 +48,13 @@ class ConsultationMailRepositoryImpl implements ConsultationMailRepository {
     final uri = Uri(
       scheme: 'mailto',
       path: AppConstants.supportEmail,
-      queryParameters: <String, String>{
-        'subject': subject,
-        'body': body,
-      },
+      queryParameters: <String, String>{'subject': subject, 'body': body},
     );
 
     if (!await canLaunchUrl(uri)) {
       throw StateError('No application available to handle email.');
     }
-    final launched =
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
+    final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!launched) {
       throw StateError('Could not open mail composer.');
     }
@@ -90,8 +86,10 @@ class ConsultationMailRepositoryImpl implements ConsultationMailRepository {
     if (attachment != null) {
       buffer
         ..writeln()
-        ..writeln('Attachment: ${attachment.fileName} '
-            '(${attachment.sizeBytes} bytes)');
+        ..writeln(
+          'Attachment: ${attachment.fileName} '
+          '(${attachment.sizeBytes} bytes)',
+        );
       if (webAttachmentPrompt) {
         buffer.writeln(
           'The same file should download from the browser — please attach it '
