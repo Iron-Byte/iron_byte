@@ -19,6 +19,15 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overscroll-behavior-x: none;
+      overscroll-behavior-y: none;
+    }
+  </style>
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -33,6 +42,19 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script>
+    // Prevent browser back/forward swipe gestures from horizontal trackpad wheel input.
+    // App navigation should occur only via explicit UI actions (AppBar item clicks).
+    window.addEventListener(
+      'wheel',
+      function (event) {
+        if (Math.abs(event.deltaX) > Math.abs(event.deltaY) && Math.abs(event.deltaX) > 0.5) {
+          event.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
