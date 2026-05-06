@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iron_byte/assets/image_paths.dart';
 
 class AboutStatData {
   const AboutStatData({required this.valueKey, required this.labelKey});
@@ -70,9 +71,11 @@ class AboutTeamMemberData {
     required this.nameKey,
     required this.roleKey,
     required this.links,
+    this.avatarImage,
   });
 
   final String initials;
+  final String? avatarImage;
   final Color avatarColor;
   final String nameKey;
   final String roleKey;
@@ -80,53 +83,32 @@ class AboutTeamMemberData {
 
   static final List<AboutTeamMemberData> team = [
     AboutTeamMemberData(
-      initials: 'AK',
+      initials: 'EP',
+      avatarImage: MembersPaths.kit01,
       avatarColor: Color(0xFF2563EB),
-      nameKey: 'about.team.alex.name',
-      roleKey: 'about.team.alex.role',
+      nameKey: 'Edgar Papikyan',
+      roleKey: 'Co-Founder & CEO',
       links: [
         AboutSocialLinkData(
           labelKey: 'about.team.social.linkedin',
           uri: Uri.parse('https://www.linkedin.com'),
         ),
-        AboutSocialLinkData(
-          labelKey: 'about.team.social.github',
-          uri: Uri.parse('https://www.github.com'),
-        ),
       ],
     ),
     AboutTeamMemberData(
-      initials: 'MR',
+      initials: 'KH',
+      avatarImage: MembersPaths.kit02,
       avatarColor: Color(0xFF92400E),
-      nameKey: 'about.team.maria.name',
-      roleKey: 'about.team.maria.role',
+      nameKey: 'Knyaz Harutyunyan',
+      roleKey: 'Co-Founder & CEO',
       links: [
         AboutSocialLinkData(
           labelKey: 'about.team.social.linkedin',
           uri: Uri.parse('https://www.linkedin.com'),
         ),
-        AboutSocialLinkData(
-          labelKey: 'about.team.social.github',
-          uri: Uri.parse('https://www.github.com'),
-        ),
       ],
     ),
-    AboutTeamMemberData(
-      initials: 'JN',
-      avatarColor: Color(0xFF16A34A),
-      nameKey: 'about.team.jonas.name',
-      roleKey: 'about.team.jonas.role',
-      links: [
-        AboutSocialLinkData(
-          labelKey: 'about.team.social.linkedin',
-          uri: Uri.parse('https://www.linkedin.com'),
-        ),
-        AboutSocialLinkData(
-          labelKey: 'about.team.social.dribbble',
-          uri: Uri.parse('https://www.dribbble.com'),
-        ),
-      ],
-    ),
+
     AboutTeamMemberData(
       initials: 'SP',
       avatarColor: Color(0xFF9333EA),

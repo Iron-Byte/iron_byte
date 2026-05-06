@@ -41,6 +41,7 @@ flutter:
 
   assets:
     - assets/translations/
+    - assets/images/pictures/members/
     - assets/images/pictures/language_kit/
     - assets/images/pictures/migrane_app/
     - assets/images/pictures/numis_ai/

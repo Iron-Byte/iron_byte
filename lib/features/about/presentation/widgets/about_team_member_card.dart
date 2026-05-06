@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iron_byte/assets/image_paths.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/about/presentation/models/about_ui_models.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -29,9 +30,12 @@ class AboutTeamMemberCard extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 36,
+              backgroundImage: member.avatarImage != null
+                  ? AssetImage(member.avatarImage!)
+                  : null,
               backgroundColor: member.avatarColor,
               child: Text(
-                member.initials,
+                member.avatarImage != null ? '' : member.initials,
                 style: AppTextStyles.labelLarge.copyWith(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w600,

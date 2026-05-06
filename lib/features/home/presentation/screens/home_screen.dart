@@ -167,24 +167,6 @@ class _HomeBody extends StatelessWidget {
                               appDescription: tr('vibe_kit_desc'),
                             ),
                             const Gap(AppSpacing.lg16),
-                            BlocBuilder<PortfolioBloc, PortfolioState>(
-                              builder: (context, state) {
-                                return state.maybeWhen(
-                                  loaded: (projects) =>
-                                      PortfolioLoadedColumn(projects: projects),
-                                  orElse: () => const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: AppSpacing.xxl24,
-                                    ),
-                                    child: Center(
-                                      child: CircularProgressIndicator(
-                                        color: AppColors.primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
                           ],
                         ),
                       ),

@@ -6,6 +6,12 @@ const String kPicturesRoot = 'assets/images/pictures';
 
 /// Short filename keys (no directory) for lookup via [imagePathByKey].
 abstract final class ImageKey {
+
+  // memebers 
+  static const memberKnyaz = 'kno.jpeg';
+  static const memberEd = 'ed.jpeg';
+
+
   // language_kit
   static const languageKit01 = 'language_kit_01.webp';
   static const languageKit02 = 'language_kit_02.webp';
@@ -13,6 +19,7 @@ abstract final class ImageKey {
   static const languageKit04 = 'language_kit_04.webp';
   static const languageKit05 = 'language_kit_05.webp';
   static const languageKit05Typo = 'langauage_kit_05.webp';
+
 
   // migrane_app
   static const migraneApp01 = 'migrane_app_01.webp';
@@ -40,6 +47,15 @@ abstract final class ImageKey {
   static const vibeKit03 = 'vibe_kit_03.webp';
   static const vibeKit04 = 'vibe_kit_04.webp';
   static const vibeKit05 = 'vibe_kit_05.webp';
+}
+
+abstract final class MembersPaths {
+    static const String _d = '$kPicturesRoot/members';
+
+  static const kit01 = '$_d/${ImageKey.memberEd}';
+  static const kit02 = '$_d/${ImageKey.memberKnyaz}';
+  /// Order used for carousels (canonical five; excludes the duplicate typo file).
+  static const List<String> carousel = [kit01, kit02];
 }
 
 abstract final class LanguageKitPaths {
