@@ -18,12 +18,14 @@ class ConsultationPage extends StatelessWidget {
     this.selectedServiceName,
     this.isJobApplication = false,
     this.vacancyTitleKey,
+    this.serviceTitleKey,
     this.blocFactory,
   });
 
   final String? selectedServiceName;
   final bool isJobApplication;
   final String? vacancyTitleKey;
+  final String? serviceTitleKey;
   final ConsultationBlocFactory? blocFactory;
 
   @override
@@ -35,6 +37,7 @@ class ConsultationPage extends StatelessWidget {
       child: _ConsultationBody(
         isJobApplication: isJobApplication,
         vacancyTitleKey: vacancyTitleKey,
+        serviceTitleKey: serviceTitleKey,
       ),
     );
   }
@@ -44,10 +47,12 @@ class _ConsultationBody extends StatelessWidget {
   const _ConsultationBody({
     required this.isJobApplication,
     this.vacancyTitleKey,
+    this.serviceTitleKey,
   });
 
   final bool isJobApplication;
   final String? vacancyTitleKey;
+  final String? serviceTitleKey;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +76,8 @@ class _ConsultationBody extends StatelessWidget {
               maxW,
             );
             final wide = maxW >= 900;
-            final showVacancy = isJobApplication && vacancyTitleKey != null;
+            final detailsTitleKey = vacancyTitleKey ?? serviceTitleKey;
+            final showDetails = detailsTitleKey != null;
 
             final consultationForm = ConstrainedBox(
               constraints: BoxConstraints(maxWidth: cardMaxWidth),
@@ -89,13 +95,13 @@ class _ConsultationBody extends StatelessWidget {
               ),
             );
 
-            final vacancyDetails = showVacancy
+            final detailsCard = showDetails
                 ? ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: cardMaxWidth),
                     child: _VacancyDetailsCard(
-                      titleKey: vacancyTitleKey!,
+                      titleKey: detailsTitleKey,
                       description: VacancyPlaceholderDescriptions.forTitleKey(
-                        vacancyTitleKey,
+                        detailsTitleKey,
                       )!,
                     ),
                   )
@@ -133,19 +139,19 @@ class _ConsultationBody extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const Gap(AppSpacing.xxl24),
-                    if (showVacancy && wide)
+                    if (showDetails && wide)
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(child: consultationForm),
                           const Gap(AppSpacing.xxxl32),
-                          Expanded(child: vacancyDetails!),
+                          Expanded(child: detailsCard!),
                         ],
                       )
                     else ...[
                       consultationForm,
-                      if (showVacancy) ...[
-                        vacancyDetails!,
+                      if (showDetails) ...[
+                        detailsCard!,
                         const Gap(AppSpacing.xxl24),
                       ],
                     ],

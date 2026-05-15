@@ -15,10 +15,18 @@ abstract final class VacancyPlaceholderDescriptions {
     'careers.jobs.devops.title': _lorem,
     'careers.jobs.pm.title': _lorem,
     'careers.jobs.bd_lead.title': _lorem,
+    'services.capabilities.web.title': _lorem,
+    'services.capabilities.mobile.title': _lorem,
+    'services.capabilities.cloud.title': _lorem,
+    'services.capabilities.saas.title': _lorem,
+    'services.capabilities.cicd.title': _lorem,
+    'services.capabilities.uiux.title': _lorem,
+    'services.capabilities.webview.title': _lorem,
+    'services.capabilities.animations.title': _lorem,
   };
 
-  static String? forTitleKey(String? vacancyTitleKey) {
-    if (vacancyTitleKey == null) return null;
-    return byVacancyTitleKey[vacancyTitleKey];
+  static String? forTitleKey(String? titleKey) {
+    if (titleKey == null) return null;
+    return byVacancyTitleKey[titleKey];
   }
 }

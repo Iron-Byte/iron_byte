@@ -46,6 +46,7 @@ class AppRouter {
                   selectedServiceName: routeExtra?.serviceName,
                   isJobApplication: routeExtra?.isJobApplication ?? false,
                   vacancyTitleKey: routeExtra?.vacancyTitleKey,
+                  serviceTitleKey: routeExtra?.serviceTitleKey,
                 );
               },
             ),

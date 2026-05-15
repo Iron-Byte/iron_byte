@@ -112,6 +112,7 @@ class ServicesPageColumn extends StatelessWidget {
                                 AppRoutes.consultation,
                                 extra: ConsultationRouteExtra(
                                   serviceName: item.titleKey.tr(),
+                                  serviceTitleKey: item.titleKey,
                                 ),
                               );
                             },
@@ -138,6 +139,7 @@ class ServicesPageColumn extends StatelessWidget {
                           AppRoutes.consultation,
                           extra: ConsultationRouteExtra(
                             serviceName: item.titleKey.tr(),
+                            serviceTitleKey: item.titleKey,
                           ),
                         );
                       },
