@@ -41,8 +41,6 @@ class HomeScreen extends StatelessWidget {
           create: (_) => HomeConsultationBloc(
             bookConsultationReservation:
                 ConsultationBookingDependencies.bookReservation,
-            loadConsultationBookedSlots:
-                ConsultationBookingDependencies.loadBookedSlots,
             checkConsultationServerHealth:
                 ConsultationBookingDependencies.checkServerHealth,
             messageGenerator: const ConsultationDefaultMessageGenerator(),

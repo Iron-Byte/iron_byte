@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/consultation_item/presentation/consultation_page_layout_metrics.dart';
 import 'package:iron_byte/features/consultation_item/presentation/home_consultation_bloc_factory.dart';
+import 'package:iron_byte/features/consultation_item/presentation/vacancy_placeholder_descriptions.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
 import 'package:iron_byte/features/home/presentation/widgets/consultation_card.dart';
 
@@ -16,11 +17,13 @@ class ConsultationPage extends StatelessWidget {
     super.key,
     this.selectedServiceName,
     this.isJobApplication = false,
+    this.vacancyTitleKey,
     this.blocFactory,
   });
 
   final String? selectedServiceName;
   final bool isJobApplication;
+  final String? vacancyTitleKey;
   final ConsultationBlocFactory? blocFactory;
 
   @override
@@ -29,15 +32,22 @@ class ConsultationPage extends StatelessWidget {
       create: (_) =>
           (blocFactory ?? createDefaultHomeConsultationBloc)
               .call(selectedServiceName),
-      child: _ConsultationBody(isJobApplication: isJobApplication),
+      child: _ConsultationBody(
+        isJobApplication: isJobApplication,
+        vacancyTitleKey: vacancyTitleKey,
+      ),
     );
   }
 }
 
 class _ConsultationBody extends StatelessWidget {
-  const _ConsultationBody({required this.isJobApplication});
+  const _ConsultationBody({
+    required this.isJobApplication,
+    this.vacancyTitleKey,
+  });
 
   final bool isJobApplication;
+  final String? vacancyTitleKey;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +100,19 @@ class _ConsultationBody extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    if (isJobApplication && vacancyTitleKey != null) ...[
+                      const Gap(AppSpacing.xxl24),
+                      ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: cardMaxWidth),
+                        child: _VacancyDetailsCard(
+                          titleKey: vacancyTitleKey!,
+                          description:
+                              VacancyPlaceholderDescriptions.forTitleKey(
+                                vacancyTitleKey,
+                              )!,
+                        ),
+                      ),
+                    ],
                     const Gap(AppSpacing.xxxl32),
                     ConstrainedBox(
                       constraints: BoxConstraints(maxWidth: cardMaxWidth),
@@ -113,6 +136,51 @@ class _ConsultationBody extends StatelessWidget {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class _VacancyDetailsCard extends StatelessWidget {
+  const _VacancyDetailsCard({
+    required this.titleKey,
+    required this.description,
+  });
+
+  final String titleKey;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: AppRadius.borderLg16,
+        border: Border.all(color: AppColors.borderSurface),
+      ),
+      child: Padding(
+        padding: AppSpacing.allXxl24,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SelectableText(
+              titleKey.tr(),
+              style: AppTextStyles.label.copyWith(
+                fontWeight: FontWeight.w600,
+                fontSize: 20,
+                fontFamily: 'Cinzel',
+              ),
+            ),
+            const Gap(AppSpacing.lg16),
+            SelectableText(
+              description,
+              style: AppTextStyles.body.copyWith(
+                color: AppColors.textSecondary,
+                height: 1.5,
+              ),
+            ),
+          ],
         ),
       ),
     );

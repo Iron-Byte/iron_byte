@@ -11,21 +11,16 @@ class ConsultationBookingRepositoryImpl implements ConsultationBookingRepository
   Future<bool> checkHealth() => _remote.checkHealth();
 
   @override
-  Future<List<DateTime>> getBookedSlots() => _remote.getBookedSlots();
-
-  @override
   Future<void> createReservation({
     required String name,
     required String email,
     String? note,
-    DateTime? preferredSlotUtc,
     ConsultationAttachment? attachment,
   }) {
     return _remote.createReservation(
       name: name,
       email: email,
       note: note,
-      dateUtc: preferredSlotUtc,
       attachment: attachment,
     );
   }

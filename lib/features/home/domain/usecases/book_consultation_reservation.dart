@@ -10,14 +10,12 @@ class BookConsultationReservation {
     required String name,
     required String guestEmail,
     required String note,
-    DateTime? preferredSlotUtc,
     ConsultationAttachment? attachment,
   }) {
     return _repository.createReservation(
       name: name,
       email: guestEmail,
       note: note,
-      preferredSlotUtc: preferredSlotUtc,
       attachment: attachment,
     );
   }

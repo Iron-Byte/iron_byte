@@ -92,12 +92,6 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "code_assets",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/code_assets-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.9"
-    },
-    {
       "name": "code_builder",
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/code_builder-4.11.1",
       "packageUri": "lib/",
@@ -200,12 +194,6 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "flutter_email_sender",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/flutter_email_sender-8.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/flutter_lints-6.0.0",
       "packageUri": "lib/",
@@ -222,12 +210,6 @@
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.33",
       "packageUri": "lib/",
       "languageVersion": "3.9"
-    },
-    {
-      "name": "flutter_svg",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/flutter_svg-2.2.3",
-      "packageUri": "lib/",
-      "languageVersion": "3.8"
     },
     {
       "name": "flutter_test",
@@ -278,12 +260,6 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "hooks",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/hooks-1.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "3.10"
-    },
-    {
       "name": "http",
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/http-1.6.0",
       "packageUri": "lib/",
@@ -312,18 +288,6 @@
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/io-1.0.5",
       "packageUri": "lib/",
       "languageVersion": "3.4"
-    },
-    {
-      "name": "jni",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/jni-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
-    },
-    {
-      "name": "jni_flutter",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/jni_flutter-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
     },
     {
       "name": "json_annotation",
@@ -392,22 +356,10 @@
       "languageVersion": "3.2"
     },
     {
-      "name": "native_toolchain_c",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/native_toolchain_c-0.17.6",
-      "packageUri": "lib/",
-      "languageVersion": "3.10"
-    },
-    {
       "name": "nested",
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "objective_c",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/objective_c-9.3.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.10"
     },
     {
       "name": "package_config",
@@ -420,30 +372,6 @@
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/path-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "3.4"
-    },
-    {
-      "name": "path_parsing",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/path_parsing-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
-    },
-    {
-      "name": "path_provider",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/path_provider-2.1.5",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "path_provider_android",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/path_provider_android-2.3.1",
-      "packageUri": "lib/",
-      "languageVersion": "3.9"
-    },
-    {
-      "name": "path_provider_foundation",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/path_provider_foundation-2.6.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.10"
     },
     {
       "name": "path_provider_linux",
@@ -504,12 +432,6 @@
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/pubspec_parse-1.5.0",
       "packageUri": "lib/",
       "languageVersion": "3.6"
-    },
-    {
-      "name": "record_use",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/record_use-0.6.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.10"
     },
     {
       "name": "shared_preferences",
@@ -678,24 +600,6 @@
       "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/url_launcher_windows-3.1.5",
       "packageUri": "lib/",
       "languageVersion": "3.8"
-    },
-    {
-      "name": "vector_graphics",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/vector_graphics-1.1.19",
-      "packageUri": "lib/",
-      "languageVersion": "3.6"
-    },
-    {
-      "name": "vector_graphics_codec",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/vector_graphics_codec-1.1.13",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "vector_graphics_compiler",
-      "rootUri": "file:///Users/edgarpapikyan/.pub-cache/hosted/pub.dev/vector_graphics_compiler-1.1.19",
-      "packageUri": "lib/",
-      "languageVersion": "3.7"
     },
     {
       "name": "vector_math",

@@ -7,7 +7,6 @@ import 'package:iron_byte/features/home/presentation/consultation_booking_depend
 HomeConsultationBloc createDefaultHomeConsultationBloc(String? selectedServiceName) {
   return HomeConsultationBloc(
     bookConsultationReservation: ConsultationBookingDependencies.bookReservation,
-    loadConsultationBookedSlots: ConsultationBookingDependencies.loadBookedSlots,
     checkConsultationServerHealth:
         ConsultationBookingDependencies.checkServerHealth,
     messageGenerator: const ConsultationDefaultMessageGenerator(),

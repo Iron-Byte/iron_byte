@@ -16,14 +16,11 @@ dependencies:
   url_launcher: ^6.3.1
   gap: ^3.0.1
   easy_localization: ^3.0.8
-  flutter_svg: ^2.2.3
   file_picker: ^11.0.2
   flutter_bloc: ^9.1.1
   freezed_annotation: ^3.1.0
   json_annotation: ^4.8.1
   freezed: ^3.2.5
-  flutter_email_sender: ^8.0.0
-  path_provider: ^2.1.5
   path: ^1.9.1
   http: ^1.6.0
   visibility_detector: ^0.4.0+2

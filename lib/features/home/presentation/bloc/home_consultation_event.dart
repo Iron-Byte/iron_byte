@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 
 abstract class HomeConsultationEvent {}
 
-/// Runs health check and loads booked slots (screen open).
+/// Runs health check (screen open).
 class HomeConsultationBootstrapRequested extends HomeConsultationEvent {}
 
 class HomeConsultationInitialized extends HomeConsultationEvent {
@@ -27,11 +27,6 @@ class HomeConsultationMessageChanged extends HomeConsultationEvent {
 }
 
 class HomeConsultationSendRequested extends HomeConsultationEvent {}
-
-class HomeConsultationPreferredSlotChanged extends HomeConsultationEvent {
-  HomeConsultationPreferredSlotChanged(this.slotUtc);
-  final DateTime? slotUtc;
-}
 
 class HomeConsultationAttachmentPicked extends HomeConsultationEvent {
   HomeConsultationAttachmentPicked(this.platformFile);

@@ -45,6 +45,7 @@ class AppRouter {
                 return ConsultationPage(
                   selectedServiceName: routeExtra?.serviceName,
                   isJobApplication: routeExtra?.isJobApplication ?? false,
+                  vacancyTitleKey: routeExtra?.vacancyTitleKey,
                 );
               },
             ),

@@ -16,12 +16,8 @@ abstract class HomeConsultationState with _$HomeConsultationState {
     String? emailValidationError,
   /// `null` while the initial health check is in progress.
     bool? isServerOnline,
-    @Default(false) bool isLoadingBookedSlots,
-    String? bookedSlotsErrorKey,
-    @Default(<DateTime>[]) List<DateTime> bookedSlotsUtc,
     @Default(ConsultationBookingStatus.idle) ConsultationBookingStatus bookingStatus,
     String? bookingErrorMessage,
-    DateTime? preferredConsultationSlotUtc,
     ConsultationAttachment? attachment,
     String? attachmentErrorKey,
   }) = _HomeConsultationState;

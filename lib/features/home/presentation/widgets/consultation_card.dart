@@ -7,8 +7,6 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_event.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_state.dart';
-import 'package:iron_byte/features/home/presentation/widgets/consultation_calendar_picker.dart';
-
 class HomeConsultationCard extends StatefulWidget {
   const HomeConsultationCard({super.key, this.isJobApplication = false});
 
@@ -208,13 +206,6 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                         ),
                       ).applyDefaults(theme.inputDecorationTheme),
                     ),
-                    if (!widget.isJobApplication) ...[
-                      const Gap(AppSpacing.lg16),
-                      ConsultationCalendarPicker(
-                        state: state,
-                        isSending: isSending,
-                      ),
-                    ],
                     const Gap(AppSpacing.lg16),
                     Align(
                       alignment: Alignment.centerLeft,

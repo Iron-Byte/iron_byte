@@ -35,7 +35,10 @@ class CareersJobCard extends StatelessWidget {
             final apply = TextButton(
               onPressed: () => context.push(
                 AppRoutes.consultation,
-                extra: const ConsultationRouteExtra(isJobApplication: true),
+                extra: ConsultationRouteExtra(
+                  isJobApplication: true,
+                  vacancyTitleKey: opening.titleKey,
+                ),
               ),
               style: TextButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
