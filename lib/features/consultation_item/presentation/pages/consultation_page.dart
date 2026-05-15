@@ -29,9 +29,9 @@ class ConsultationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          (blocFactory ?? createDefaultHomeConsultationBloc)
-              .call(selectedServiceName),
+      create: (_) => (blocFactory ?? createDefaultHomeConsultationBloc).call(
+        selectedServiceName,
+      ),
       child: _ConsultationBody(
         isJobApplication: isJobApplication,
         vacancyTitleKey: vacancyTitleKey,
@@ -64,76 +64,91 @@ class _ConsultationBody extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final maxW = constraints.maxWidth;
-            final horizontal =
-                ConsultationPageLayoutMetrics.horizontalPadding(maxW);
-            final cardMaxWidth =
-                ConsultationPageLayoutMetrics.cardMaxWidth(maxW);
+            final horizontal = ConsultationPageLayoutMetrics.horizontalPadding(
+              maxW,
+            );
+            final cardMaxWidth = ConsultationPageLayoutMetrics.cardMaxWidth(
+              maxW,
+            );
 
-            return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                  horizontal,
-                  AppSpacing.huge36,
-                  horizontal,
-                  AppSpacing.huge36,
+            return Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        horizontal,
+                        AppSpacing.huge36,
+                        horizontal,
+                        AppSpacing.huge36,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SelectableText(
+                            isJobApplication
+                                ? 'consultation.job.title'.tr()
+                                : 'get_consultation'.tr(),
+                            style: AppTextStyles.hero.copyWith(
+                              fontFamily: 'Cinzel',
+                              fontSize: maxW >= 720 ? 38 : 30,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const Gap(AppSpacing.md12),
+                          SelectableText(
+                            isJobApplication
+                                ? 'consultation.job.subtitle'.tr()
+                                : 'Tell us about your project and we will help you shape the right delivery plan.',
+                            style: AppTextStyles.body.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const Gap(AppSpacing.xxl24),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: cardMaxWidth),
+                            child: TweenAnimationBuilder<double>(
+                              tween: Tween(begin: 0.98, end: 1),
+                              duration: const Duration(milliseconds: 260),
+                              curve: Curves.easeOutCubic,
+                              child: HomeConsultationCard(
+                                isJobApplication: isJobApplication,
+                              ),
+                              builder: (context, value, child) {
+                                return Opacity(
+                                  opacity: value.clamp(0.0, 1.0),
+                                  child: Transform.scale(
+                                    scale: value,
+                                    child: child,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SelectableText(
-                      isJobApplication
-                          ? 'consultation.job.title'.tr()
-                          : 'get_consultation'.tr(),
-                      style: AppTextStyles.hero.copyWith(
-                        fontFamily: 'Cinzel',
-                        fontSize: maxW >= 720 ? 38 : 30,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const Gap(AppSpacing.md12),
-                    SelectableText(
-                      isJobApplication
-                          ? 'consultation.job.subtitle'.tr()
-                          : 'Tell us about your project and we will help you shape the right delivery plan.',
-                      style: AppTextStyles.body.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    if (isJobApplication && vacancyTitleKey != null) ...[
-                      const Gap(AppSpacing.xxl24),
-                      ConstrainedBox(
-                        constraints: BoxConstraints(maxWidth: cardMaxWidth),
-                        child: _VacancyDetailsCard(
-                          titleKey: vacancyTitleKey!,
-                          description:
-                              VacancyPlaceholderDescriptions.forTitleKey(
-                                vacancyTitleKey,
-                              )!,
-                        ),
-                      ),
-                    ],
-                    const Gap(AppSpacing.xxxl32),
-                    ConstrainedBox(
+
+                if (isJobApplication && vacancyTitleKey != null) ...[
+                  // const Gap(AppSpacing.xxl24),
+                  Expanded(
+                    child: ConstrainedBox(
                       constraints: BoxConstraints(maxWidth: cardMaxWidth),
-                      child: TweenAnimationBuilder<double>(
-                        tween: Tween(begin: 0.98, end: 1),
-                        duration: const Duration(milliseconds: 260),
-                        curve: Curves.easeOutCubic,
-                        child: HomeConsultationCard(
-                          isJobApplication: isJobApplication,
-                        ),
-                        builder: (context, value, child) {
-                          return Opacity(
-                            opacity: value.clamp(0.0, 1.0),
-                            child: Transform.scale(scale: value, child: child),
-                          );
-                        },
+                      child: _VacancyDetailsCard(
+                        titleKey: vacancyTitleKey!,
+                        description: VacancyPlaceholderDescriptions.forTitleKey(
+                          vacancyTitleKey,
+                        )!,
                       ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                ],
+                // Expanded(child: const Gap(AppSpacing.xxxl32)),
+              ],
             );
           },
         ),
