@@ -7,6 +7,7 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_event.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_state.dart';
+import 'package:iron_byte/features/home/presentation/widgets/consultation_calendar_picker.dart';
 
 class HomeConsultationCard extends StatefulWidget {
   const HomeConsultationCard({super.key, this.isJobApplication = false});
@@ -18,6 +19,7 @@ class HomeConsultationCard extends StatefulWidget {
 }
 
 class _HomeConsultationCardState extends State<HomeConsultationCard> {
+  late final TextEditingController _nameController;
   late final TextEditingController _emailController;
   late final TextEditingController _messageController;
 
@@ -25,15 +27,47 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
   void initState() {
     super.initState();
     final bloc = context.read<HomeConsultationBloc>();
+    _nameController = TextEditingController(text: bloc.state.name);
     _emailController = TextEditingController(text: bloc.state.email);
     _messageController = TextEditingController(text: bloc.state.message);
+    bloc.add(HomeConsultationBootstrapRequested());
   }
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
     _messageController.dispose();
     super.dispose();
+  }
+
+  String _formatFileSize(int bytes) {
+    if (bytes < 1024) return '$bytes B';
+    if (bytes < 1024 * 1024) {
+      return '${(bytes / 1024).toStringAsFixed(1)} KB';
+    }
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+  }
+
+  void _showSuccessDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('consultation.booking.success_title'.tr()),
+        content: Text('consultation.booking.success_body'.tr()),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+              context.read<HomeConsultationBloc>().add(
+                HomeConsultationBookingStatusAcknowledged(),
+              );
+            },
+            child: Text('consultation.booking.success_ok'.tr()),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -43,18 +77,21 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
     return BlocConsumer<HomeConsultationBloc, HomeConsultationState>(
       listenWhen: (previous, current) =>
           previous.message != current.message ||
+          previous.name != current.name ||
           previous.email != current.email ||
-          (previous.isSending &&
-              !current.isSending &&
-              current.sendError == null) ||
-          (previous.isSending &&
-              !current.isSending &&
-              current.sendError != null),
+          previous.bookingStatus != current.bookingStatus,
       listener: (context, state) {
         if (_messageController.text != state.message) {
           _messageController.value = _messageController.value.copyWith(
             text: state.message,
             selection: TextSelection.collapsed(offset: state.message.length),
+            composing: TextRange.empty,
+          );
+        }
+        if (_nameController.text != state.name) {
+          _nameController.value = _nameController.value.copyWith(
+            text: state.name,
+            selection: TextSelection.collapsed(offset: state.name.length),
             composing: TextRange.empty,
           );
         }
@@ -65,19 +102,33 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
             composing: TextRange.empty,
           );
         }
-        if (!state.isSending && state.sendError == null) {
+        if (state.bookingStatus == ConsultationBookingStatus.success) {
+          _showSuccessDialog(context);
+        } else if (state.bookingStatus == ConsultationBookingStatus.error &&
+            state.bookingErrorMessage != null) {
+          final message = state.bookingErrorMessage!;
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('consultation.snackbar.opening_mail'.tr())),
+            SnackBar(
+              content: Text(
+                message.startsWith('consultation.') ? message.tr() : message,
+              ),
+            ),
           );
-        } else if (state.sendError != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('consultation.snackbar.mail_failed'.tr())),
+          context.read<HomeConsultationBloc>().add(
+            HomeConsultationBookingStatusAcknowledged(),
           );
         }
       },
       builder: (context, state) {
+        final isSending =
+            state.bookingStatus == ConsultationBookingStatus.loading;
+
         return Column(
           children: [
+            if (state.isServerOnline == false) ...[
+              _ServerStatusBanner(),
+              const Gap(AppSpacing.md12),
+            ],
             DecoratedBox(
               decoration: BoxDecoration(
                 color: AppColors.surface,
@@ -105,6 +156,22 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                       style: AppTextStyles.bodySmall,
                     ),
                     const Gap(AppSpacing.xxl24),
+                    TextField(
+                      controller: _nameController,
+                      onChanged: (v) => context
+                          .read<HomeConsultationBloc>()
+                          .add(HomeConsultationNameChanged(v)),
+                      textCapitalization: TextCapitalization.words,
+                      autofillHints: const [AutofillHints.name],
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.textPrimary,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: 'consultation.name_hint'.tr(),
+                        errorText: state.nameValidationError?.tr(),
+                      ).applyDefaults(theme.inputDecorationTheme),
+                    ),
+                    const Gap(AppSpacing.lg16),
                     TextField(
                       controller: _emailController,
                       onChanged: (v) => context
@@ -141,6 +208,13 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                         ),
                       ).applyDefaults(theme.inputDecorationTheme),
                     ),
+                    if (!widget.isJobApplication) ...[
+                      const Gap(AppSpacing.lg16),
+                      ConsultationCalendarPicker(
+                        state: state,
+                        isSending: isSending,
+                      ),
+                    ],
                     const Gap(AppSpacing.lg16),
                     Align(
                       alignment: Alignment.centerLeft,
@@ -150,7 +224,7 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: [
                           OutlinedButton.icon(
-                            onPressed: state.isSending
+                            onPressed: isSending
                                 ? null
                                 : () async {
                                     final result = await FilePicker.pickFiles(
@@ -188,7 +262,7 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                               tooltip: MaterialLocalizations.of(
                                 context,
                               ).deleteButtonTooltip,
-                              onPressed: state.isSending
+                              onPressed: isSending
                                   ? null
                                   : () => context
                                         .read<HomeConsultationBloc>()
@@ -203,7 +277,8 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                     if (state.attachment != null) ...[
                       const Gap(AppSpacing.sm8),
                       Text(
-                        state.attachment!.fileName,
+                        '${state.attachment!.fileName} · '
+                        '${_formatFileSize(state.attachment!.sizeBytes)}',
                         style: AppTextStyles.bodySmall,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -222,12 +297,12 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: state.isSending
+                        onPressed: isSending
                             ? null
                             : () => context.read<HomeConsultationBloc>().add(
                                 HomeConsultationSendRequested(),
                               ),
-                        child: state.isSending
+                        child: isSending
                             ? SizedBox(
                                 height: 22,
                                 width: 22,
@@ -238,7 +313,11 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
                                   ).colorScheme.onPrimary,
                                 ),
                               )
-                            : Text('send_message'.tr()),
+                            : Text(
+                                widget.isJobApplication
+                                    ? 'consultation.job.submit'.tr()
+                                    : 'book_meeting'.tr(),
+                              ),
                       ),
                     ),
                   ],
@@ -249,6 +328,45 @@ class _HomeConsultationCardState extends State<HomeConsultationCard> {
           ],
         );
       },
+    );
+  }
+}
+
+class _ServerStatusBanner extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: AppRadius.borderMd12,
+        border: Border.all(
+          color: Theme.of(context).colorScheme.error.withValues(alpha: 0.4),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg16,
+          vertical: AppSpacing.md12,
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.cloud_off_outlined,
+              size: 18,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            const Gap(AppSpacing.md12),
+            Expanded(
+              child: Text(
+                'consultation.server.offline'.tr(),
+                style: AppTextStyles.bodySmall.copyWith(
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

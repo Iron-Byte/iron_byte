@@ -24,4 +24,12 @@ abstract final class Validators {
     }
     return null;
   }
+
+  /// Returns an [easy_localization] key when invalid, or `null` when valid.
+  static String? nameValidationKey(String value) {
+    if (value.trim().isEmpty) {
+      return 'consultation.validation.name_required';
+    }
+    return null;
+  }
 }

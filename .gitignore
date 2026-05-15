@@ -25,6 +25,12 @@ build/
 
 Thumbs.db
 
+# Backend server config (not used by Flutter — do not commit secrets)
+
+env.txt
+.env
+.env.*
+
 # Logs
 
 *.log

@@ -12,10 +12,10 @@ import 'package:iron_byte/features/careers/presentation/bloc/careers_bloc.dart';
 import 'package:iron_byte/features/careers/presentation/bloc/careers_event.dart';
 import 'package:iron_byte/features/careers/presentation/bloc/careers_state.dart';
 import 'package:iron_byte/features/careers/presentation/screens/careers_screen.dart';
-import 'package:iron_byte/features/home/data/repositories/consultation_mail_repository_impl.dart';
 import 'package:iron_byte/features/home/domain/services/consultation_default_message_generator.dart';
-import 'package:iron_byte/features/home/domain/usecases/send_consultation_inquiry.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
+import 'package:iron_byte/features/home/presentation/bloc/home_consultation_event.dart';
+import 'package:iron_byte/features/home/presentation/consultation_booking_dependencies.dart';
 import 'package:iron_byte/features/home/presentation/widgets/consultation_card.dart';
 import 'package:iron_byte/features/home/presentation/widgets/hero_section.dart';
 import 'package:iron_byte/features/portfolio/data/datasources/portfolio_local_datasource.dart';
@@ -39,11 +39,14 @@ class HomeScreen extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => HomeConsultationBloc(
-            sendConsultationInquiry: SendConsultationInquiry(
-              ConsultationMailRepositoryImpl(),
-            ),
+            bookConsultationReservation:
+                ConsultationBookingDependencies.bookReservation,
+            loadConsultationBookedSlots:
+                ConsultationBookingDependencies.loadBookedSlots,
+            checkConsultationServerHealth:
+                ConsultationBookingDependencies.checkServerHealth,
             messageGenerator: const ConsultationDefaultMessageGenerator(),
-          ),
+          )..add(HomeConsultationInitialized()),
         ),
         BlocProvider(create: (_) => ServicesBloc()..add(LoadServices())),
         BlocProvider(create: (_) => CareersBloc()..add(LoadCareers())),

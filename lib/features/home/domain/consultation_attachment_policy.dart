@@ -1,7 +1,9 @@
+import 'package:iron_byte/core/constants/app_constants.dart';
 import 'package:path/path.dart' as p;
 
 /// Max attachment size for consultation / job application uploads.
-const int kConsultationAttachmentMaxBytes = 10 * 1024 * 1024;
+int get kConsultationAttachmentMaxBytes =>
+    AppConstants.maxConsultationAttachmentBytes;
 
 const Set<String> kConsultationAttachmentExtensions = {
   'pdf',

@@ -52,3 +52,15 @@ String formatConsultationSlotForBody(DateTime utcInstant) {
   final min = wall.minute.toString().padLeft(2, '0');
   return '$y-$m-$d $h:$min (GMT+2)';
 }
+
+/// `yyyy-MM-dd HH:mm:ss` in GMT+2 wall time — format accepted by the reservations API.
+String formatConsultationDateForApi(DateTime utcInstant) {
+  final wall = utcInstant.add(kConsultationGmt2Offset);
+  final y = wall.year;
+  final m = wall.month.toString().padLeft(2, '0');
+  final d = wall.day.toString().padLeft(2, '0');
+  final h = wall.hour.toString().padLeft(2, '0');
+  final min = wall.minute.toString().padLeft(2, '0');
+  final sec = wall.second.toString().padLeft(2, '0');
+  return '$y-$m-$d $h:$min:$sec';
+}

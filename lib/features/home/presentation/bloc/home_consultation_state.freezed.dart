@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomeConsultationState {
 
- String get email; String get message; String? get emailValidationError; bool get isSending; String? get sendError; DateTime? get preferredConsultationSlotUtc; ConsultationAttachment? get attachment; String? get attachmentErrorKey;
+ String get name; String get email; String get message; String? get nameValidationError; String? get emailValidationError;/// `null` while the initial health check is in progress.
+ bool? get isServerOnline; bool get isLoadingBookedSlots; String? get bookedSlotsErrorKey; List<DateTime> get bookedSlotsUtc; ConsultationBookingStatus get bookingStatus; String? get bookingErrorMessage; DateTime? get preferredConsultationSlotUtc; ConsultationAttachment? get attachment; String? get attachmentErrorKey;
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +26,16 @@ $HomeConsultationStateCopyWith<HomeConsultationState> get copyWith => _$HomeCons
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.sendError, sendError) || other.sendError == sendError)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc)&&(identical(other.attachment, attachment) || other.attachment == attachment)&&(identical(other.attachmentErrorKey, attachmentErrorKey) || other.attachmentErrorKey == attachmentErrorKey));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeConsultationState&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.nameValidationError, nameValidationError) || other.nameValidationError == nameValidationError)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isServerOnline, isServerOnline) || other.isServerOnline == isServerOnline)&&(identical(other.isLoadingBookedSlots, isLoadingBookedSlots) || other.isLoadingBookedSlots == isLoadingBookedSlots)&&(identical(other.bookedSlotsErrorKey, bookedSlotsErrorKey) || other.bookedSlotsErrorKey == bookedSlotsErrorKey)&&const DeepCollectionEquality().equals(other.bookedSlotsUtc, bookedSlotsUtc)&&(identical(other.bookingStatus, bookingStatus) || other.bookingStatus == bookingStatus)&&(identical(other.bookingErrorMessage, bookingErrorMessage) || other.bookingErrorMessage == bookingErrorMessage)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc)&&(identical(other.attachment, attachment) || other.attachment == attachment)&&(identical(other.attachmentErrorKey, attachmentErrorKey) || other.attachmentErrorKey == attachmentErrorKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,message,emailValidationError,isSending,sendError,preferredConsultationSlotUtc,attachment,attachmentErrorKey);
+int get hashCode => Object.hash(runtimeType,name,email,message,nameValidationError,emailValidationError,isServerOnline,isLoadingBookedSlots,bookedSlotsErrorKey,const DeepCollectionEquality().hash(bookedSlotsUtc),bookingStatus,bookingErrorMessage,preferredConsultationSlotUtc,attachment,attachmentErrorKey);
 
 @override
 String toString() {
-  return 'HomeConsultationState(email: $email, message: $message, emailValidationError: $emailValidationError, isSending: $isSending, sendError: $sendError, preferredConsultationSlotUtc: $preferredConsultationSlotUtc, attachment: $attachment, attachmentErrorKey: $attachmentErrorKey)';
+  return 'HomeConsultationState(name: $name, email: $email, message: $message, nameValidationError: $nameValidationError, emailValidationError: $emailValidationError, isServerOnline: $isServerOnline, isLoadingBookedSlots: $isLoadingBookedSlots, bookedSlotsErrorKey: $bookedSlotsErrorKey, bookedSlotsUtc: $bookedSlotsUtc, bookingStatus: $bookingStatus, bookingErrorMessage: $bookingErrorMessage, preferredConsultationSlotUtc: $preferredConsultationSlotUtc, attachment: $attachment, attachmentErrorKey: $attachmentErrorKey)';
 }
 
 
@@ -45,7 +46,7 @@ abstract mixin class $HomeConsultationStateCopyWith<$Res>  {
   factory $HomeConsultationStateCopyWith(HomeConsultationState value, $Res Function(HomeConsultationState) _then) = _$HomeConsultationStateCopyWithImpl;
 @useResult
 $Res call({
- String email, String message, String? emailValidationError, bool isSending, String? sendError, DateTime? preferredConsultationSlotUtc, ConsultationAttachment? attachment, String? attachmentErrorKey
+ String name, String email, String message, String? nameValidationError, String? emailValidationError, bool? isServerOnline, bool isLoadingBookedSlots, String? bookedSlotsErrorKey, List<DateTime> bookedSlotsUtc, ConsultationBookingStatus bookingStatus, String? bookingErrorMessage, DateTime? preferredConsultationSlotUtc, ConsultationAttachment? attachment, String? attachmentErrorKey
 });
 
 
@@ -62,13 +63,19 @@ class _$HomeConsultationStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? message = null,Object? emailValidationError = freezed,Object? isSending = null,Object? sendError = freezed,Object? preferredConsultationSlotUtc = freezed,Object? attachment = freezed,Object? attachmentErrorKey = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? email = null,Object? message = null,Object? nameValidationError = freezed,Object? emailValidationError = freezed,Object? isServerOnline = freezed,Object? isLoadingBookedSlots = null,Object? bookedSlotsErrorKey = freezed,Object? bookedSlotsUtc = null,Object? bookingStatus = null,Object? bookingErrorMessage = freezed,Object? preferredConsultationSlotUtc = freezed,Object? attachment = freezed,Object? attachmentErrorKey = freezed,}) {
   return _then(_self.copyWith(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,emailValidationError: freezed == emailValidationError ? _self.emailValidationError : emailValidationError // ignore: cast_nullable_to_non_nullable
-as String?,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
-as bool,sendError: freezed == sendError ? _self.sendError : sendError // ignore: cast_nullable_to_non_nullable
+as String,nameValidationError: freezed == nameValidationError ? _self.nameValidationError : nameValidationError // ignore: cast_nullable_to_non_nullable
+as String?,emailValidationError: freezed == emailValidationError ? _self.emailValidationError : emailValidationError // ignore: cast_nullable_to_non_nullable
+as String?,isServerOnline: freezed == isServerOnline ? _self.isServerOnline : isServerOnline // ignore: cast_nullable_to_non_nullable
+as bool?,isLoadingBookedSlots: null == isLoadingBookedSlots ? _self.isLoadingBookedSlots : isLoadingBookedSlots // ignore: cast_nullable_to_non_nullable
+as bool,bookedSlotsErrorKey: freezed == bookedSlotsErrorKey ? _self.bookedSlotsErrorKey : bookedSlotsErrorKey // ignore: cast_nullable_to_non_nullable
+as String?,bookedSlotsUtc: null == bookedSlotsUtc ? _self.bookedSlotsUtc : bookedSlotsUtc // ignore: cast_nullable_to_non_nullable
+as List<DateTime>,bookingStatus: null == bookingStatus ? _self.bookingStatus : bookingStatus // ignore: cast_nullable_to_non_nullable
+as ConsultationBookingStatus,bookingErrorMessage: freezed == bookingErrorMessage ? _self.bookingErrorMessage : bookingErrorMessage // ignore: cast_nullable_to_non_nullable
 as String?,preferredConsultationSlotUtc: freezed == preferredConsultationSlotUtc ? _self.preferredConsultationSlotUtc : preferredConsultationSlotUtc // ignore: cast_nullable_to_non_nullable
 as DateTime?,attachment: freezed == attachment ? _self.attachment : attachment // ignore: cast_nullable_to_non_nullable
 as ConsultationAttachment?,attachmentErrorKey: freezed == attachmentErrorKey ? _self.attachmentErrorKey : attachmentErrorKey // ignore: cast_nullable_to_non_nullable
@@ -157,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  String email,  String message,  String? nameValidationError,  String? emailValidationError,  bool? isServerOnline,  bool isLoadingBookedSlots,  String? bookedSlotsErrorKey,  List<DateTime> bookedSlotsUtc,  ConsultationBookingStatus bookingStatus,  String? bookingErrorMessage,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeConsultationState() when $default != null:
-return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
+return $default(_that.name,_that.email,_that.message,_that.nameValidationError,_that.emailValidationError,_that.isServerOnline,_that.isLoadingBookedSlots,_that.bookedSlotsErrorKey,_that.bookedSlotsUtc,_that.bookingStatus,_that.bookingErrorMessage,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
   return orElse();
 
 }
@@ -178,10 +185,10 @@ return $default(_that.email,_that.message,_that.emailValidationError,_that.isSen
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  String email,  String message,  String? nameValidationError,  String? emailValidationError,  bool? isServerOnline,  bool isLoadingBookedSlots,  String? bookedSlotsErrorKey,  List<DateTime> bookedSlotsUtc,  ConsultationBookingStatus bookingStatus,  String? bookingErrorMessage,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)  $default,) {final _that = this;
 switch (_that) {
 case _HomeConsultationState():
-return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
+return $default(_that.name,_that.email,_that.message,_that.nameValidationError,_that.emailValidationError,_that.isServerOnline,_that.isLoadingBookedSlots,_that.bookedSlotsErrorKey,_that.bookedSlotsUtc,_that.bookingStatus,_that.bookingErrorMessage,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +205,10 @@ return $default(_that.email,_that.message,_that.emailValidationError,_that.isSen
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String message,  String? emailValidationError,  bool isSending,  String? sendError,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  String email,  String message,  String? nameValidationError,  String? emailValidationError,  bool? isServerOnline,  bool isLoadingBookedSlots,  String? bookedSlotsErrorKey,  List<DateTime> bookedSlotsUtc,  ConsultationBookingStatus bookingStatus,  String? bookingErrorMessage,  DateTime? preferredConsultationSlotUtc,  ConsultationAttachment? attachment,  String? attachmentErrorKey)?  $default,) {final _that = this;
 switch (_that) {
 case _HomeConsultationState() when $default != null:
-return $default(_that.email,_that.message,_that.emailValidationError,_that.isSending,_that.sendError,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
+return $default(_that.name,_that.email,_that.message,_that.nameValidationError,_that.emailValidationError,_that.isServerOnline,_that.isLoadingBookedSlots,_that.bookedSlotsErrorKey,_that.bookedSlotsUtc,_that.bookingStatus,_that.bookingErrorMessage,_that.preferredConsultationSlotUtc,_that.attachment,_that.attachmentErrorKey);case _:
   return null;
 
 }
@@ -213,14 +220,27 @@ return $default(_that.email,_that.message,_that.emailValidationError,_that.isSen
 
 
 class _HomeConsultationState implements HomeConsultationState {
-  const _HomeConsultationState({this.email = '', this.message = '', this.emailValidationError, this.isSending = false, this.sendError, this.preferredConsultationSlotUtc, this.attachment, this.attachmentErrorKey});
+  const _HomeConsultationState({this.name = '', this.email = '', this.message = '', this.nameValidationError, this.emailValidationError, this.isServerOnline, this.isLoadingBookedSlots = false, this.bookedSlotsErrorKey, final  List<DateTime> bookedSlotsUtc = const <DateTime>[], this.bookingStatus = ConsultationBookingStatus.idle, this.bookingErrorMessage, this.preferredConsultationSlotUtc, this.attachment, this.attachmentErrorKey}): _bookedSlotsUtc = bookedSlotsUtc;
   
 
+@override@JsonKey() final  String name;
 @override@JsonKey() final  String email;
 @override@JsonKey() final  String message;
+@override final  String? nameValidationError;
 @override final  String? emailValidationError;
-@override@JsonKey() final  bool isSending;
-@override final  String? sendError;
+/// `null` while the initial health check is in progress.
+@override final  bool? isServerOnline;
+@override@JsonKey() final  bool isLoadingBookedSlots;
+@override final  String? bookedSlotsErrorKey;
+ final  List<DateTime> _bookedSlotsUtc;
+@override@JsonKey() List<DateTime> get bookedSlotsUtc {
+  if (_bookedSlotsUtc is EqualUnmodifiableListView) return _bookedSlotsUtc;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_bookedSlotsUtc);
+}
+
+@override@JsonKey() final  ConsultationBookingStatus bookingStatus;
+@override final  String? bookingErrorMessage;
 @override final  DateTime? preferredConsultationSlotUtc;
 @override final  ConsultationAttachment? attachment;
 @override final  String? attachmentErrorKey;
@@ -235,16 +255,16 @@ _$HomeConsultationStateCopyWith<_HomeConsultationState> get copyWith => __$HomeC
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeConsultationState&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isSending, isSending) || other.isSending == isSending)&&(identical(other.sendError, sendError) || other.sendError == sendError)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc)&&(identical(other.attachment, attachment) || other.attachment == attachment)&&(identical(other.attachmentErrorKey, attachmentErrorKey) || other.attachmentErrorKey == attachmentErrorKey));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeConsultationState&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.message, message) || other.message == message)&&(identical(other.nameValidationError, nameValidationError) || other.nameValidationError == nameValidationError)&&(identical(other.emailValidationError, emailValidationError) || other.emailValidationError == emailValidationError)&&(identical(other.isServerOnline, isServerOnline) || other.isServerOnline == isServerOnline)&&(identical(other.isLoadingBookedSlots, isLoadingBookedSlots) || other.isLoadingBookedSlots == isLoadingBookedSlots)&&(identical(other.bookedSlotsErrorKey, bookedSlotsErrorKey) || other.bookedSlotsErrorKey == bookedSlotsErrorKey)&&const DeepCollectionEquality().equals(other._bookedSlotsUtc, _bookedSlotsUtc)&&(identical(other.bookingStatus, bookingStatus) || other.bookingStatus == bookingStatus)&&(identical(other.bookingErrorMessage, bookingErrorMessage) || other.bookingErrorMessage == bookingErrorMessage)&&(identical(other.preferredConsultationSlotUtc, preferredConsultationSlotUtc) || other.preferredConsultationSlotUtc == preferredConsultationSlotUtc)&&(identical(other.attachment, attachment) || other.attachment == attachment)&&(identical(other.attachmentErrorKey, attachmentErrorKey) || other.attachmentErrorKey == attachmentErrorKey));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,email,message,emailValidationError,isSending,sendError,preferredConsultationSlotUtc,attachment,attachmentErrorKey);
+int get hashCode => Object.hash(runtimeType,name,email,message,nameValidationError,emailValidationError,isServerOnline,isLoadingBookedSlots,bookedSlotsErrorKey,const DeepCollectionEquality().hash(_bookedSlotsUtc),bookingStatus,bookingErrorMessage,preferredConsultationSlotUtc,attachment,attachmentErrorKey);
 
 @override
 String toString() {
-  return 'HomeConsultationState(email: $email, message: $message, emailValidationError: $emailValidationError, isSending: $isSending, sendError: $sendError, preferredConsultationSlotUtc: $preferredConsultationSlotUtc, attachment: $attachment, attachmentErrorKey: $attachmentErrorKey)';
+  return 'HomeConsultationState(name: $name, email: $email, message: $message, nameValidationError: $nameValidationError, emailValidationError: $emailValidationError, isServerOnline: $isServerOnline, isLoadingBookedSlots: $isLoadingBookedSlots, bookedSlotsErrorKey: $bookedSlotsErrorKey, bookedSlotsUtc: $bookedSlotsUtc, bookingStatus: $bookingStatus, bookingErrorMessage: $bookingErrorMessage, preferredConsultationSlotUtc: $preferredConsultationSlotUtc, attachment: $attachment, attachmentErrorKey: $attachmentErrorKey)';
 }
 
 
@@ -255,7 +275,7 @@ abstract mixin class _$HomeConsultationStateCopyWith<$Res> implements $HomeConsu
   factory _$HomeConsultationStateCopyWith(_HomeConsultationState value, $Res Function(_HomeConsultationState) _then) = __$HomeConsultationStateCopyWithImpl;
 @override @useResult
 $Res call({
- String email, String message, String? emailValidationError, bool isSending, String? sendError, DateTime? preferredConsultationSlotUtc, ConsultationAttachment? attachment, String? attachmentErrorKey
+ String name, String email, String message, String? nameValidationError, String? emailValidationError, bool? isServerOnline, bool isLoadingBookedSlots, String? bookedSlotsErrorKey, List<DateTime> bookedSlotsUtc, ConsultationBookingStatus bookingStatus, String? bookingErrorMessage, DateTime? preferredConsultationSlotUtc, ConsultationAttachment? attachment, String? attachmentErrorKey
 });
 
 
@@ -272,13 +292,19 @@ class __$HomeConsultationStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeConsultationState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? message = null,Object? emailValidationError = freezed,Object? isSending = null,Object? sendError = freezed,Object? preferredConsultationSlotUtc = freezed,Object? attachment = freezed,Object? attachmentErrorKey = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? email = null,Object? message = null,Object? nameValidationError = freezed,Object? emailValidationError = freezed,Object? isServerOnline = freezed,Object? isLoadingBookedSlots = null,Object? bookedSlotsErrorKey = freezed,Object? bookedSlotsUtc = null,Object? bookingStatus = null,Object? bookingErrorMessage = freezed,Object? preferredConsultationSlotUtc = freezed,Object? attachment = freezed,Object? attachmentErrorKey = freezed,}) {
   return _then(_HomeConsultationState(
-email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,emailValidationError: freezed == emailValidationError ? _self.emailValidationError : emailValidationError // ignore: cast_nullable_to_non_nullable
-as String?,isSending: null == isSending ? _self.isSending : isSending // ignore: cast_nullable_to_non_nullable
-as bool,sendError: freezed == sendError ? _self.sendError : sendError // ignore: cast_nullable_to_non_nullable
+as String,nameValidationError: freezed == nameValidationError ? _self.nameValidationError : nameValidationError // ignore: cast_nullable_to_non_nullable
+as String?,emailValidationError: freezed == emailValidationError ? _self.emailValidationError : emailValidationError // ignore: cast_nullable_to_non_nullable
+as String?,isServerOnline: freezed == isServerOnline ? _self.isServerOnline : isServerOnline // ignore: cast_nullable_to_non_nullable
+as bool?,isLoadingBookedSlots: null == isLoadingBookedSlots ? _self.isLoadingBookedSlots : isLoadingBookedSlots // ignore: cast_nullable_to_non_nullable
+as bool,bookedSlotsErrorKey: freezed == bookedSlotsErrorKey ? _self.bookedSlotsErrorKey : bookedSlotsErrorKey // ignore: cast_nullable_to_non_nullable
+as String?,bookedSlotsUtc: null == bookedSlotsUtc ? _self._bookedSlotsUtc : bookedSlotsUtc // ignore: cast_nullable_to_non_nullable
+as List<DateTime>,bookingStatus: null == bookingStatus ? _self.bookingStatus : bookingStatus // ignore: cast_nullable_to_non_nullable
+as ConsultationBookingStatus,bookingErrorMessage: freezed == bookingErrorMessage ? _self.bookingErrorMessage : bookingErrorMessage // ignore: cast_nullable_to_non_nullable
 as String?,preferredConsultationSlotUtc: freezed == preferredConsultationSlotUtc ? _self.preferredConsultationSlotUtc : preferredConsultationSlotUtc // ignore: cast_nullable_to_non_nullable
 as DateTime?,attachment: freezed == attachment ? _self.attachment : attachment // ignore: cast_nullable_to_non_nullable
 as ConsultationAttachment?,attachmentErrorKey: freezed == attachmentErrorKey ? _self.attachmentErrorKey : attachmentErrorKey // ignore: cast_nullable_to_non_nullable
