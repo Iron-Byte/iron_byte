@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iron_byte/assets/image_paths.dart';
 import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/about/presentation/models/about_ui_models.dart';
 import 'package:url_launcher/url_launcher.dart';

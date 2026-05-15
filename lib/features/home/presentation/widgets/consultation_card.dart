@@ -7,7 +7,6 @@ import 'package:iron_byte/core/themes/themes.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_bloc.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_event.dart';
 import 'package:iron_byte/features/home/presentation/bloc/home_consultation_state.dart';
-import 'package:iron_byte/features/home/presentation/widgets/status_chip.dart';
 
 class HomeConsultationCard extends StatefulWidget {
   const HomeConsultationCard({super.key, this.isJobApplication = false});
